@@ -1,0 +1,2716 @@
+<!-- ========================================================
+ APPLICATION IDENTITY
+ Application Name : HC Talent & Succession Analytics Hub
+ File Name        : Index.html
+ Version          : V2.2.0
+ Schema Version   : V1.0.0
+ Year             : 2026
+ Prepared By      : Bli Nengah
+ Purpose / Module : Executive Luxury UI, Modern Sidebar, Welcome Banner, Dynamic Sheet Competencies & User Management
+ Mode             : PRODUCTION READY
+ ======================================================== -->
+<!DOCTYPE html>
+<html lang="id" class="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HC TalentPulse 360 - Enterprise Analytics Hub</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Phosphor Icons CDN -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eef8ff',
+              100: '#d8eeff',
+              500: '#0284c7',
+              600: '#0369a1',
+              700: '#075985',
+              900: '#0c4a6e'
+            },
+            luxury: {
+              gold: '#d97706',
+              amberDark: '#b45309',
+              slate950: '#020617'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+    body { font-family: 'Plus Jakarta Sans', sans-serif; transition: background-color 0.3s ease, color 0.3s ease; }
+    .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(148, 163, 184, 0.4); border-radius: 9999px; }
+    .gold-gradient-text {
+      background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 50%, #d97706 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 antialiased min-h-screen flex flex-col justify-between">
+
+  <!-- ==================== TOAST NOTIFICATION CONTAINER ==================== -->
+  <div id="toast-container" class="fixed top-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+  <!-- ==================== VIEW 1: LUXURY ENTERPRISE LANDING PAGE ==================== -->
+  <section id="view-landing" class="flex-1 flex flex-col justify-between">
+    <!-- Navbar -->
+    <header class="w-full border-b border-slate-200/80 dark:border-slate-800/80 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl sticky top-0 z-30 px-6 py-4">
+      <div class="max-w-7xl mx-auto flex items-center justify-between">
+        <div class="flex items-center gap-3.5">
+          <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-sky-600 via-indigo-600 to-amber-500 flex items-center justify-center text-white text-2xl font-bold shadow-lg shadow-sky-500/20">
+            <i class="ph-bold ph-chart-polar"></i>
+          </div>
+          <div>
+            <h1 class="text-lg font-black tracking-tight text-slate-950 dark:text-white leading-tight flex items-center gap-2">
+              <span>TalentPulse 360</span>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20">ENTERPRISE</span>
+            </h1>
+            <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">Human Capital Governance & Succession Engine</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <button onclick="toggleTheme()" class="theme-toggle-btn p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-800/80 text-slate-600 dark:text-amber-400 hover:bg-slate-200 dark:hover:bg-slate-700 transition" title="Ganti Mode Gelap/Terang">
+            <i class="ph-bold ph-moon text-lg dark:hidden"></i>
+            <i class="ph-bold ph-sun text-lg hidden dark:inline"></i>
+          </button>
+          <button onclick="openLoginModal()" class="inline-flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-sky-600 via-indigo-600 to-sky-700 hover:opacity-95 active:scale-95 text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-lg shadow-sky-600/25 transition">
+            <i class="ph-bold ph-sign-in text-base"></i>
+            <span>MASUK PORTAL</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Luxury Hero Section -->
+    <main class="max-w-7xl mx-auto px-6 py-12 lg:py-20 flex-1 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <div class="lg:col-span-7 space-y-6">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900 dark:bg-slate-800 text-slate-100 text-xs font-semibold tracking-wide border border-slate-700 shadow-sm">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span>Sistem Tata Kelola Suksesi Strategis &bull; Production V2.0.0</span>
+        </div>
+
+        <h2 class="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-950 dark:text-white tracking-tight leading-[1.12]">
+          Kesiapan Suksesi Posisi Kritis. <span class="gold-gradient-text">Obyektif, Terukur & Presisi.</span>
+        </h2>
+
+        <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl font-normal">
+          Mengintegrasikan profil 360° talenta organisasi, matriks 9-Box, histori kinerja 3 tahun terakhir, pemetaan suksesi posisi kritis, dan kurikulum pengembangan kompetensi individual secara komprehensif.
+        </p>
+
+        <!-- Executive Metrics Ticker -->
+        <div class="grid grid-cols-3 gap-3 pt-2 max-w-xl">
+          <div class="p-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm">
+            <p class="text-[11px] font-medium text-slate-500 dark:text-slate-400">Bench Strength</p>
+            <p class="text-xl font-black text-slate-900 dark:text-white mt-0.5">88.4%</p>
+            <p class="text-[10px] text-emerald-600 dark:text-emerald-400 font-semibold mt-0.5">High Stability</p>
+          </div>
+          <div class="p-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm">
+            <p class="text-[11px] font-medium text-slate-500 dark:text-slate-400">Critical Coverage</p>
+            <p class="text-xl font-black text-slate-900 dark:text-white mt-0.5">100%</p>
+            <p class="text-[10px] text-sky-600 dark:text-sky-400 font-semibold mt-0.5">Semua Posisi Dipetakan</p>
+          </div>
+          <div class="p-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm">
+            <p class="text-[11px] font-medium text-slate-500 dark:text-slate-400">Talent Pool Ratio</p>
+            <p class="text-xl font-black text-slate-900 dark:text-white mt-0.5">3.2 : 1</p>
+            <p class="text-[10px] text-amber-600 dark:text-amber-400 font-semibold mt-0.5">Ready Bench</p>
+          </div>
+        </div>
+
+        <div class="pt-2 flex flex-wrap items-center gap-4">
+          <button onclick="openLoginModal()" class="px-8 py-3.5 bg-slate-950 dark:bg-white text-white dark:text-slate-950 font-extrabold text-xs uppercase tracking-wider rounded-xl shadow-xl transition hover:opacity-90 flex items-center gap-2">
+            <span>Masuk Dashboard</span>
+            <i class="ph-bold ph-arrow-right"></i>
+          </button>
+          <div class="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
+            <i class="ph-fill ph-shield-check text-sky-600 dark:text-sky-400 text-sm"></i> Kepatuhan ISO 37001 & Good Corporate Governance
+          </div>
+        </div>
+      </div>
+
+      <!-- Luxury Visual Showcase Card -->
+      <div class="lg:col-span-5">
+        <div class="relative rounded-3xl p-1 bg-gradient-to-b from-slate-200 via-slate-100 to-transparent dark:from-slate-800 dark:via-slate-900 dark:to-transparent shadow-2xl">
+          <div class="rounded-[22px] bg-white dark:bg-slate-900 p-6 space-y-5 border border-slate-200/80 dark:border-slate-800">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
+              <span class="text-xs font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
+                <i class="ph-bold ph-crown text-amber-500"></i> Executive Talent Benchmark
+              </span>
+              <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-sky-50 dark:bg-sky-950 text-sky-700 dark:text-sky-300 font-bold">2026 EDITION</span>
+            </div>
+
+            <!-- Position Target Showcase -->
+            <div class="p-4 rounded-2xl bg-gradient-to-r from-slate-900 via-sky-950 to-indigo-950 text-white space-y-3 shadow-md">
+              <div class="flex justify-between items-center text-xs text-sky-300">
+                <span class="font-medium">Posisi Strategis Target</span>
+                <span class="px-2 py-0.5 rounded bg-rose-500/20 text-rose-300 border border-rose-500/40 text-[10px] font-bold">VACANCY RISK: HIGH</span>
+              </div>
+              <p class="font-bold text-base leading-snug">Head of Corporate Security & GSS</p>
+              <div class="grid grid-cols-3 gap-2 pt-1 text-center">
+                <div class="bg-white/10 rounded-xl p-2">
+                  <p class="text-[10px] text-slate-300">Ready Now</p>
+                  <p class="text-sm font-black text-emerald-400">1 Kandidat</p>
+                </div>
+                <div class="bg-white/10 rounded-xl p-2">
+                  <p class="text-[10px] text-slate-300">1 Year</p>
+                  <p class="text-sm font-black text-amber-400">2 Kandidat</p>
+                </div>
+                <div class="bg-white/10 rounded-xl p-2">
+                  <p class="text-[10px] text-slate-300">2 Years</p>
+                  <p class="text-sm font-black text-slate-300">3 Kandidat</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Top Match Preview -->
+            <div class="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200/80 dark:border-slate-800 space-y-2">
+              <div class="flex items-center justify-between text-xs">
+                <span class="font-semibold text-slate-700 dark:text-slate-300">Top Cross-Dept Succession Fit</span>
+                <span class="text-emerald-600 dark:text-emerald-400 font-bold">94% Match</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-full bg-indigo-100 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300 font-bold flex items-center justify-center text-xs">
+                  NS
+                </div>
+                <div class="flex-1 min-w-0">
+                  <p class="text-xs font-bold text-slate-900 dark:text-white truncate">I Nengah Sugiarta, S.H., M.H.</p>
+                  <p class="text-[10px] text-slate-500 dark:text-slate-400">Grade 16 &bull; Security Governance & BCP</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </section>
+
+  <!-- ==================== VIEW 2: AUTHENTICATED DASHBOARD ==================== -->
+  <section id="view-dashboard" class="hidden flex-1 flex flex-col lg:flex-row w-full min-h-screen bg-slate-50/50 dark:bg-slate-950">
+    <!-- Refined Sidebar Navigation (Modern Luxury Glassmorphism) -->
+    <aside class="w-full lg:w-64 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-b lg:border-b-0 lg:border-r border-slate-200/70 dark:border-slate-800/80 flex flex-col justify-between shrink-0 sticky top-0 lg:h-screen z-30 p-4 space-y-4">
+      
+      <!-- Top Brand -->
+      <div class="space-y-5">
+        <div class="flex items-center justify-between px-2 py-1">
+          <div class="flex items-center gap-2.5">
+            <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-sky-600 to-indigo-600 flex items-center justify-center text-white text-lg font-bold shadow-md shadow-sky-500/20">
+              <i class="ph-bold ph-chart-polar"></i>
+            </div>
+            <div>
+              <h2 class="text-xs font-black tracking-tight text-slate-950 dark:text-white leading-tight">TalentPulse 360</h2>
+              <p class="text-[9px] text-slate-400 dark:text-slate-500 uppercase tracking-wider font-semibold">HC Governance</p>
+            </div>
+          </div>
+          <span class="text-[9px] font-mono font-bold px-2 py-0.5 rounded bg-sky-50 dark:bg-sky-950/80 text-sky-700 dark:text-sky-300 border border-sky-200 dark:border-sky-800">V2.2.0</span>
+        </div>
+
+        <!-- Navigation Tabs (Sleek Clean Icons & Spacing) -->
+        <div class="space-y-1">
+          <p class="text-[9px] font-extrabold uppercase tracking-widest text-slate-400 dark:text-slate-500 px-3 mb-2">Menu Utama</p>
+          <nav class="flex flex-col gap-1 text-xs">
+            <button onclick="switchTab('tab-overview')" id="btn-tab-overview" class="tab-btn w-full flex items-center gap-3 px-3 py-2 rounded-xl font-bold transition text-left bg-sky-600 text-white shadow-sm shadow-sky-600/30">
+              <i class="ph-bold ph-squares-four text-sm"></i>
+              <span>Ringkasan Eksekutif</span>
+            </button>
+            <button onclick="switchTab('tab-talent-pool')" id="btn-tab-talent-pool" class="tab-btn w-full flex items-center gap-3 px-3 py-2 rounded-xl font-medium transition text-left text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-white">
+              <i class="ph-bold ph-grid-four text-sm"></i>
+              <span>Talent Pool</span>
+            </button>
+            <button onclick="switchTab('tab-employees')" id="btn-tab-employees" class="tab-btn w-full flex items-center gap-3 px-3 py-2 rounded-xl font-medium transition text-left text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-white">
+              <i class="ph-bold ph-user-list text-sm"></i>
+              <span>Direktori Karyawan</span>
+            </button>
+            <button onclick="switchTab('tab-critical-pos')" id="btn-tab-critical-pos" class="tab-btn w-full flex items-center gap-3 px-3 py-2 rounded-xl font-medium transition text-left text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-white">
+              <i class="ph-bold ph-crosshair text-sm"></i>
+              <span>Critical Position</span>
+            </button>
+            <button onclick="switchTab('tab-competency-profile')" id="btn-tab-competency-profile" class="tab-btn w-full flex items-center gap-3 px-3 py-2 rounded-xl font-medium transition text-left text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-white">
+              <i class="ph-bold ph-chart-polar text-sm"></i>
+              <span>Competency Profile</span>
+            </button>
+          </nav>
+        </div>
+
+        <!-- Super Admin Controls Section (Protected by RBAC - Hidden by Default) -->
+        <div id="section-admin-controls" class="space-y-1 pt-2 hidden">
+          <p class="text-[9px] font-extrabold uppercase tracking-widest text-slate-400 dark:text-slate-500 px-3 mb-2">Pengaturan Sistem</p>
+          <div class="flex flex-col gap-1 text-xs">
+            <button onclick="openUserManagementModal()" class="w-full flex items-center gap-3 px-3 py-2 rounded-xl font-medium transition text-left text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-white">
+              <i class="ph-bold ph-users-three text-sm text-sky-600"></i>
+              <span>Kelola Akun User</span>
+            </button>
+            <button onclick="openMasterSettingModal()" class="w-full flex items-center gap-3 px-3 py-2 rounded-xl font-medium transition text-left text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-white">
+              <i class="ph-bold ph-faders text-sm text-amber-500"></i>
+              <span>Master Field Sheet</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom User Controls & Theme -->
+      <div class="space-y-3 pt-3 border-t border-slate-100 dark:border-slate-800">
+        <div class="p-2.5 rounded-xl bg-slate-100/70 dark:bg-slate-800/60 border border-slate-200/50 dark:border-slate-700/50 flex items-center justify-between">
+          <div class="flex items-center gap-2 min-w-0">
+            <div id="session-avatar" class="w-7 h-7 rounded-lg bg-sky-600 text-white font-bold text-xs flex items-center justify-center shrink-0">
+              BN
+            </div>
+            <div class="min-w-0">
+              <p id="session-username" class="text-xs font-bold text-slate-900 dark:text-white truncate">blinengah</p>
+              <p id="session-role" class="text-[9px] text-sky-600 dark:text-sky-400 font-extrabold uppercase truncate">SUPER ADMIN</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-1">
+            <button onclick="toggleTheme()" class="theme-toggle-btn p-1.5 rounded-lg text-slate-500 dark:text-amber-400 hover:bg-slate-200 dark:hover:bg-slate-700 transition" title="Ganti Tema">
+              <i class="ph-bold ph-moon text-sm dark:hidden"></i>
+              <i class="ph-bold ph-sun text-sm hidden dark:inline"></i>
+            </button>
+            <button onclick="triggerLogout()" class="p-1.5 text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 rounded-lg transition" title="Keluar">
+              <i class="ph-bold ph-sign-out text-sm"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Viewport with Luxury Welcome Banner -->
+    <main class="flex-1 min-w-0 max-w-7xl mx-auto px-4 sm:px-8 py-6 w-full space-y-6">
+
+      <!-- ================= LUXURY EXECUTIVE WELCOME BANNER ================= -->
+      <div class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-slate-950 via-sky-950 to-indigo-950 text-white p-6 sm:p-7 shadow-xl border border-sky-900/30">
+        <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-sky-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div class="space-y-1.5">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur border border-white/15 text-[11px] font-semibold text-sky-200">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span id="banner-greeting-time">Selamat Datang</span> &bull; <span id="banner-current-date">Tahun 2026</span>
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-black tracking-tight leading-tight">
+              Halo, <span class="gold-gradient-text" id="banner-user-name">I Nengah Sugiarta, S.H., M.H.</span>
+            </h2>
+            <p class="text-xs sm:text-sm text-slate-300 max-w-2xl font-normal leading-relaxed">
+              Portal Human Capital Governance aktif. Pantau suksesi posisi kritis, talent pool 9-box, dan akselerasi gap kompetensi karyawan secara real-time.
+            </p>
+          </div>
+          <div class="flex items-center gap-2.5 shrink-0">
+            <button onclick="openEmployeeFormModal()" class="px-4 py-2.5 bg-gradient-to-r from-sky-500 to-indigo-600 hover:opacity-95 text-white font-bold text-xs rounded-xl shadow-lg shadow-sky-500/25 transition flex items-center gap-1.5">
+              <i class="ph-bold ph-user-plus"></i> + Input Karyawan
+            </button>
+            <button onclick="loadInitialDataFromServer()" class="p-2.5 bg-white/10 hover:bg-white/20 border border-white/20 text-white rounded-xl text-xs font-bold transition" title="Sinkronkan Data Sheet">
+              <i class="ph-bold ph-arrows-clockwise text-base"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= TAB 1: EXECUTIVE OVERVIEW ================= -->
+      <div id="tab-overview" class="tab-content space-y-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+          <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm flex items-center justify-between">
+            <div>
+              <p class="text-xs font-medium text-slate-500 dark:text-slate-400">Total Karyawan Terdata</p>
+              <h3 class="text-2xl font-black text-slate-900 dark:text-white mt-1" id="metric-total-emp">0</h3>
+              <p class="text-[11px] text-emerald-600 dark:text-emerald-400 font-semibold mt-1 flex items-center gap-1">
+                <i class="ph-bold ph-check"></i> Database Terhubung
+              </p>
+            </div>
+            <div class="w-12 h-12 rounded-xl bg-sky-50 dark:bg-sky-950/60 text-sky-600 dark:text-sky-400 flex items-center justify-center text-xl">
+              <i class="ph-bold ph-users"></i>
+            </div>
+          </div>
+          <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm flex items-center justify-between">
+            <div>
+              <p class="text-xs font-medium text-slate-500 dark:text-slate-400">Critical Positions</p>
+              <h3 class="text-2xl font-black text-slate-900 dark:text-white mt-1" id="metric-critical-pos">0</h3>
+              <p class="text-[11px] text-rose-500 dark:text-rose-400 font-semibold mt-1">Jabatan Strategis Korporat</p>
+            </div>
+            <div class="w-12 h-12 rounded-xl bg-rose-50 dark:bg-rose-950/60 text-rose-600 dark:text-rose-400 flex items-center justify-center text-xl">
+              <i class="ph-bold ph-shield-warning"></i>
+            </div>
+          </div>
+          <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm flex items-center justify-between">
+            <div>
+              <p class="text-xs font-medium text-slate-500 dark:text-slate-400">Star & High Potential (9-Box)</p>
+              <h3 class="text-2xl font-black text-indigo-600 dark:text-indigo-400 mt-1" id="metric-hipo-count">0</h3>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400 font-medium mt-1">Kuadran Atas Talent Pool</p>
+            </div>
+            <div class="w-12 h-12 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center text-xl">
+              <i class="ph-bold ph-star"></i>
+            </div>
+          </div>
+          <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm flex items-center justify-between">
+            <div>
+              <p class="text-xs font-medium text-slate-500 dark:text-slate-400">Proporsi Gender (Pria vs Wanita)</p>
+              <h3 class="text-xl font-black text-violet-600 dark:text-violet-400 mt-1" id="metric-gender-ratio">0% : 0%</h3>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400 font-medium mt-1 truncate" id="metric-gender-detail">0 Pria &bull; 0 Wanita</p>
+            </div>
+            <div class="w-12 h-12 rounded-xl bg-violet-50 dark:bg-violet-950/60 text-violet-600 dark:text-violet-400 flex items-center justify-center text-xl">
+              <i class="ph-bold ph-gender-intersex"></i>
+            </div>
+          </div>
+          <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm flex items-center justify-between">
+            <div>
+              <p class="text-xs font-medium text-slate-500 dark:text-slate-400">Average & Rentang Usia</p>
+              <h3 class="text-2xl font-black text-emerald-600 dark:text-emerald-400 mt-1" id="metric-avg-age">0 Thn</h3>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400 font-medium mt-1" id="metric-age-range">Rentang: 0 - 0 Thn</p>
+            </div>
+            <div class="w-12 h-12 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-xl">
+              <i class="ph-bold ph-hourglass-medium"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Bar -->
+        <div class="p-4 bg-sky-50 dark:bg-slate-900 border border-sky-100 dark:border-slate-800 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-lg bg-sky-600 text-white flex items-center justify-center font-bold">
+              <i class="ph-bold ph-lightning"></i>
+            </div>
+            <div>
+              <h4 class="text-xs font-bold text-sky-950 dark:text-sky-300">Aksi Cepat Manajemen Talenta</h4>
+              <p class="text-[11px] text-sky-800 dark:text-slate-400">Kelola karyawan dengan Grade & Sertifikasi atau buat posisi kritis baru.</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-2 w-full sm:w-auto">
+            <button onclick="openEmployeeFormModal()" class="px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs rounded-xl shadow-sm transition flex items-center justify-center gap-1.5 flex-1 sm:flex-initial">
+              <i class="ph-bold ph-user-plus"></i> + Input Karyawan
+            </button>
+            <button onclick="openPositionFormModal()" class="px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-bold text-xs rounded-xl transition flex items-center justify-center gap-1.5 flex-1 sm:flex-initial">
+              <i class="ph-bold ph-crosshair"></i> + Critical Position
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <div class="lg:col-span-7 bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-4">
+            <div class="flex items-center justify-between">
+              <div>
+                <h3 class="font-bold text-slate-900 dark:text-white text-sm">Status Kesiapan Suksesi Posisi Kritis</h3>
+                <p class="text-xs text-slate-500 dark:text-slate-400">Peta suksesor posisi strategis</p>
+              </div>
+              <button onclick="switchTab('tab-critical-pos')" class="text-xs font-bold text-sky-600 dark:text-sky-400 hover:underline">Detail &rarr;</button>
+            </div>
+            <div class="space-y-3" id="overview-critical-list"></div>
+          </div>
+
+          <div class="lg:col-span-5 bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-4">
+            <div class="flex items-center justify-between">
+              <div>
+                <h3 class="font-bold text-slate-900 dark:text-white text-sm">Talent Pool Highlights</h3>
+                <p class="text-xs text-slate-500 dark:text-slate-400">Top talent berdasarkan KPI & Potensi</p>
+              </div>
+              <button onclick="switchTab('tab-talent-pool')" class="text-xs font-bold text-indigo-600 dark:text-indigo-400 hover:underline">Buka 9-Box &rarr;</button>
+            </div>
+            <div class="space-y-3" id="overview-hipo-list"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= TAB 2: TALENT POOL MATRIX ================= -->
+      <div id="tab-talent-pool" class="tab-content hidden space-y-6">
+        <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <span class="text-[10px] font-bold text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-950/80 px-2.5 py-0.5 rounded-full uppercase tracking-wider">
+              Talent Matrix Mapping
+            </span>
+            <h3 class="text-base font-bold text-slate-900 dark:text-white mt-1">Talent Pool Matrix (Performance vs. Potential)</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400">Distribusi penempatan talenta berdasarkan Rerata KPI vs Skor Potensi Asesmen.</p>
+          </div>
+          <button onclick="openEmployeeFormModal()" class="px-3.5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5 shadow-sm">
+            <i class="ph-bold ph-plus"></i> Tambah Karyawan ke Pool
+          </button>
+        </div>
+
+        <div class="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5" id="nine-box-container"></div>
+        </div>
+      </div>
+
+      <!-- ================= TAB 3: DIREKTORI KARYAWAN ================= -->
+      <div id="tab-employees" class="tab-content hidden space-y-4">
+        <div class="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm flex flex-col gap-3">
+          <div class="flex flex-col lg:flex-row gap-3 items-center justify-between">
+            <div class="relative flex-1 w-full">
+              <i class="ph-bold ph-magnifying-glass absolute left-3.5 top-3 text-slate-400"></i>
+              <input type="text" id="search-emp" oninput="renderEmployeeTable()" placeholder="Cari nama, NIK, Grade, training, sertifikasi, achievement..." class="w-full pl-10 pr-4 py-2 border border-slate-200 dark:border-slate-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 bg-white dark:bg-slate-800 text-slate-900 dark:text-white">
+            </div>
+            <div class="flex flex-wrap items-center gap-2 w-full lg:w-auto justify-between lg:justify-end">
+              <span class="text-xs text-slate-500 dark:text-slate-400 font-medium">
+                Total: <strong id="filtered-emp-count" class="text-slate-900 dark:text-white">0</strong>
+              </span>
+              <button onclick="openEmployeeFormModal()" class="px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs rounded-xl shadow-sm transition flex items-center gap-1.5">
+                <i class="ph-bold ph-user-plus"></i> + Input Karyawan
+              </button>
+            </div>
+          </div>
+
+          <!-- Filter Terpadu: Departemen, Core Function, & Proyeksi Waktu -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-2 border-t border-slate-100 dark:border-slate-800 text-xs">
+            <div>
+              <label class="block font-bold text-slate-500 dark:text-slate-400 mb-1">Departemen:</label>
+              <select id="filter-dept" onchange="renderEmployeeTable()" class="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-sky-500">
+                <option value="ALL">Semua Departemen</option>
+              </select>
+            </div>
+            <div>
+              <label class="block font-bold text-slate-500 dark:text-slate-400 mb-1">Klasifikasi Fungsi:</label>
+              <select id="filter-function" onchange="renderEmployeeTable()" class="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-sky-500">
+                <option value="ALL">Semua Fungsi</option>
+                <optgroup label="Core Function">
+                  <option value="Project Facility">Project Facility</option>
+                  <option value="Geoscience">Geoscience</option>
+                  <option value="DWO">DWO (Drilling & Workover)</option>
+                  <option value="Engineering">Engineering</option>
+                  <option value="Operation">Operation</option>
+                </optgroup>
+                <optgroup label="Support Function">
+                  <option value="Support Function">Support Function (HC, Sec, Fin, Legal, etc.)</option>
+                </optgroup>
+              </select>
+            </div>
+            <div>
+              <label class="block font-bold text-slate-500 dark:text-slate-400 mb-1">Proyeksi Kesiapan Waktu:</label>
+              <select id="filter-projection" onchange="renderEmployeeTable()" class="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-sky-500 font-semibold text-sky-700 dark:text-sky-400">
+                <option value="CURRENT">Status Saat Ini (Tahun 2026)</option>
+                <option value="PLUS_1">Proyeksi 1 Tahun Mendatang (2027)</option>
+                <option value="PLUS_2">Proyeksi 2 Tahun Mendatang (2028)</option>
+                <option value="PLUS_3">Proyeksi 3 Tahun Mendatang (2029)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-sm">
+              <thead class="bg-slate-50 dark:bg-slate-800/60 border-b border-slate-200 dark:border-slate-800 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                <tr>
+                  <th class="py-3.5 px-4">Karyawan</th>
+                  <th class="py-3.5 px-4">Departemen, Fungsi & Posisi</th>
+                  <th class="py-3.5 px-4 text-center">Grade</th>
+                  <th class="py-3.5 px-4">Pendidikan & Usia</th>
+                  <th class="py-3.5 px-4">Tenure</th>
+                  <th class="py-3.5 px-4 text-center">PA / KPI</th>
+                  <th class="py-3.5 px-4 text-center">Asesmen</th>
+                  <th class="py-3.5 px-4">Training / Seminar</th>
+                  <th class="py-3.5 px-4">Sertifikasi</th>
+                  <th class="py-3.5 px-4">Achievement</th>
+                  <th class="py-3.5 px-4 text-right">Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="employee-table-body" class="divide-y divide-slate-100 dark:divide-slate-800/80"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= TAB 4: CRITICAL POSITION ================= -->
+      <div id="tab-critical-pos" class="tab-content hidden space-y-6">
+        <div class="bg-gradient-to-r from-slate-900 to-sky-950 dark:from-slate-900 dark:to-slate-900 p-6 rounded-3xl text-white shadow-xl space-y-4 border border-slate-800">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+              <span class="text-xs font-bold tracking-wider uppercase text-sky-400 bg-sky-900/60 px-3 py-1 rounded-full border border-sky-700/60">
+                Critical Position & Succession Matcher
+              </span>
+              <h3 class="text-xl font-black mt-2">Identifikasi Posisi Kritis & Succession Bench</h3>
+              <p class="text-xs text-slate-300 mt-1 max-w-2xl">
+                Pilih jabatan kritis strategis. Mesin otomatis memindai seluruh talenta lintas divisi berdasarkan kecocokan kompetensi, grade, dan tenure.
+              </p>
+            </div>
+            <div class="min-w-[280px] space-y-2">
+              <div class="flex items-center justify-between">
+                <label class="text-xs font-semibold text-slate-300">Pilih Critical Position:</label>
+                <button onclick="openPositionFormModal()" class="text-[11px] font-bold text-sky-400 hover:text-sky-300 underline">+ Buat Posisi</button>
+              </div>
+              <select id="select-critical-job" onchange="runSuccessionMatchEngine()" class="w-full p-2.5 rounded-xl bg-slate-800 text-white border border-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-sky-400">
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div class="bg-white dark:bg-slate-900 rounded-2xl border-2 border-emerald-200/80 dark:border-emerald-900/60 p-5 shadow-sm space-y-4">
+            <div class="flex items-center justify-between pb-3 border-b border-emerald-100 dark:border-emerald-900/40">
+              <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+                <h4 class="font-bold text-sm text-slate-900 dark:text-white">Ready Now</h4>
+              </div>
+              <span id="badge-ready-now-count" class="text-xs bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 font-bold px-2 py-0.5 rounded-full">0 Kandidat</span>
+            </div>
+            <p class="text-[11px] text-slate-500 dark:text-slate-400">Kandidat memenuhi ≥85% kecocokan profil.</p>
+            <div id="container-ready-now" class="space-y-3"></div>
+          </div>
+
+          <div class="bg-white dark:bg-slate-900 rounded-2xl border-2 border-amber-200/80 dark:border-amber-900/60 p-5 shadow-sm space-y-4">
+            <div class="flex items-center justify-between pb-3 border-b border-amber-100 dark:border-amber-900/40">
+              <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-amber-500"></span>
+                <h4 class="font-bold text-sm text-slate-900 dark:text-white">Ready in 1 Year</h4>
+              </div>
+              <span id="badge-ready-1yr-count" class="text-xs bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300 font-bold px-2 py-0.5 rounded-full">0 Kandidat</span>
+            </div>
+            <p class="text-[11px] text-slate-500 dark:text-slate-400">Kecocokan 70% - 84% dengan kebutuhan 1 thn pengembangan.</p>
+            <div id="container-ready-1yr" class="space-y-3"></div>
+          </div>
+
+          <div class="bg-white dark:bg-slate-900 rounded-2xl border-2 border-slate-200 dark:border-slate-800 p-5 shadow-sm space-y-4">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
+              <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-slate-400"></span>
+                <h4 class="font-bold text-sm text-slate-900 dark:text-white">Ready in 2 Years</h4>
+              </div>
+              <span id="badge-ready-2yr-count" class="text-xs bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold px-2 py-0.5 rounded-full">0 Kandidat</span>
+            </div>
+            <p class="text-[11px] text-slate-500 dark:text-slate-400">Pipeline suksesi jangka menengah (55% - 69%).</p>
+            <div id="container-ready-2yr" class="space-y-3"></div>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800 p-5 shadow-sm space-y-4">
+          <h4 class="font-bold text-sm text-slate-900 dark:text-white">Hasil Pemindaian Lintas Departemen Terpadu</h4>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-sm">
+              <thead class="bg-slate-50 dark:bg-slate-800/60 text-xs text-slate-500 dark:text-slate-400 font-semibold uppercase">
+                <tr>
+                  <th class="py-2.5 px-3">Kandidat</th>
+                  <th class="py-2.5 px-3">Departemen Asal</th>
+                  <th class="py-2.5 px-3 text-center">Grade</th>
+                  <th class="py-2.5 px-3">Tenure</th>
+                  <th class="py-2.5 px-3 text-center">Kecocokan Profil</th>
+                  <th class="py-2.5 px-3 text-center">Kesiapan</th>
+                  <th class="py-2.5 px-3 text-right">Analisis</th>
+                </tr>
+              </thead>
+              <tbody id="cross-dept-matcher-body" class="divide-y divide-slate-100 dark:divide-slate-800"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= TAB 5: COMPETENCY PROFILE ================= -->
+      <div id="tab-competency-profile" class="tab-content hidden space-y-6">
+        <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div>
+            <h3 class="font-bold text-sm text-slate-900 dark:text-white">Evaluasi Competency Profile & Individual Learning Plan (ILP)</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400">Komparasi standar jabatan vs riil talenta untuk menyusun kurikulum pengembangan.</p>
+          </div>
+          <div class="flex items-center gap-2 w-full sm:w-auto">
+            <label class="text-xs font-semibold text-slate-600 dark:text-slate-300">Pilih Karyawan:</label>
+            <select id="select-gap-emp" onchange="loadGapAndILPView()" class="w-full sm:w-64 p-2 border border-slate-200 dark:border-slate-700 rounded-xl text-sm bg-white dark:bg-slate-800 text-slate-900 dark:text-white">
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <div class="lg:col-span-5 bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm flex flex-col items-center">
+            <h4 class="font-bold text-sm text-slate-900 dark:text-white mb-1 w-full text-left">Radar Chart Profil Kompetensi</h4>
+            <div class="w-full max-w-sm h-72">
+              <canvas id="competencyRadarChart"></canvas>
+            </div>
+            <div class="mt-4 flex items-center justify-center gap-6 text-xs font-semibold">
+              <div class="flex items-center gap-1.5">
+                <span class="w-3 h-3 rounded-full bg-sky-500"></span>
+                <span class="text-slate-700 dark:text-slate-300">Standar Jabatan</span>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <span class="w-3 h-3 rounded-full bg-rose-500"></span>
+                <span class="text-slate-700 dark:text-slate-300">Aktual Karyawan</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="lg:col-span-7 bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-5">
+            <div class="flex items-center justify-between">
+              <div>
+                <h4 class="font-bold text-sm text-slate-900 dark:text-white">Rencana Pembelajaran Individu (ILP)</h4>
+                <p class="text-xs text-slate-500 dark:text-slate-400">Rekomendasi otomatis berbasis gap kompetensi negatif (&lt; 0)</p>
+              </div>
+              <button onclick="saveILPPlan()" class="px-3.5 py-1.5 bg-sky-600 hover:bg-sky-700 text-white rounded-lg text-xs font-bold transition flex items-center gap-1.5">
+                <i class="ph-bold ph-floppy-disk"></i> Simpan ILP Plan
+              </button>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-xs">
+                <thead class="bg-slate-50 dark:bg-slate-800/60 text-slate-500 dark:text-slate-400 uppercase font-semibold">
+                  <tr>
+                    <th class="py-2.5 px-3">Kompetensi</th>
+                    <th class="py-2.5 px-2 text-center">Standar</th>
+                    <th class="py-2.5 px-2 text-center">Aktual</th>
+                    <th class="py-2.5 px-2 text-center">Gap</th>
+                    <th class="py-2.5 px-3">Rekomendasi Intervensi ILP</th>
+                  </tr>
+                </thead>
+                <tbody id="gap-ilp-table-body" class="divide-y divide-slate-100 dark:divide-slate-800"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </section>
+
+  <!-- ==================== MANDATORY PLATFORM FOOTER ==================== -->
+  <footer class="w-full bg-white dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 py-3 px-6 text-center text-xs text-slate-500 dark:text-slate-400">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+      <p>TalentPulse 360 &copy; 2026 Human Capital Department &bull; Version V2.3.0</p>
+      <p class="font-semibold text-slate-600 dark:text-slate-300">Created by Blinengah | 2026</p>
+    </div>
+  </footer>
+
+  <!-- ==================== MODAL 1: LOGIN (WITH AUTO-HIDING BOOTSTRAP BANNER) ==================== -->
+  <div id="modal-login" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-slate-100 dark:border-slate-800 space-y-6">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-lg bg-sky-600 text-white flex items-center justify-center font-bold">
+            <i class="ph-bold ph-lock-key"></i>
+          </div>
+          <h3 class="font-extrabold text-slate-900 dark:text-white text-lg">Masuk Portal HC</h3>
+        </div>
+        <button onclick="closeLoginModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-xl font-bold">&times;</button>
+      </div>
+
+      <!-- BANNER BOOTSTRAP INI AKAN HILANG PERMANEN SETELAH PASSWORD PERTAMA KALI DIGANTI -->
+      <div id="bootstrap-hint-card" class="hidden p-3 bg-amber-50 dark:bg-amber-950/60 border border-amber-200 dark:border-amber-800 rounded-xl text-xs text-amber-800 dark:text-amber-300 space-y-1">
+        <p class="font-bold flex items-center gap-1"><i class="ph-bold ph-info"></i> Inisialisasi Akun Super Admin Pertama:</p>
+        <p class="font-mono text-[11px]">Username: <strong>blinengah</strong> | Password: <strong>bismillah</strong></p>
+        <p class="text-[10px] text-amber-600 dark:text-amber-400">*Wajib mengganti password baru pada login pertama. Setelah diubah, info ini tidak akan muncul lagi.</p>
+      </div>
+
+      <form onsubmit="handleLoginSubmit(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-1">Username</label>
+          <input type="text" id="login-username" required placeholder="Masukkan username..." class="w-full px-3.5 py-2.5 border border-slate-200 dark:border-slate-700 rounded-xl text-sm focus:ring-2 focus:ring-sky-500 focus:outline-none bg-white dark:bg-slate-800 text-slate-900 dark:text-white">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-1">Password</label>
+          <input type="password" id="login-password" required placeholder="Masukkan password..." class="w-full px-3.5 py-2.5 border border-slate-200 dark:border-slate-700 rounded-xl text-sm focus:ring-2 focus:ring-sky-500 focus:outline-none bg-white dark:bg-slate-800 text-slate-900 dark:text-white">
+        </div>
+        <button type="submit" id="btn-login-submit" class="w-full py-3 bg-sky-600 hover:bg-sky-700 text-white font-bold text-sm rounded-xl transition shadow-lg shadow-sky-600/20">
+          Autentikasi & Lanjutkan
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL 2: FORCED CHANGE PASSWORD ==================== -->
+  <div id="modal-force-password" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-slate-100 dark:border-slate-800 space-y-6">
+      <div class="w-12 h-12 rounded-2xl bg-amber-100 dark:bg-amber-950 text-amber-700 dark:text-amber-400 flex items-center justify-center text-2xl mx-auto">
+        <i class="ph-bold ph-shield-check"></i>
+      </div>
+      <div class="text-center space-y-1">
+        <h3 class="font-extrabold text-slate-900 dark:text-white text-lg">Amankan Akun Anda</h3>
+        <p class="text-xs text-slate-500 dark:text-slate-400">Password bootstrap bawaan wajib diganti sebelum melanjutkan ke dashboard.</p>
+      </div>
+      <form onsubmit="handleForcePasswordSubmit(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-1">Password Baru</label>
+          <input type="password" id="new-password" required minlength="6" placeholder="Minimal 6 karakter..." class="w-full px-3.5 py-2.5 border border-slate-200 dark:border-slate-700 rounded-xl text-sm focus:ring-2 focus:ring-sky-500 focus:outline-none bg-white dark:bg-slate-800 text-slate-900 dark:text-white">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-1">Konfirmasi Password Baru</label>
+          <input type="password" id="confirm-password" required minlength="6" placeholder="Ulangi password baru..." class="w-full px-3.5 py-2.5 border border-slate-200 dark:border-slate-700 rounded-xl text-sm focus:ring-2 focus:ring-sky-500 focus:outline-none bg-white dark:bg-slate-800 text-slate-900 dark:text-white">
+        </div>
+        <button type="submit" id="btn-force-submit" class="w-full py-3 bg-slate-900 dark:bg-sky-600 hover:bg-slate-800 dark:hover:bg-sky-500 text-white font-bold text-sm rounded-xl transition">
+          Simpan & Amankan Akses
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL 3: 360° EMPLOYEE DETAIL DRAWER ==================== -->
+  <div id="modal-emp-detail" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-4xl w-full max-h-[92vh] flex flex-col shadow-2xl border border-slate-100 dark:border-slate-800 overflow-hidden">
+      <div class="px-6 py-4 bg-slate-900 dark:bg-slate-950 text-white flex items-center justify-between border-b border-slate-800">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-sky-500/20 text-sky-300 font-bold flex items-center justify-center border border-sky-400" id="detail-avatar">--</div>
+          <div>
+            <h3 class="font-bold text-base leading-tight" id="detail-name">--</h3>
+            <p class="text-xs text-sky-300" id="detail-pos">--</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <button id="btn-edit-from-detail" class="px-3 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded-lg text-xs font-bold transition flex items-center gap-1">
+            <i class="ph-bold ph-pencil"></i> Edit Profil
+          </button>
+          <button onclick="closeEmployeeModal()" class="text-slate-300 hover:text-white text-2xl font-bold">&times;</button>
+        </div>
+      </div>
+
+      <div class="p-6 overflow-y-auto custom-scrollbar space-y-6 flex-1 text-slate-800 dark:text-slate-100">
+        <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 bg-slate-50 dark:bg-slate-800/50 p-4 rounded-2xl border border-slate-200/80 dark:border-slate-800 text-xs">
+          <div>
+            <p class="text-slate-500 dark:text-slate-400">Grade Organisasi</p>
+            <p class="font-bold text-sky-700 dark:text-sky-400 text-sm mt-0.5" id="detail-grade">--</p>
+          </div>
+          <div>
+            <p class="text-slate-500 dark:text-slate-400">Usia & Pendidikan</p>
+            <p class="font-bold text-slate-900 dark:text-white mt-0.5" id="detail-demog">--</p>
+          </div>
+          <div>
+            <p class="text-slate-500 dark:text-slate-400">Tenure</p>
+            <p class="font-bold text-slate-900 dark:text-white mt-0.5" id="detail-tenure">--</p>
+          </div>
+          <div>
+            <p class="text-slate-500 dark:text-slate-400">Departemen</p>
+            <p class="font-bold text-slate-900 dark:text-white mt-0.5" id="detail-dept">--</p>
+          </div>
+          <div>
+            <p class="text-slate-500 dark:text-slate-400">9-Box Placement</p>
+            <p class="font-bold text-emerald-600 dark:text-emerald-400 mt-0.5" id="detail-ninebox">--</p>
+          </div>
+        </div>
+
+        <div class="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 space-y-2">
+          <h4 class="font-bold text-xs text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
+            <i class="ph-bold ph-certificate text-sky-600 dark:text-sky-400"></i> Sertifikasi Profesional yang Dimiliki
+          </h4>
+          <div class="flex flex-wrap gap-1.5" id="detail-certifications-list"></div>
+        </div>
+
+        <div>
+          <h4 class="font-bold text-sm text-slate-900 dark:text-white mb-3 flex items-center gap-2">
+            <i class="ph-bold ph-clock-counter-clockwise text-sky-600 dark:text-sky-400"></i> Riwayat Posisi Organisasi
+          </h4>
+          <div class="space-y-3 relative before:absolute before:inset-0 before:left-3 before:w-0.5 before:bg-slate-200 dark:before:bg-slate-800 pl-8" id="detail-career-timeline"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div class="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm space-y-3">
+            <h5 class="font-bold text-xs text-slate-700 dark:text-slate-300 flex items-center justify-between">
+              <span>Laporan Kinerja 3 Tahun Terakhir</span>
+              <span class="text-sky-600 dark:text-sky-400 font-semibold text-[11px]">Rerata: <span id="detail-kpi-avg">0</span></span>
+            </h5>
+            <div class="space-y-2 text-xs" id="detail-kpi-bars"></div>
+          </div>
+
+          <div class="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm space-y-3">
+            <h5 class="font-bold text-xs text-slate-700 dark:text-slate-300">Hasil Assessment Center & Potensi</h5>
+            <div class="p-3 bg-slate-50 dark:bg-slate-800/60 rounded-xl space-y-2 text-xs">
+              <p><span class="text-slate-500 dark:text-slate-400">Predikat:</span> <strong id="detail-assessment-predicate" class="text-slate-900 dark:text-white">--</strong></p>
+              <p><span class="text-slate-500 dark:text-slate-400">LQ:</span> <strong id="detail-assessment-lq" class="text-slate-900 dark:text-white">--</strong></p>
+              <p class="text-[11px] text-slate-600 dark:text-slate-300 italic" id="detail-assessment-notes">--</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 space-y-3">
+          <h4 class="font-bold text-xs text-slate-700 dark:text-slate-300">Profil Nilai Kompetensi Aktual</h4>
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs" id="detail-competencies-grid"></div>
+        </div>
+      </div>
+
+      <div class="p-4 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 flex items-center justify-end">
+        <button onclick="closeEmployeeModal()" class="px-5 py-2 bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 rounded-xl text-xs font-bold transition">Tutup</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL 4: INPUT / EDIT KARYAWAN ==================== -->
+  <div id="modal-emp-form" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-3xl w-full max-h-[92vh] flex flex-col shadow-2xl border border-slate-100 dark:border-slate-800 overflow-hidden">
+      <div class="px-6 py-4 bg-sky-900 dark:bg-slate-950 text-white flex items-center justify-between border-b border-slate-800">
+        <h3 class="font-extrabold text-base leading-tight" id="form-emp-title">Input Data Karyawan</h3>
+        <button onclick="closeEmployeeFormModal()" class="text-slate-300 hover:text-white text-2xl font-bold">&times;</button>
+      </div>
+
+      <form id="form-employee" onsubmit="handleEmployeeFormSubmit(event)" class="p-6 overflow-y-auto custom-scrollbar space-y-6 flex-1 text-slate-800 dark:text-slate-100">
+        <input type="hidden" id="form-emp-id" value="">
+
+        <div class="space-y-3">
+          <h4 class="text-xs font-extrabold uppercase tracking-wider text-sky-800 dark:text-sky-400 border-b border-slate-100 dark:border-slate-800 pb-1.5">1. Identitas, Grade & Posisi</h4>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+            <div>
+              <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Nama Lengkap & Gelar *</label>
+              <input type="text" id="inp-name" required placeholder="Contoh: I Nengah Sugiarta, S.H., M.H." class="w-full p-2.5 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white">
+            </div>
+            <div>
+              <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">NIK *</label>
+              <input type="text" id="inp-nik" required placeholder="Contoh: EMP-2026-001" class="w-full p-2.5 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white">
+            </div>
+            <div>
+              <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Jenis Kelamin *</label>
+              <select id="inp-gender" required class="w-full p-2.5 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-medium">
+                <option value="Pria">Pria</option>
+                <option value="Wanita">Wanita</option>
+              </select>
+            </div>
+            <div>
+              <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Departemen (Pilih / Ketik Bebas) *</label>
+              <input type="text" id="inp-dept" list="dept-options" required placeholder="Ketik atau pilih departemen..." class="w-full p-2.5 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white">
+              <datalist id="dept-options">
+                <option value="Corporate Security & GSS">
+                <option value="Human Capital">
+                <option value="Operations & Engineering">
+                <option value="Finance & Accounting">
+                <option value="Legal & Governance">
+              </datalist>
+            </div>
+            <div>
+              <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Posisi Saat Ini *</label>
+              <input type="text" id="inp-position" required placeholder="Contoh: Security Governance Lead" class="w-full p-2.5 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white">
+            </div>
+            <div>
+              <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Grade Organisasi *</label>
+              <input type="text" id="inp-grade" required placeholder="Contoh: Grade 16 (Senior Specialist)" class="w-full p-2.5 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white">
+            </div>
+            <div>
+              <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Pendidikan Terakhir *</label>
+              <input type="text" id="inp-education" required placeholder="Contoh: S2 Magister Hukum" class="w-full p-2.5 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white">
+            </div>
+            <div>
+              <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Usia (Tahun) *</label>
+              <input type="number" id="inp-age" required min="20" max="65" value="40" class="w-full p-2.5 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white">
+            </div>
+            <div>
+              <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Tenure Saat Ini (Tahun) *</label>
+              <input type="number" id="inp-tenure-years" step="0.1" required min="0" max="40" value="6.0" class="w-full p-2.5 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white">
+            </div>
+            <div>
+              <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Klasifikasi Fungsi *</label>
+              <select id="inp-function-cat" required class="w-full p-2.5 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-medium">
+                <option value="Project Facility">Core: Project Facility</option>
+                <option value="Geoscience">Core: Geoscience</option>
+                <option value="DWO">Core: DWO</option>
+                <option value="Engineering">Core: Engineering</option>
+                <option value="Operation">Core: Operation</option>
+                <option value="Support Function" selected>Support Function</option>
+              </select>
+            </div>
+            <div class="sm:col-span-3">
+              <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Training / Workshop / Seminar (Pisahkan dengan koma)</label>
+              <input type="text" id="inp-trainings" placeholder="Contoh: Workshop PTK 007, Executive Leadership Masterclass, Advanced Risk Assessor" class="w-full p-2.5 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white">
+            </div>
+            <div class="sm:col-span-3">
+              <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Sertifikasi Profesional (Pisahkan dengan koma) *</label>
+              <input type="text" id="inp-certifications" required placeholder="Contoh: ISO 37001 Lead Auditor, BCP Specialist (DRI)" class="w-full p-2.5 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white">
+            </div>
+            <div class="sm:col-span-3">
+              <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Achievement / Rekam Jejak Prestasi (Pisahkan dengan koma)</label>
+              <input type="text" id="inp-achievements" placeholder="Contoh: Best Continuous Improvement Award 2025, Zero Incident Safety Leader" class="w-full p-2.5 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white">
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-3">
+          <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-1.5">
+            <h4 class="text-xs font-extrabold uppercase tracking-wider text-sky-800 dark:text-sky-400">2. Performance Appraisal (Standar 6 Kategori) & Asesmen</h4>
+            <span class="text-[10px] text-slate-400">AS+(90) | AS(85) | AS-(80) | MS+(75) | MS(70) | MS-(65)</span>
+          </div>
+          <div class="grid grid-cols-3 gap-3 text-xs">
+            <div>
+              <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">PA 2023</label>
+              <select id="inp-kpi-2023" class="w-full p-2 border border-slate-200 dark:border-slate-700 rounded-xl text-center font-bold bg-white dark:bg-slate-800 text-slate-900 dark:text-white">
+                <option value="90">AS+ (90)</option>
+                <option value="85">AS (85)</option>
+                <option value="80">AS- (80)</option>
+                <option value="75">MS+ (75)</option>
+                <option value="70">MS (70)</option>
+                <option value="65">MS- (65)</option>
+              </select>
+            </div>
+            <div>
+              <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">PA 2024</label>
+              <select id="inp-kpi-2024" class="w-full p-2 border border-slate-200 dark:border-slate-700 rounded-xl text-center font-bold bg-white dark:bg-slate-800 text-slate-900 dark:text-white">
+                <option value="90">AS+ (90)</option>
+                <option value="85" selected>AS (85)</option>
+                <option value="80">AS- (80)</option>
+                <option value="75">MS+ (75)</option>
+                <option value="70">MS (70)</option>
+                <option value="65">MS- (65)</option>
+              </select>
+            </div>
+            <div>
+              <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">PA 2025</label>
+              <select id="inp-kpi-2025" class="w-full p-2 border border-slate-200 dark:border-slate-700 rounded-xl text-center font-bold text-emerald-700 dark:text-emerald-400 bg-white dark:bg-slate-800">
+                <option value="90" selected>AS+ (90)</option>
+                <option value="85">AS (85)</option>
+                <option value="80">AS- (80)</option>
+                <option value="75">MS+ (75)</option>
+                <option value="70">MS (70)</option>
+                <option value="65">MS- (65)</option>
+              </select>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs pt-1">
+            <div>
+              <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Predikat Hasil Asesmen</label>
+              <select id="inp-assess-predicate" class="w-full p-2.5 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white">
+                <option value="Optimal / Recommended with Distinction">Optimal / Recommended with Distinction</option>
+                <option value="Recommended for Strategic Role">Recommended for Strategic Role</option>
+                <option value="Ready with Technical Mastery">Ready with Technical Mastery</option>
+                <option value="High Potential Professional">High Potential Professional</option>
+                <option value="Recommended with Development">Recommended with Development</option>
+              </select>
+            </div>
+            <div>
+              <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Leadership Quotient (LQ)</label>
+              <input type="text" id="inp-assess-lq" placeholder="Contoh: High (4.6 / 5.0)" value="High (4.5 / 5.0)" class="w-full p-2.5 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white">
+            </div>
+            <div>
+              <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Skor Potensi Asesmen (1 - 100) *</label>
+              <input type="number" id="inp-assess-potential" required min="1" max="100" value="85" class="w-full p-2.5 border border-slate-200 dark:border-slate-700 rounded-xl font-bold bg-white dark:bg-slate-800 text-slate-900 dark:text-white">
+            </div>
+            <div class="sm:col-span-3">
+              <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Catatan Evaluator</label>
+              <textarea id="inp-assess-notes" rows="2" class="w-full p-2.5 border border-slate-200 dark:border-slate-700 rounded-xl text-xs bg-white dark:bg-slate-800 text-slate-900 dark:text-white">Memiliki kapabilitas governance, mitigasi risiko krisis, dan kepatuhan regulasi yang matang.</textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-3">
+          <h4 class="text-xs font-extrabold uppercase tracking-wider text-sky-800 dark:text-sky-400 border-b border-slate-100 dark:border-slate-800 pb-1.5">3. Penilaian 6 Kompetensi Kunci</h4>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs" id="form-competency-inputs"></div>
+        </div>
+
+        <div class="space-y-3">
+          <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-1.5">
+            <h4 class="text-xs font-extrabold uppercase tracking-wider text-sky-800 dark:text-sky-400">4. Riwayat Posisi yang Pernah Diemban</h4>
+            <button type="button" onclick="addCareerRow()" class="text-xs font-bold text-sky-600 dark:text-sky-400 hover:underline flex items-center gap-1">
+              <i class="ph-bold ph-plus"></i> Tambah Posisi
+            </button>
+          </div>
+          <div id="form-career-rows" class="space-y-2"></div>
+        </div>
+
+        <div class="pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-end gap-3">
+          <button type="button" onclick="closeEmployeeFormModal()" class="px-5 py-2.5 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-xl text-xs font-bold transition">Batal</button>
+          <button type="submit" id="btn-save-emp" class="px-6 py-2.5 bg-sky-600 hover:bg-sky-700 text-white rounded-xl text-xs font-bold transition shadow-md shadow-sky-600/20 flex items-center gap-1.5">
+            <i class="ph-bold ph-check"></i> Simpan Data Karyawan
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL 5: INPUT CRITICAL POSITION ==================== -->
+  <div id="modal-position-form" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-slate-100 dark:border-slate-800 space-y-5">
+      <div class="flex items-center justify-between">
+        <h3 class="font-extrabold text-slate-900 dark:text-white text-base">Tambah Target Critical Position</h3>
+        <button onclick="closePositionFormModal()" class="text-slate-400 hover:text-slate-600 text-xl font-bold">&times;</button>
+      </div>
+
+      <form onsubmit="handlePositionFormSubmit(event)" class="space-y-4 text-xs">
+        <div>
+          <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Nama Jabatan Strategis *</label>
+          <input type="text" id="inp-pos-title" required placeholder="Contoh: Head of Corporate Security & GSS" class="w-full p-2.5 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white">
+        </div>
+        <div>
+          <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Departemen Penyelenggara *</label>
+          <select id="inp-pos-dept" class="w-full p-2.5 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white">
+            <option value="Corporate Security & GSS">Corporate Security & GSS</option>
+            <option value="Human Capital">Human Capital</option>
+            <option value="Operations & Engineering">Operations & Engineering</option>
+            <option value="Finance & Accounting">Finance & Accounting</option>
+            <option value="Legal & Governance">Legal & Governance</option>
+          </select>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Min. Tenure (Tahun)</label>
+            <input type="number" id="inp-pos-tenure" value="7" min="1" max="25" class="w-full p-2.5 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white">
+          </div>
+          <div>
+            <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Status Kebutuhan</label>
+            <select id="inp-pos-status" class="w-full p-2.5 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white">
+              <option value="Critical Vacancy Risk">Critical Vacancy Risk</option>
+              <option value="Retiring in 6 Months">Retiring in 6 Months</option>
+              <option value="Benchmark Talent Pool">Benchmark Talent Pool</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="space-y-2 pt-2 border-t border-slate-100 dark:border-slate-800">
+          <label class="block font-bold text-slate-700 dark:text-slate-300">Target Standar Kompetensi (1.0 - 5.0):</label>
+          <div class="grid grid-cols-2 gap-2" id="form-pos-std-inputs"></div>
+        </div>
+
+        <div class="pt-3 flex items-center justify-end gap-2">
+          <button type="button" onclick="closePositionFormModal()" class="px-4 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 rounded-xl font-bold">Batal</button>
+          <button type="submit" id="btn-save-pos" class="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-bold">Simpan Posisi</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL 6: MASTER FIELD & SETTINGS (SUPER ADMIN) ==================== -->
+  <div id="modal-master-setting" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-xl w-full p-6 shadow-2xl border border-slate-100 dark:border-slate-800 space-y-5">
+      <div class="flex items-center justify-between">
+        <h3 class="font-extrabold text-slate-900 dark:text-white text-base">Super Admin: Master Label Kompetensi</h3>
+        <button onclick="closeMasterSettingModal()" class="text-slate-400 hover:text-slate-600 text-xl font-bold">&times;</button>
+      </div>
+
+      <div class="space-y-3 text-xs max-h-96 overflow-y-auto custom-scrollbar p-1">
+        <p class="font-bold text-slate-700 dark:text-slate-300">Nama-nama Kompetensi Inti Organisasi:</p>
+        <div id="master-competency-list" class="space-y-2"></div>
+      </div>
+
+      <div class="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-end gap-2">
+        <button type="button" onclick="closeMasterSettingModal()" class="px-4 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 rounded-xl font-bold text-xs">Batal</button>
+        <button type="button" onclick="saveMasterCompetencyNames()" id="btn-save-master" class="px-5 py-2 bg-sky-600 hover:bg-sky-700 text-white rounded-xl font-bold text-xs">Terapkan Perubahan Label</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL 7: KELOLA AKUN USER (SUPER ADMIN) ==================== -->
+  <div id="modal-user-management" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-2xl w-full max-h-[90vh] flex flex-col shadow-2xl border border-slate-100 dark:border-slate-800 overflow-hidden">
+      <div class="px-6 py-4 bg-slate-900 dark:bg-slate-950 text-white flex items-center justify-between border-b border-slate-800">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-lg bg-sky-600 text-white flex items-center justify-center font-bold">
+            <i class="ph-bold ph-users-three"></i>
+          </div>
+          <div>
+            <h3 class="font-extrabold text-base leading-tight">Kelola Akun Pengguna</h3>
+            <p class="text-[11px] text-slate-400">Tambah dan kelola hak akses akun pada lembar TB_USERS</p>
+          </div>
+        </div>
+        <button onclick="closeUserManagementModal()" class="text-slate-400 hover:text-white text-xl font-bold">&times;</button>
+      </div>
+
+      <div class="p-6 overflow-y-auto custom-scrollbar space-y-6 flex-1 text-slate-800 dark:text-slate-100">
+        <!-- Form Tambah User -->
+        <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200/80 dark:border-slate-800 space-y-3">
+          <h4 class="text-xs font-black uppercase tracking-wider text-sky-800 dark:text-sky-400 flex items-center gap-1.5">
+            <i class="ph-bold ph-user-plus"></i> Tambah Akun Baru
+          </h4>
+          <form onsubmit="handleCreateUserSubmit(event)" class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+            <div>
+              <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Username *</label>
+              <input type="text" id="new-user-username" required placeholder="Contoh: userhc" class="w-full p-2 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white">
+            </div>
+            <div>
+              <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Nama Lengkap *</label>
+              <input type="text" id="new-user-fullname" required placeholder="Contoh: Ahmad Fauzi, S.Psi." class="w-full p-2 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white">
+            </div>
+            <div>
+              <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Password Sementara *</label>
+              <input type="password" id="new-user-password" required minlength="6" placeholder="Minimal 6 karakter" class="w-full p-2 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white">
+            </div>
+            <div>
+              <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Peran / Role *</label>
+              <select id="new-user-role" class="w-full p-2 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white">
+                <option value="HC TALENT MANAGER">HC TALENT MANAGER</option>
+                <option value="SUPER ADMIN">SUPER ADMIN</option>
+                <option value="DEPT HEAD">DEPT HEAD</option>
+                <option value="VIEWER">VIEWER</option>
+              </select>
+            </div>
+            <div class="sm:col-span-2 flex justify-end pt-1">
+              <button type="submit" id="btn-create-user" class="px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white font-bold rounded-xl transition shadow-sm">
+                + Tambahkan Akun
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Tabel Daftar User -->
+        <div class="space-y-2">
+          <h4 class="text-xs font-bold text-slate-700 dark:text-slate-300 flex items-center justify-between">
+            <span>Daftar Akun Terdaftar (TB_USERS)</span>
+            <span id="user-count-badge" class="text-[11px] font-semibold text-slate-400">0 Akun</span>
+          </h4>
+          <div class="border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-slate-100 dark:bg-slate-800 text-slate-500 uppercase font-semibold">
+                <tr>
+                  <th class="py-2.5 px-3">Username & Nama</th>
+                  <th class="py-2.5 px-3">Role</th>
+                  <th class="py-2.5 px-3">Status</th>
+                  <th class="py-2.5 px-3 text-right">Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="user-table-body" class="divide-y divide-slate-100 dark:divide-slate-800"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-4 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 flex justify-end">
+        <button onclick="closeUserManagementModal()" class="px-5 py-2 bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-slate-200 rounded-xl text-xs font-bold">Tutup</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== FRONTEND APPLICATION CONTROLLER ==================== -->
+  <script>
+    /* URL Deployment Google Apps Script Web App (Headless Backend) */
+    const GAS_API_URL = 'https://script.google.com/macros/s/AKfycbyWn-xY8AufSw0Ij9oky9Qo9gGmx6pNgA_kD_VN0484PPYLEEYpw9VsfyAddrFvhugb/exec';
+
+    /* Jembatan API Universal (Kompatibel GAS Container & Domain Vercel) */
+    async function apiCall(action, payload = {}) {
+      // 1. Jika berjalan langsung di dalam GAS WebApp
+      if (typeof google !== 'undefined' && google.script && google.script.run) {
+        return new Promise((resolve, reject) => {
+          const runner = google.script.run
+            .withSuccessHandler(res => resolve(res))
+            .withFailureHandler(err => reject(err));
+
+          if (action === 'fetchDashboardData') runner.fetchDashboardData();
+          else if (action === 'authenticateUser') runner.authenticateUser(payload.username, payload.password);
+          else if (action === 'forceChangeBootstrapPassword') runner.forceChangeBootstrapPassword(payload.username, payload.newPassword);
+          else if (action === 'saveEmployeeRecord') runner.saveEmployeeRecord(payload.employeeData);
+          else if (action === 'deleteEmployeeRecord') runner.deleteEmployeeRecord(payload.employeeId);
+          else if (action === 'saveCriticalPositionRecord') runner.saveCriticalPositionRecord(payload.positionData);
+          else if (action === 'saveCompetencyCatalog') runner.saveCompetencyCatalog(payload.catalogData);
+          else if (action === 'fetchUserAccounts') runner.fetchUserAccounts();
+          else if (action === 'createUserAccount') runner.createUserAccount(payload.userData);
+          else if (action === 'deleteUserAccount') runner.deleteUserAccount(payload.userId);
+          else reject(new Error('Aksi tidak terdaftar di client runner'));
+        });
+      }
+
+      // 2. Jika berjalan dari Vercel / GitHub Pages / Localhost
+      try {
+        const response = await fetch(GAS_API_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'text/plain;charset=utf-8' // Menghindari CORS Preflight OPTIONS
+          },
+          body: JSON.stringify({ action, ...payload })
+        });
+        return await response.json();
+      } catch (err) {
+        throw new Error('Gagal menghubungi backend Sheets: ' + err.message);
+      }
+    }
+
+    /* Theme Controller */
+    let currentTheme = localStorage.getItem('talentpulse_theme') || 'light';
+    function initTheme() {
+      if (currentTheme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    }
+    function toggleTheme() {
+      if (document.documentElement.classList.contains('dark')) {
+        document.documentElement.classList.remove('dark');
+        currentTheme = 'light';
+      } else {
+        document.documentElement.classList.add('dark');
+        currentTheme = 'dark';
+      }
+      localStorage.setItem('talentpulse_theme', currentTheme);
+      showToast(`Mode ${currentTheme === 'dark' ? 'Gelap (Dark)' : 'Terang (Light)'} aktif.`, 'info');
+      loadGapAndILPView();
+    }
+    initTheme();
+
+    /* App State Cache */
+    let COMPETENCY_CATALOG = [];
+    let CRITICAL_POSITIONS = [];
+    let EMPLOYEES = [];
+    let SYSTEM_CONFIG = { isBootstrapActive: false, appVersion: 'V2.0.0' };
+
+    let currentAuthUser = null;
+    let radarChartInstance = null;
+    let pendingUsernameForPasswordChange = null;
+
+    /* Notification Helper */
+    function showToast(message, type = 'info') {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      const colors = {
+        success: 'bg-emerald-600 text-white',
+        error: 'bg-rose-600 text-white',
+        warning: 'bg-amber-600 text-white',
+        info: 'bg-slate-900 dark:bg-slate-800 text-white border border-slate-700'
+      };
+      toast.className = `px-4 py-3 rounded-xl shadow-xl text-xs font-semibold flex items-center gap-2 pointer-events-auto transition duration-300 transform translate-y-2 opacity-0 ${colors[type] || colors.info}`;
+      toast.innerHTML = `<i class="ph-bold ph-bell"></i> <span>${message}</span>`;
+      container.appendChild(toast);
+
+      setTimeout(() => toast.classList.remove('translate-y-2', 'opacity-0'), 10);
+      setTimeout(() => {
+        toast.classList.add('opacity-0');
+        setTimeout(() => toast.remove(), 300);
+      }, 3500);
+    }
+
+    /* Initialize Application Data */
+    document.addEventListener('DOMContentLoaded', () => {
+      loadInitialDataFromServer();
+    });
+
+    async function loadInitialDataFromServer() {
+      try {
+        const response = await apiCall('fetchDashboardData');
+        if (response && response.success) {
+          COMPETENCY_CATALOG = response.data.competencies || [];
+          CRITICAL_POSITIONS = response.data.criticalPositions || [];
+          EMPLOYEES = response.data.employees || [];
+          SYSTEM_CONFIG = response.data.config || { isBootstrapActive: false };
+
+          updateBootstrapBannerVisibility();
+          buildFormCompetencyInputs();
+          buildPositionStandardInputs();
+          populateCriticalPositionsDropdown();
+          populateGapEmployeeDropdown();
+          syncDepartmentOptions();
+          refreshAllViews();
+        } else {
+          showToast('Gagal memuat data: ' + (response ? response.message : 'Error'), 'error');
+        }
+      } catch (err) {
+        showToast('Koneksi backend: ' + err.message, 'error');
+        // Fallback offline bila URL belum disetel
+        SYSTEM_CONFIG = { isBootstrapActive: true, appVersion: 'V2.0.0 (Local Preview)' };
+        COMPETENCY_CATALOG = [
+          { id: 'C1', name: 'Strategic Thinking' },
+          { id: 'C2', name: 'Leadership & People Development' },
+          { id: 'C3', name: 'Security Governance & Risk Management' },
+          { id: 'C4', name: 'Business Continuity & Crisis Response' },
+          { id: 'C5', name: 'Digital & Process Innovation' },
+          { id: 'C6', name: 'Stakeholder & Legal Relations' }
+        ];
+        CRITICAL_POSITIONS = [
+          {
+            id: 'POS-001',
+            title: 'Head of Corporate Security & GSS',
+            department: 'Corporate Security & GSS',
+            minEducation: 'S1 / S2 Hukum atau Teknik',
+            minTenureYears: 7,
+            standardCompetencies: { C1: 4.5, C2: 4.5, C3: 5.0, C4: 4.5, C5: 4.0, C6: 4.5 },
+            currentStatus: 'Occupied (Retiring in 6 Months)'
+          }
+        ];
+        EMPLOYEES = [
+          {
+            id: 'EMP-01',
+            nik: 'EMP-2018-091',
+            name: 'I Nengah Sugiarta, S.H., M.H.',
+            age: 43,
+            education: 'S2 Magister Hukum (S.H., M.H.)',
+            grade: 'Grade 16 (Senior Specialist)',
+            tenure: '7.3 Tahun',
+            tenureYears: 7.3,
+            currentDepartment: 'Corporate Security & GSS',
+            currentPosition: 'Security Governance & BCP Specialist',
+            certifications: ['ISO 37001 Lead Auditor', 'Certified BCP Specialist (DRI)'],
+            initials: 'NS',
+            pastPositions: [{ role: 'Security Lead', dept: 'Corporate Security & GSS', period: '2023 - Sekarang' }],
+            kpiHistory: { 2023: 94.5, 2024: 96.0, 2025: 98.2 },
+            assessment: { predicate: 'Optimal / Recommended with Distinction', lq: 'High (4.7 / 5.0)', potentialScore: 95, notes: 'Governance & BCP expert.' },
+            competencies: { C1: 4.5, C2: 4.4, C3: 4.9, C4: 4.8, C5: 4.2, C6: 4.6 }
+          }
+        ];
+        updateBootstrapBannerVisibility();
+        buildFormCompetencyInputs();
+        buildPositionStandardInputs();
+        populateCriticalPositionsDropdown();
+        populateGapEmployeeDropdown();
+        refreshAllViews();
+      }
+    }
+
+    /* Update Visibilitas Kartu Hint Akun Bootstrap */
+    function updateBootstrapBannerVisibility() {
+      const banner = document.getElementById('bootstrap-hint-card');
+      if (!banner) return;
+      if (SYSTEM_CONFIG.isBootstrapActive === true) {
+        banner.classList.remove('hidden');
+      } else {
+        banner.classList.add('hidden'); // Hilang permanen setelah password bootstrap diganti
+      }
+    }
+
+    /* Sinkronisasi Daftar Departemen Bawaan & Hasil Input Manual */
+    function syncDepartmentOptions() {
+      const defaultDepts = [
+        'Corporate Security & GSS',
+        'Human Capital',
+        'Operations & Engineering',
+        'Finance & Accounting',
+        'Legal & Governance'
+      ];
+
+      // Kumpulkan seluruh departemen unik dari data karyawan
+      const allDepts = Array.from(new Set([
+        ...defaultDepts,
+        ...EMPLOYEES.map(e => e.currentDepartment).filter(Boolean)
+      ])).sort();
+
+      // Perbarui datalist form karyawan
+      const datalist = document.getElementById('dept-options');
+      if (datalist) {
+        datalist.innerHTML = allDepts.map(d => `<option value="${escapeHtml(d)}">`).join('');
+      }
+
+      // Perbarui dropdown filter departemen pada tabel direktori
+      const filterSelect = document.getElementById('filter-dept');
+      if (filterSelect) {
+        const curVal = filterSelect.value;
+        filterSelect.innerHTML = `<option value="ALL">Semua Departemen</option>` + 
+          allDepts.map(d => `<option value="${escapeHtml(d)}">${escapeHtml(d)}</option>`).join('');
+        if (curVal && allDepts.includes(curVal)) {
+          filterSelect.value = curVal;
+        }
+      }
+    }
+
+    function refreshAllViews() {
+      renderExecutiveOverview();
+      renderNineBoxMatrix();
+      renderEmployeeTable();
+      runSuccessionMatchEngine();
+      loadGapAndILPView();
+      updateMetricCounts();
+    }
+
+    function updateMetricCounts() {
+      const totalEmpEl = document.getElementById('metric-total-emp');
+      const critPosEl = document.getElementById('metric-critical-pos');
+      const hipoEl = document.getElementById('metric-hipo-count');
+      const genderRatioEl = document.getElementById('metric-gender-ratio');
+      const genderDetailEl = document.getElementById('metric-gender-detail');
+      const avgAgeEl = document.getElementById('metric-avg-age');
+      const ageRangeEl = document.getElementById('metric-age-range');
+
+      if (totalEmpEl) totalEmpEl.innerText = EMPLOYEES.length;
+      if (critPosEl) critPosEl.innerText = CRITICAL_POSITIONS.length;
+
+      if (EMPLOYEES.length > 0) {
+        // 1. Star & High Potential Count (9-Box)
+        const hipoCount = EMPLOYEES.filter(e => {
+          const avgKpi = ((e.kpiHistory[2023] || 0) + (e.kpiHistory[2024] || 0) + (e.kpiHistory[2025] || 0)) / 3;
+          return avgKpi >= 93 && (e.assessment.potentialScore || 80) >= 85;
+        }).length;
+        if (hipoEl) hipoEl.innerText = hipoCount;
+
+        // 2. Proporsi Pekerja Laki-laki vs Wanita
+        let maleCount = 0;
+        let femaleCount = 0;
+        EMPLOYEES.forEach(e => {
+          const g = (e.gender || '').toLowerCase().trim();
+          if (g === 'wanita' || g === 'perempuan' || g === 'female' || g === 'w' || g === 'f') {
+            femaleCount++;
+          } else if (g === 'laki-laki' || g === 'pria' || g === 'male' || g === 'l' || g === 'm') {
+            maleCount++;
+          } else {
+            // Heuristik cerdas bila atribut gender belum diisi pada database sheet
+            const name = (e.name || '').toLowerCase();
+            if (/\b(siti|rahma|rahmawati|dewi|putri|ayu|dian|ani|rina|nur|pertiwi|safitri|sarah|linda|maya|anisa|fatimah|retno|kusuma)\b/.test(name)) {
+              femaleCount++;
+            } else {
+              maleCount++;
+            }
+          }
+        });
+
+        const total = EMPLOYEES.length;
+        const malePct = total > 0 ? Math.round((maleCount / total) * 100) : 0;
+        const femalePct = total > 0 ? Math.round((femaleCount / total) * 100) : 0;
+
+        if (genderRatioEl) genderRatioEl.innerText = `${malePct}% : ${femalePct}%`;
+        if (genderDetailEl) genderDetailEl.innerText = `${maleCount} Pria (${malePct}%) • ${femaleCount} Wanita (${femalePct}%)`;
+
+        // 3. Average & Rentang Usia Pekerja
+        const validAges = EMPLOYEES.map(e => Number(e.age) || 0).filter(a => a > 0);
+        if (validAges.length > 0) {
+          const avgAge = (validAges.reduce((acc, cur) => acc + cur, 0) / validAges.length).toFixed(1);
+          const minAge = Math.min(...validAges);
+          const maxAge = Math.max(...validAges);
+
+          if (avgAgeEl) avgAgeEl.innerText = `${avgAge} Thn`;
+          if (ageRangeEl) ageRangeEl.innerText = `Rentang: ${minAge} - ${maxAge} Thn`;
+        } else {
+          if (avgAgeEl) avgAgeEl.innerText = '-';
+          if (ageRangeEl) ageRangeEl.innerText = 'Rentang: -';
+        }
+      } else {
+        if (hipoEl) hipoEl.innerText = '0';
+        if (genderRatioEl) genderRatioEl.innerText = '0% : 0%';
+        if (genderDetailEl) genderDetailEl.innerText = '0 Pria • 0 Wanita';
+        if (avgAgeEl) avgAgeEl.innerText = '0 Thn';
+        if (ageRangeEl) ageRangeEl.innerText = 'Rentang: 0 - 0 Thn';
+      }
+    }
+
+    /* Modal Navigation */
+    function openLoginModal() {
+      document.getElementById('modal-login').classList.remove('hidden');
+    }
+    function closeLoginModal() {
+      document.getElementById('modal-login').classList.add('hidden');
+    }
+
+    /* Authentication & Forced Password Change Handling */
+    async function handleLoginSubmit(e) {
+      e.preventDefault();
+      const u = document.getElementById('login-username').value.trim();
+      const p = document.getElementById('login-password').value;
+
+      const btn = document.getElementById('btn-login-submit');
+      btn.disabled = true;
+      btn.innerText = 'Memverifikasi...';
+
+      try {
+        const res = await apiCall('authenticateUser', { username: u, password: p });
+        btn.disabled = false;
+        btn.innerText = 'Autentikasi & Lanjutkan';
+
+        if (res && res.success) {
+          closeLoginModal();
+          if (res.user.forcePasswordChange) {
+            pendingUsernameForPasswordChange = u;
+            document.getElementById('modal-force-password').classList.remove('hidden');
+            showToast('Wajib mengganti password awal sebelum mengakses portal.', 'warning');
+          } else {
+            grantAccess(res.user);
+          }
+        } else {
+          showToast(res ? res.message : 'Autentikasi gagal.', 'error');
+        }
+      } catch (err) {
+        btn.disabled = false;
+        btn.innerText = 'Autentikasi & Lanjutkan';
+        showToast('Koneksi autentikasi gagal: ' + err.message, 'error');
+      }
+    }
+
+    async function handleForcePasswordSubmit(e) {
+      e.preventDefault();
+      const np = document.getElementById('new-password').value;
+      const cp = document.getElementById('confirm-password').value;
+
+      if (np !== cp) {
+        showToast('Password baru dan konfirmasi tidak cocok!', 'error');
+        return;
+      }
+      if (np === 'bismillah') {
+        showToast('Password baru tidak boleh sama dengan kredensial bawaan!', 'error');
+        return;
+      }
+
+      const btn = document.getElementById('btn-force-submit');
+      btn.disabled = true;
+      btn.innerText = 'Menyimpan...';
+
+      const username = pendingUsernameForPasswordChange || 'blinengah';
+
+      try {
+        const res = await apiCall('forceChangeBootstrapPassword', { username, newPassword: np });
+        btn.disabled = false;
+        btn.innerText = 'Simpan & Amankan Akses';
+
+        if (res && res.success) {
+          document.getElementById('modal-force-password').classList.add('hidden');
+          SYSTEM_CONFIG.isBootstrapActive = false;
+          updateBootstrapBannerVisibility();
+          showToast(res.message, 'success');
+          grantAccess({ username, role: 'SUPER ADMIN' });
+        } else {
+          showToast(res ? res.message : 'Gagal memperbarui password.', 'error');
+        }
+      } catch (err) {
+        btn.disabled = false;
+        btn.innerText = 'Simpan & Amankan Akses';
+        showToast('Koneksi gagal: ' + err.message, 'error');
+      }
+    }
+
+    /* XSS Sanitization Helper */
+    function escapeHtml(str) {
+      if (str === null || str === undefined) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function grantAccess(user) {
+      currentAuthUser = user;
+      document.getElementById('session-username').innerText = user.username;
+      document.getElementById('session-role').innerText = user.role;
+      
+      const avatarEl = document.getElementById('session-avatar');
+      if (avatarEl && user.username) {
+        avatarEl.innerText = user.username.substring(0, 2).toUpperCase();
+      }
+
+      // Terapkan RBAC pada Sidebar Kontrol Admin
+      const adminControls = document.getElementById('section-admin-controls');
+      if (adminControls) {
+        if (user.role === 'SUPER ADMIN') {
+          adminControls.classList.remove('hidden');
+        } else {
+          adminControls.classList.add('hidden');
+        }
+      }
+
+      updateWelcomeBanner(user.fullName || user.username);
+      document.getElementById('view-landing').classList.add('hidden');
+      document.getElementById('view-dashboard').classList.remove('hidden');
+      switchTab('tab-overview');
+      showToast(`Selamat datang, ${user.username}!`, 'success');
+    }
+
+    function triggerLogout() {
+      currentAuthUser = null;
+      const adminControls = document.getElementById('section-admin-controls');
+      if (adminControls) adminControls.classList.add('hidden');
+      
+      document.getElementById('view-dashboard').classList.add('hidden');
+      document.getElementById('view-landing').classList.remove('hidden');
+      showToast('Anda telah keluar dari portal HC.', 'info');
+    }
+
+    /* Tab Switcher (Sleek Sidebar Engine) */
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.className = "tab-btn w-full flex items-center gap-3 px-3 py-2 rounded-xl font-medium transition text-left text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-white";
+      });
+
+      const target = document.getElementById(tabId);
+      if (target) target.classList.remove('hidden');
+
+      const activeBtn = document.getElementById('btn-' + tabId);
+      if (activeBtn) {
+        activeBtn.className = "tab-btn w-full flex items-center gap-3 px-3 py-2 rounded-xl font-bold transition text-left bg-sky-600 text-white shadow-sm shadow-sky-600/30";
+      }
+
+      if (tabId === 'tab-critical-pos') {
+        runSuccessionMatchEngine();
+      } else if (tabId === 'tab-competency-profile') {
+        loadGapAndILPView();
+      } else if (tabId === 'tab-talent-pool') {
+        renderNineBoxMatrix();
+      }
+    }
+
+    /* Executive Overview Module */
+    function renderExecutiveOverview() {
+      const critContainer = document.getElementById('overview-critical-list');
+      critContainer.innerHTML = CRITICAL_POSITIONS.map(pos => `
+        <div class="p-3.5 rounded-xl border border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/40 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <div>
+            <h5 class="text-xs font-bold text-slate-900 dark:text-white">${pos.title}</h5>
+            <p class="text-[11px] text-slate-500 dark:text-slate-400">${pos.department} &bull; ${pos.currentStatus}</p>
+          </div>
+          <button onclick="selectAndGoToCritical('${pos.id}')" class="text-xs font-bold px-3 py-1 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sky-700 dark:text-sky-300 hover:bg-sky-50 rounded-lg transition self-start sm:self-auto">
+            Analisis Suksesor &rarr;
+          </button>
+        </div>
+      `).join('');
+
+      const hipoContainer = document.getElementById('overview-hipo-list');
+      const sortedHipo = [...EMPLOYEES].sort((a,b) => ((b.kpiHistory[2025]||0) - (a.kpiHistory[2025]||0))).slice(0, 3);
+      hipoContainer.innerHTML = sortedHipo.map(emp => `
+        <div class="p-3 rounded-xl border border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/40 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-full bg-sky-100 dark:bg-sky-950 text-sky-700 dark:text-sky-300 font-bold text-xs flex items-center justify-center">
+              ${emp.initials}
+            </div>
+            <div>
+              <p class="text-xs font-bold text-slate-900 dark:text-white">${emp.name}</p>
+              <p class="text-[10px] text-slate-500 dark:text-slate-400">${emp.grade} &bull; ${emp.currentDepartment}</p>
+            </div>
+          </div>
+          <div class="text-right">
+            <span class="text-xs font-black text-emerald-600 dark:text-emerald-400">KPI ${emp.kpiHistory[2025]}</span>
+            <p class="text-[10px] text-slate-400">Tenure ${emp.tenureYears} thn</p>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function selectAndGoToCritical(posId) {
+      switchTab('tab-critical-pos');
+      const sel = document.getElementById('select-critical-job');
+      sel.value = posId;
+      runSuccessionMatchEngine();
+    }
+
+    /* Talent Pool Matrix Module (4-Box Active Focus, 5 Standby Hidden) */
+    function renderNineBoxMatrix() {
+      const container = document.getElementById('nine-box-container');
+      const boxes = [
+        // 4 BOX AKTIF SAAT INI SESUAI TATA LETAK 2x2
+        { id: 'b-growth', active: true, title: 'High Potential / Med Perf', sub: 'Growth Talent', perf: 'med', pot: 'high', bg: 'bg-emerald-50/40 dark:bg-emerald-950/20', border: 'border-emerald-300 dark:border-emerald-800' },
+        { id: 'b-star',   active: true, title: 'High Potential / High Perf', sub: 'Star Talent / Future Leader', perf: 'high', pot: 'high', bg: 'bg-indigo-50/50 dark:bg-indigo-950/20', border: 'border-indigo-300 dark:border-indigo-800' },
+        { id: 'b-core',   active: true, title: 'Med Potential / Med Perf', sub: 'Core Player', perf: 'med', pot: 'med', bg: 'bg-slate-50/80 dark:bg-slate-800/40', border: 'border-slate-200 dark:border-slate-700' },
+        { id: 'b-highperf', active: true, title: 'Med Potential / High Perf', sub: 'High Performer', perf: 'high', pot: 'med', bg: 'bg-emerald-50/30 dark:bg-emerald-950/20', border: 'border-emerald-300 dark:border-emerald-800' },
+
+        // 5 BOX CADANGAN (DISEMBUNYIKAN SEMENTARA DENGAN active: false)
+        { id: 'b-enigma', active: false, title: 'High Potential / Low Perf', sub: 'Enigma / Rough Diamond', perf: 'low', pot: 'high', bg: 'bg-amber-50/60 dark:bg-amber-950/20', border: 'border-amber-200 dark:border-amber-900/60' },
+        { id: 'b-dilemma', active: false, title: 'Med Potential / Low Perf', sub: 'Dilemma / Inconsistent', perf: 'low', pot: 'med', bg: 'bg-rose-50/40 dark:bg-rose-950/20', border: 'border-rose-200 dark:border-rose-900/60' },
+        { id: 'b-risk',    active: false, title: 'Low Potential / Low Perf', sub: 'Underperformer / Risk', perf: 'low', pot: 'low', bg: 'bg-rose-50/70 dark:bg-rose-950/30', border: 'border-rose-200 dark:border-rose-900/60' },
+        { id: 'b-specialist', active: false, title: 'Low Potential / Med Perf', sub: 'Effective / Specialist', perf: 'med', pot: 'low', bg: 'bg-slate-50 dark:bg-slate-800/40', border: 'border-slate-200 dark:border-slate-800' },
+        { id: 'b-solid',   active: false, title: 'Low Potential / High Perf', sub: 'Solid Professional', perf: 'high', pot: 'low', bg: 'bg-sky-50/50 dark:bg-sky-950/20', border: 'border-sky-200 dark:border-sky-900/60' }
+      ];
+
+      // Hanya render box yang berstatus active: true (4 Box utama)
+      const activeBoxes = boxes.filter(b => b.active === true);
+
+      container.innerHTML = activeBoxes.map(b => {
+        const occupants = EMPLOYEES.filter(emp => {
+          const avgKpi = ((emp.kpiHistory[2023] || 0) + (emp.kpiHistory[2024] || 0) + (emp.kpiHistory[2025] || 0)) / 3;
+          const pot = emp.assessment.potentialScore || 80;
+
+          const matchPerf = (b.perf === 'high' && avgKpi >= 94) ||
+                            (b.perf === 'med' && avgKpi >= 91 && avgKpi < 94) ||
+                            (b.perf === 'low' && avgKpi < 91);
+
+          const matchPot = (b.pot === 'high' && pot >= 88) ||
+                           (b.pot === 'med' && pot >= 80 && pot < 88) ||
+                           (b.pot === 'low' && pot < 80);
+
+          return matchPerf && matchPot;
+        });
+
+        return `
+          <div class="p-5 rounded-3xl border-2 ${b.border} ${b.bg} space-y-4 min-h-[190px] flex flex-col justify-between shadow-xs transition hover:shadow-md">
+            <div>
+              <div class="flex items-center justify-between">
+                <h5 class="text-sm font-black text-slate-900 dark:text-white tracking-tight">${escapeHtml(b.title)}</h5>
+                <span class="text-xs font-bold px-2.5 py-0.5 rounded-lg bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 shadow-xs border border-slate-200/60 dark:border-slate-700">${occupants.length} Org</span>
+              </div>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">${escapeHtml(b.sub)}</p>
+            </div>
+            <div class="space-y-2">
+              ${occupants.map(o => {
+                const avgKpiVal = (((o.kpiHistory[2023]||0) + (o.kpiHistory[2024]||0) + (o.kpiHistory[2025]||0)) / 3).toFixed(1);
+                return `
+                  <div onclick="openEmployeeDetail('${o.id}')" class="p-3 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700 shadow-xs hover:border-sky-500 hover:shadow-sm cursor-pointer transition flex items-center justify-between">
+                    <div>
+                      <p class="text-xs font-extrabold text-slate-900 dark:text-white">${escapeHtml(o.name)}</p>
+                      <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">${escapeHtml(o.grade || o.currentPosition)}</p>
+                    </div>
+                    <span class="text-xs font-black text-sky-700 dark:text-sky-400 px-2 py-1 rounded-lg bg-sky-50 dark:bg-sky-950/60 border border-sky-100 dark:border-sky-800">${avgKpiVal}</span>
+                  </div>
+                `;
+              }).join('')}
+              ${occupants.length === 0 ? '<p class="text-xs text-slate-400 dark:text-slate-500 italic py-6 text-center">Belum ada karyawan</p>' : ''}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    /* Helper Konversi Nilai Bobot ke Label Kategori Performance Appraisal */
+    function formatPALabel(val) {
+      const num = Number(val) || 0;
+      if (num >= 90) return 'AS+ (90)';
+      if (num >= 85) return 'AS (85)';
+      if (num >= 80) return 'AS- (80)';
+      if (num >= 75) return 'MS+ (75)';
+      if (num >= 70) return 'MS (70)';
+      if (num >= 65) return 'MS- (65)';
+      return num > 0 ? num.toFixed(1) : '-';
+    }
+
+    /* Direktori Karyawan Module */
+    function renderEmployeeTable() {
+      const q = document.getElementById('search-emp').value.toLowerCase();
+      const deptFilter = document.getElementById('filter-dept').value;
+      const funcFilter = document.getElementById('filter-function') ? document.getElementById('filter-function').value : 'ALL';
+      const projFilter = document.getElementById('filter-projection') ? document.getElementById('filter-projection').value : 'CURRENT';
+      const tbody = document.getElementById('employee-table-body');
+
+      // Kalkulasi penambahan tahun berdasarkan pilihan proyeksi
+      const additionalYears = {
+        CURRENT: 0,
+        PLUS_1: 1,
+        PLUS_2: 2,
+        PLUS_3: 3
+      }[projFilter] || 0;
+
+      const filtered = EMPLOYEES.filter(e => {
+        const certString = (e.certifications || []).join(' ').toLowerCase();
+        const trainString = (e.trainings || []).join(' ').toLowerCase();
+        const achString = (e.achievements || []).join(' ').toLowerCase();
+
+        const matchesQuery = (e.name || '').toLowerCase().includes(q) ||
+                             (e.nik || '').toLowerCase().includes(q) ||
+                             (e.currentPosition || '').toLowerCase().includes(q) ||
+                             (e.grade || '').toLowerCase().includes(q) ||
+                             certString.includes(q) ||
+                             trainString.includes(q) ||
+                             achString.includes(q);
+
+        const matchesDept = deptFilter === 'ALL' || e.currentDepartment === deptFilter;
+        
+        let matchesFunc = true;
+        if (funcFilter !== 'ALL') {
+          if (funcFilter === 'Support Function') {
+            matchesFunc = (e.functionCategory === 'Support Function') || !['Project Facility','Geoscience','DWO','Engineering','Operation'].includes(e.functionCategory);
+          } else {
+            matchesFunc = e.functionCategory === funcFilter;
+          }
+        }
+
+        return matchesQuery && matchesDept && matchesFunc;
+      });
+
+      document.getElementById('filtered-emp-count').innerText = filtered.length;
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="11" class="py-8 text-center text-slate-400 text-xs">Tidak ditemukan profil karyawan yang sesuai kriteria pencarian dan filter.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(emp => {
+        const avgKpi = (((emp.kpiHistory[2023]||0) + (emp.kpiHistory[2024]||0) + (emp.kpiHistory[2025]||0)) / 3).toFixed(1);
+        const paBadge = formatPALabel(avgKpi);
+
+        // Proyeksi usia dan tenure
+        const projectedAge = (Number(emp.age) || 0) + additionalYears;
+        const projectedTenure = ((Number(emp.tenureYears) || 0) + additionalYears).toFixed(1);
+
+        const trainBadges = (emp.trainings || []).map(t => `
+          <span class="inline-block px-2 py-0.5 bg-amber-50 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 border border-amber-200 dark:border-amber-800 rounded text-[10px] font-medium mr-1 mb-1 truncate max-w-[140px]" title="${escapeHtml(t)}">${escapeHtml(t)}</span>
+        `).join('');
+
+        const certBadges = (emp.certifications || []).map(c => `
+          <span class="inline-block px-2 py-0.5 bg-sky-50 dark:bg-sky-950/60 text-sky-800 dark:text-sky-300 border border-sky-200 dark:border-sky-800 rounded text-[10px] font-medium mr-1 mb-1 truncate max-w-[140px]" title="${escapeHtml(c)}">${escapeHtml(c)}</span>
+        `).join('');
+
+        const achBadges = (emp.achievements || []).map(a => `
+          <span class="inline-block px-2 py-0.5 bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 rounded text-[10px] font-medium mr-1 mb-1 truncate max-w-[140px]" title="${escapeHtml(a)}">★ ${escapeHtml(a)}</span>
+        `).join('');
+
+        const isCore = ['Project Facility','Geoscience','DWO','Engineering','Operation'].includes(emp.functionCategory);
+
+        return `
+          <tr class="hover:bg-slate-50/80 dark:hover:bg-slate-800/50 transition">
+            <td class="py-3 px-4">
+              <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold text-xs flex items-center justify-center">
+                  ${escapeHtml(emp.initials)}
+                </div>
+                <div>
+                  <p class="font-bold text-slate-900 dark:text-white text-xs">${escapeHtml(emp.name)}</p>
+                  <p class="text-[10px] text-slate-500 dark:text-slate-400">${escapeHtml(emp.nik)} &bull; ${escapeHtml(emp.gender || 'Pria')}</p>
+                </div>
+              </div>
+            </td>
+            <td class="py-3 px-4">
+              <p class="font-semibold text-slate-800 dark:text-slate-200 text-xs">${escapeHtml(emp.currentPosition)}</p>
+              <p class="text-[10px] text-slate-500 dark:text-slate-400 flex items-center gap-1 mt-0.5">
+                <span>${escapeHtml(emp.currentDepartment)}</span>
+                <span class="px-1.5 py-0.2 rounded text-[9px] font-bold ${isCore ? 'bg-indigo-100 text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300' : 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400'}">
+                  ${escapeHtml(emp.functionCategory || 'Support')}
+                </span>
+              </p>
+            </td>
+            <td class="py-3 px-4 text-center">
+              <span class="inline-block px-2 py-1 rounded-md text-xs font-bold bg-sky-50 dark:bg-sky-950 text-sky-800 dark:text-sky-300 border border-sky-100 dark:border-sky-800">
+                ${escapeHtml(emp.grade || 'Grade --')}
+              </span>
+            </td>
+            <td class="py-3 px-4">
+              <p class="text-xs text-slate-800 dark:text-slate-200">${escapeHtml(emp.education)}</p>
+              <p class="text-[10px] ${additionalYears > 0 ? 'text-amber-600 dark:text-amber-400 font-bold' : 'text-slate-500 dark:text-slate-400'}">
+                ${projectedAge} Tahun ${additionalYears > 0 ? `(+${additionalYears}th)` : ''}
+              </p>
+            </td>
+            <td class="py-3 px-4 text-xs font-medium text-slate-700 dark:text-slate-300">
+              <span class="${additionalYears > 0 ? 'text-amber-600 dark:text-amber-400 font-bold' : ''}">
+                ${projectedTenure} Thn
+              </span>
+            </td>
+            <td class="py-3 px-4 text-center">
+              <span class="inline-block px-2 py-0.5 rounded text-[11px] font-black ${avgKpi >= 85 ? 'bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300' : avgKpi >= 75 ? 'bg-sky-100 dark:bg-sky-950 text-sky-800 dark:text-sky-300' : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300'}">
+                ${paBadge}
+              </span>
+            </td>
+            <td class="py-3 px-4 text-center">
+              <span class="text-[11px] font-semibold text-slate-700 dark:text-slate-300 block truncate max-w-[120px]" title="${escapeHtml(emp.assessment.predicate)}">
+                ${escapeHtml(emp.assessment.predicate)}
+              </span>
+            </td>
+            <td class="py-3 px-4 max-w-[160px]">
+              <div class="flex flex-wrap">${trainBadges || '<span class="text-slate-400 text-[10px]">-</span>'}</div>
+            </td>
+            <td class="py-3 px-4 max-w-[160px]">
+              <div class="flex flex-wrap">${certBadges || '<span class="text-slate-400 text-[10px]">-</span>'}</div>
+            </td>
+            <td class="py-3 px-4 max-w-[160px]">
+              <div class="flex flex-wrap">${achBadges || '<span class="text-slate-400 text-[10px]">-</span>'}</div>
+            </td>
+            <td class="py-3 px-4 text-right whitespace-nowrap">
+              <div class="inline-flex items-center gap-1.5">
+                <button onclick="openEmployeeDetail('${emp.id}')" class="px-2.5 py-1 bg-slate-100 dark:bg-slate-800 hover:bg-sky-600 hover:text-white dark:hover:bg-sky-600 text-slate-700 dark:text-slate-200 rounded-lg text-xs font-bold transition">
+                  Detail
+                </button>
+                <button onclick="editEmployee('${emp.id}')" class="p-1 text-slate-500 hover:text-sky-600 dark:hover:text-sky-400 rounded-lg transition" title="Edit Data">
+                  <i class="ph-bold ph-pencil-simple text-sm"></i>
+                </button>
+                <button onclick="deleteEmployee('${emp.id}')" class="p-1 text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 rounded-lg transition" title="Hapus Data">
+                  <i class="ph-bold ph-trash text-sm"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function openEmployeeDetail(empId) {
+      const emp = EMPLOYEES.find(e => e.id === empId);
+      if (!emp) return;
+
+      document.getElementById('btn-edit-from-detail').onclick = () => {
+        closeEmployeeModal();
+        editEmployee(empId);
+      };
+
+      document.getElementById('detail-avatar').innerText = emp.initials;
+      document.getElementById('detail-name').innerText = emp.name;
+      document.getElementById('detail-pos').innerText = `${emp.currentPosition} (${emp.nik})`;
+      document.getElementById('detail-grade').innerText = emp.grade || 'N/A';
+      document.getElementById('detail-demog').innerText = `${emp.age} Thn &bull; ${emp.education}`;
+      document.getElementById('detail-tenure').innerText = emp.tenure;
+      document.getElementById('detail-dept').innerText = emp.currentDepartment;
+      document.getElementById('detail-ninebox').innerText = (emp.assessment.potentialScore >= 88) ? 'Star Talent' : 'Core Performer';
+
+      const certBox = document.getElementById('detail-certifications-list');
+      certBox.innerHTML = (emp.certifications || []).map(c => `
+        <span class="px-2.5 py-1 bg-sky-50 dark:bg-sky-950 text-sky-800 dark:text-sky-300 border border-sky-200 dark:border-sky-800 rounded-lg text-xs font-semibold flex items-center gap-1">
+          <i class="ph-bold ph-check-circle text-sky-600 dark:text-sky-400"></i> ${c}
+        </span>
+      `).join('') || '<span class="text-xs text-slate-400">Belum ada sertifikasi terdaftar</span>';
+
+      const timelineBox = document.getElementById('detail-career-timeline');
+      timelineBox.innerHTML = (emp.pastPositions || []).map(pos => `
+        <div class="relative pl-2">
+          <div class="absolute -left-[27px] top-1 w-2.5 h-2.5 rounded-full bg-sky-600 border-2 border-white dark:border-slate-900 ring-2 ring-sky-200 dark:ring-sky-900"></div>
+          <p class="text-xs font-bold text-slate-900 dark:text-white">${pos.role}</p>
+          <p class="text-[10px] text-slate-500 dark:text-slate-400">${pos.dept} &bull; <span class="font-semibold text-sky-700 dark:text-sky-400">${pos.period}</span></p>
+        </div>
+      `).join('');
+
+      const avgKpi = ((emp.kpiHistory[2023] + emp.kpiHistory[2024] + emp.kpiHistory[2025]) / 3).toFixed(1);
+      document.getElementById('detail-kpi-avg').innerText = avgKpi;
+      const kpiContainer = document.getElementById('detail-kpi-bars');
+      kpiContainer.innerHTML = [2023, 2024, 2025].map(year => {
+        const score = emp.kpiHistory[year] || 0;
+        return `
+          <div class="space-y-1">
+            <div class="flex justify-between text-[11px] font-semibold text-slate-600 dark:text-slate-400">
+              <span>Tahun ${year}</span>
+              <span class="font-bold text-slate-900 dark:text-white">${score}</span>
+            </div>
+            <div class="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-1.5 overflow-hidden">
+              <div class="bg-sky-600 h-1.5 rounded-full" style="width: ${Math.min(score, 100)}%"></div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      document.getElementById('detail-assessment-predicate').innerText = emp.assessment.predicate;
+      document.getElementById('detail-assessment-lq').innerText = emp.assessment.lq;
+      document.getElementById('detail-assessment-notes').innerText = `"${emp.assessment.notes}"`;
+
+      const compGrid = document.getElementById('detail-competencies-grid');
+      compGrid.innerHTML = COMPETENCY_CATALOG.map(c => {
+        const val = emp.competencies[c.id] || 0;
+        return `
+          <div class="p-2 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+            <p class="text-[10px] text-slate-500 dark:text-slate-400 truncate" title="${c.name}">${c.name}</p>
+            <p class="text-sm font-extrabold text-sky-700 dark:text-sky-400 mt-0.5">${val.toFixed(1)} <span class="text-[9px] text-slate-400 font-normal">/ 5.0</span></p>
+          </div>
+        `;
+      }).join('');
+
+      document.getElementById('modal-emp-detail').classList.remove('hidden');
+    }
+
+    function closeEmployeeModal() {
+      document.getElementById('modal-emp-detail').classList.add('hidden');
+    }
+
+    /* Form Competency & Career Helpers */
+    function buildFormCompetencyInputs() {
+      const container = document.getElementById('form-competency-inputs');
+      container.innerHTML = COMPETENCY_CATALOG.map(c => `
+        <div class="p-2.5 rounded-xl border border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/40 space-y-1">
+          <div class="flex justify-between items-center">
+            <label class="font-bold text-slate-700 dark:text-slate-300 truncate" title="${c.name}">${c.name}</label>
+            <span id="label-val-${c.id}" class="font-black text-sky-600 dark:text-sky-400">4.0</span>
+          </div>
+          <input type="range" id="comp-range-${c.id}" min="1.0" max="5.0" step="0.1" value="4.0" oninput="document.getElementById('label-val-${c.id}').innerText = this.value" class="w-full accent-sky-600 cursor-pointer">
+        </div>
+      `).join('');
+    }
+
+    function addCareerRow(role = '', dept = '', period = '') {
+      const container = document.getElementById('form-career-rows');
+      const rowId = 'career-row-' + Date.now() + Math.random().toString(36).substring(2, 5);
+      const div = document.createElement('div');
+      div.id = rowId;
+      div.className = "grid grid-cols-1 sm:grid-cols-12 gap-2 items-center bg-slate-50 dark:bg-slate-800/40 p-2 rounded-xl text-xs";
+      div.innerHTML = `
+        <div class="sm:col-span-5">
+          <input type="text" placeholder="Nama Jabatan..." value="${role}" class="career-inp-role w-full p-2 border border-slate-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white">
+        </div>
+        <div class="sm:col-span-4">
+          <input type="text" placeholder="Departemen..." value="${dept}" class="career-inp-dept w-full p-2 border border-slate-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white">
+        </div>
+        <div class="sm:col-span-2">
+          <input type="text" placeholder="Periode (2020-2022)" value="${period}" class="career-inp-period w-full p-2 border border-slate-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white">
+        </div>
+        <div class="sm:col-span-1 text-center">
+          <button type="button" onclick="document.getElementById('${rowId}').remove()" class="text-rose-500 hover:text-rose-700 font-bold p-1">
+            <i class="ph-bold ph-trash"></i>
+          </button>
+        </div>
+      `;
+      container.appendChild(div);
+    }
+
+    function openEmployeeFormModal() {
+      document.getElementById('form-emp-id').value = '';
+      document.getElementById('form-emp-title').innerText = 'Input Data Karyawan Baru';
+      document.getElementById('form-employee').reset();
+      document.getElementById('form-career-rows').innerHTML = '';
+
+      const genderSelect = document.getElementById('inp-gender');
+      if (genderSelect) genderSelect.value = 'Pria';
+
+      const deptInput = document.getElementById('inp-dept');
+      if (deptInput) deptInput.value = '';
+
+      const funcSelect = document.getElementById('inp-function-cat');
+      if (funcSelect) funcSelect.value = 'Support Function';
+
+      const trainInput = document.getElementById('inp-trainings');
+      if (trainInput) trainInput.value = '';
+
+      const certInput = document.getElementById('inp-certifications');
+      if (certInput) certInput.value = '';
+
+      const achInput = document.getElementById('inp-achievements');
+      if (achInput) achInput.value = '';
+
+      const potInput = document.getElementById('inp-assess-potential');
+      if (potInput) potInput.value = '85';
+
+      addCareerRow('Officer Pelaksana', 'Operasional', '2021 - 2023');
+      addCareerRow('Spesialis Pratama', 'Departemen Terkait', '2023 - Sekarang');
+
+      COMPETENCY_CATALOG.forEach(c => {
+        const slider = document.getElementById(`comp-range-${c.id}`);
+        if (slider) {
+          slider.value = '4.0';
+          document.getElementById(`label-val-${c.id}`).innerText = '4.0';
+        }
+      });
+      document.getElementById('modal-emp-form').classList.remove('hidden');
+    }
+
+    function closeEmployeeFormModal() {
+      document.getElementById('modal-emp-form').classList.add('hidden');
+    }
+
+    function editEmployee(empId) {
+      const emp = EMPLOYEES.find(e => e.id === empId);
+      if (!emp) return;
+
+      document.getElementById('form-emp-id').value = emp.id;
+      document.getElementById('form-emp-title').innerText = `Edit Karyawan: ${emp.name}`;
+
+      document.getElementById('inp-name').value = emp.name;
+      document.getElementById('inp-nik').value = emp.nik;
+
+      const genderSelect = document.getElementById('inp-gender');
+      if (genderSelect) genderSelect.value = emp.gender || 'Pria';
+
+      document.getElementById('inp-dept').value = emp.currentDepartment || '';
+      document.getElementById('inp-position').value = emp.currentPosition;
+      document.getElementById('inp-grade').value = emp.grade || '';
+      document.getElementById('inp-certifications').value = (emp.certifications || []).join(', ');
+      document.getElementById('inp-education').value = emp.education;
+      document.getElementById('inp-age').value = emp.age;
+      document.getElementById('inp-tenure-years').value = emp.tenureYears;
+
+      const funcSelect = document.getElementById('inp-function-cat');
+      if (funcSelect) funcSelect.value = emp.functionCategory || 'Support Function';
+
+      const trainInput = document.getElementById('inp-trainings');
+      if (trainInput) trainInput.value = (emp.trainings || []).join(', ');
+
+      const achInput = document.getElementById('inp-achievements');
+      if (achInput) achInput.value = (emp.achievements || []).join(', ');
+
+      document.getElementById('inp-kpi-2023').value = String(emp.kpiHistory[2023] || 85);
+      document.getElementById('inp-kpi-2024').value = String(emp.kpiHistory[2024] || 85);
+      document.getElementById('inp-kpi-2025').value = String(emp.kpiHistory[2025] || 90);
+
+      document.getElementById('inp-assess-predicate').value = emp.assessment.predicate || 'Optimal / Recommended with Distinction';
+      document.getElementById('inp-assess-lq').value = emp.assessment.lq || '';
+      document.getElementById('inp-assess-notes').value = emp.assessment.notes || '';
+
+      const potInput = document.getElementById('inp-assess-potential');
+      if (potInput) potInput.value = emp.assessment.potentialScore || 80;
+
+      COMPETENCY_CATALOG.forEach(c => {
+        const slider = document.getElementById(`comp-range-${c.id}`);
+        const val = emp.competencies[c.id] || 3.5;
+        if (slider) {
+          slider.value = val;
+          document.getElementById(`label-val-${c.id}`).innerText = val;
+        }
+      });
+
+      const careerContainer = document.getElementById('form-career-rows');
+      careerContainer.innerHTML = '';
+      if (emp.pastPositions && emp.pastPositions.length > 0) {
+        emp.pastPositions.forEach(p => addCareerRow(p.role, p.dept, p.period));
+      } else {
+        addCareerRow('Posisi Awal', emp.currentDepartment, '2022 - Sekarang');
+      }
+
+      document.getElementById('modal-emp-form').classList.remove('hidden');
+    }
+
+    function deleteEmployee(empId) {
+      const emp = EMPLOYEES.find(e => e.id === empId);
+      if (!emp) return;
+
+      if (confirm(`Apakah Anda yakin ingin menghapus data karyawan "${emp.name}" dari sistem?`)) {
+        if (typeof google !== 'undefined' && google.script && google.script.run) {
+          google.script.run
+            .withSuccessHandler(res => {
+              if (res.success) {
+                showToast(res.message, 'success');
+                loadInitialDataFromServer();
+              } else {
+                showToast(res.message, 'error');
+              }
+            })
+            .deleteEmployeeRecord(empId);
+        } else {
+          EMPLOYEES = EMPLOYEES.filter(e => e.id !== empId);
+          showToast(`Karyawan ${emp.name} dihapus.`, 'info');
+          populateGapEmployeeDropdown();
+          refreshAllViews();
+        }
+      }
+    }
+
+    function handleEmployeeFormSubmit(e) {
+      e.preventDefault();
+      const empId = document.getElementById('form-emp-id').value;
+      const name = document.getElementById('inp-name').value.trim();
+      const nik = document.getElementById('inp-nik').value.trim();
+      const gender = (document.getElementById('inp-gender') ? document.getElementById('inp-gender').value : 'Pria');
+      const dept = document.getElementById('inp-dept').value.trim();
+      const position = document.getElementById('inp-position').value.trim();
+      const grade = document.getElementById('inp-grade').value.trim();
+      const rawCerts = document.getElementById('inp-certifications').value.trim();
+      const certifications = rawCerts ? rawCerts.split(',').map(c => c.trim()).filter(Boolean) : [];
+      const education = document.getElementById('inp-education').value.trim();
+      const age = parseInt(document.getElementById('inp-age').value);
+      const tenureYears = parseFloat(document.getElementById('inp-tenure-years').value);
+
+      const kpi2023 = parseFloat(document.getElementById('inp-kpi-2023').value);
+      const kpi2024 = parseFloat(document.getElementById('inp-kpi-2024').value);
+      const kpi2025 = parseFloat(document.getElementById('inp-kpi-2025').value);
+
+      const assessPredicate = document.getElementById('inp-assess-predicate').value;
+      const assessLq = document.getElementById('inp-assess-lq').value.trim();
+      const assessNotes = document.getElementById('inp-assess-notes').value.trim();
+
+      const competencies = {};
+      COMPETENCY_CATALOG.forEach(c => {
+        competencies[c.id] = parseFloat(document.getElementById(`comp-range-${c.id}`).value);
+      });
+
+      const pastPositions = [];
+      const roles = document.querySelectorAll('.career-inp-role');
+      const depts = document.querySelectorAll('.career-inp-dept');
+      const periods = document.querySelectorAll('.career-inp-period');
+      roles.forEach((r, idx) => {
+        if (r.value.trim() !== '') {
+          pastPositions.push({
+            role: r.value.trim(),
+            dept: depts[idx].value.trim() || dept,
+            period: periods[idx].value.trim() || '2023 - 2025'
+          });
+        }
+      });
+
+      const potentialInput = document.getElementById('inp-assess-potential');
+      const parsedPotential = potentialInput ? parseFloat(potentialInput.value) : 80;
+
+      const funcCategory = document.getElementById('inp-function-cat') ? document.getElementById('inp-function-cat').value : 'Support Function';
+      const rawTrainings = document.getElementById('inp-trainings') ? document.getElementById('inp-trainings').value.trim() : '';
+      const trainings = rawTrainings ? rawTrainings.split(',').map(s => s.trim()).filter(Boolean) : [];
+
+      const rawAchievements = document.getElementById('inp-achievements') ? document.getElementById('inp-achievements').value.trim() : '';
+      const achievements = rawAchievements ? rawAchievements.split(',').map(s => s.trim()).filter(Boolean) : [];
+
+      const empPayload = {
+        id: empId || null,
+        nik, name, gender, grade, 
+        currentDepartment: dept, 
+        currentPosition: position,
+        functionCategory: funcCategory,
+        education, age, tenureYears, 
+        trainings,
+        certifications,
+        achievements,
+        kpiHistory: { 2023: kpi2023, 2024: kpi2024, 2025: kpi2025 },
+        assessment: {
+          predicate: assessPredicate,
+          lq: assessLq,
+          potentialScore: isNaN(parsedPotential) ? 80 : parsedPotential,
+          notes: assessNotes
+        },
+        competencies,
+        pastPositions
+      };
+
+      const btn = document.getElementById('btn-save-emp');
+      btn.disabled = true;
+      btn.innerText = 'Menyimpan ke Sheets...';
+
+      apiCall('saveEmployeeRecord', { employeeData: empPayload })
+        .then(res => {
+          btn.disabled = false;
+          btn.innerText = 'Simpan Data Karyawan';
+          if (res.success) {
+            showToast(res.message, 'success');
+            closeEmployeeFormModal();
+            loadInitialDataFromServer();
+          } else {
+            showToast(res.message, 'error');
+          }
+        })
+        .catch(err => {
+          btn.disabled = false;
+          btn.innerText = 'Simpan Data Karyawan';
+          showToast('Gagal menyimpan: ' + err.message, 'error');
+        });
+    }
+
+    function deleteEmployee(empId) {
+      const emp = EMPLOYEES.find(e => e.id === empId);
+      if (!emp) return;
+
+      if (confirm(`Apakah Anda yakin ingin menghapus data karyawan "${emp.name}" dari sistem?`)) {
+        apiCall('deleteEmployeeRecord', { employeeId: empId })
+          .then(res => {
+            if (res.success) {
+              showToast(res.message, 'success');
+              loadInitialDataFromServer();
+            } else {
+              showToast(res.message, 'error');
+            }
+          })
+          .catch(err => {
+            showToast('Gagal menghapus: ' + err.message, 'error');
+          });
+      }
+    }
+
+    /* Critical Position Module */
+    function buildPositionStandardInputs() {
+      const container = document.getElementById('form-pos-std-inputs');
+      container.innerHTML = COMPETENCY_CATALOG.map(c => `
+        <div class="flex items-center justify-between p-2 bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700 rounded-lg text-xs">
+          <span class="truncate max-w-[120px] dark:text-slate-300" title="${c.name}">${c.name}</span>
+          <input type="number" id="inp-pos-std-${c.id}" min="1.0" max="5.0" step="0.5" value="4.5" class="w-14 p-1 border border-slate-300 dark:border-slate-600 rounded text-center font-bold bg-white dark:bg-slate-800 text-slate-900 dark:text-white">
+        </div>
+      `).join('');
+    }
+
+    function openPositionFormModal() {
+      document.getElementById('inp-pos-title').value = '';
+      document.getElementById('modal-position-form').classList.remove('hidden');
+    }
+    function closePositionFormModal() {
+      document.getElementById('modal-position-form').classList.add('hidden');
+    }
+
+    async function handlePositionFormSubmit(e) {
+      e.preventDefault();
+      const title = document.getElementById('inp-pos-title').value.trim();
+      const dept = document.getElementById('inp-pos-dept').value;
+      const tenure = parseFloat(document.getElementById('inp-pos-tenure').value);
+      const status = document.getElementById('inp-pos-status').value;
+
+      const standardCompetencies = {};
+      COMPETENCY_CATALOG.forEach(c => {
+        standardCompetencies[c.id] = parseFloat(document.getElementById(`inp-pos-std-${c.id}`).value) || 4.0;
+      });
+
+      const posPayload = {
+        title, department: dept, minTenureYears: tenure, currentStatus: status, standardCompetencies
+      };
+
+      const btn = document.getElementById('btn-save-pos');
+      btn.disabled = true;
+      btn.innerText = 'Menyimpan...';
+
+      try {
+        const res = await apiCall('saveCriticalPositionRecord', { positionData: posPayload });
+        btn.disabled = false;
+        btn.innerText = 'Simpan Posisi';
+        if (res && res.success) {
+          showToast(res.message, 'success');
+          closePositionFormModal();
+          loadInitialDataFromServer();
+        } else {
+          showToast(res ? res.message : 'Gagal menyimpan posisi.', 'error');
+        }
+      } catch (err) {
+        btn.disabled = false;
+        btn.innerText = 'Simpan Posisi';
+        showToast('Koneksi gagal: ' + err.message, 'error');
+      }
+    }
+
+    function populateCriticalPositionsDropdown() {
+      const select = document.getElementById('select-critical-job');
+      const currentVal = select.value;
+      select.innerHTML = CRITICAL_POSITIONS.map(p => `
+        <option value="${p.id}">${p.title} (${p.department})</option>
+      `).join('');
+      if (currentVal && CRITICAL_POSITIONS.some(p => p.id === currentVal)) {
+        select.value = currentVal;
+      }
+    }
+
+    function runSuccessionMatchEngine() {
+      const select = document.getElementById('select-critical-job');
+      if (!select.value && CRITICAL_POSITIONS.length > 0) {
+        select.value = CRITICAL_POSITIONS[0].id;
+      }
+      const selectedPosId = select.value;
+      const targetPos = CRITICAL_POSITIONS.find(p => p.id === selectedPosId) || CRITICAL_POSITIONS[0];
+      if (!targetPos) return;
+
+      const scoredCandidates = EMPLOYEES.map(emp => {
+        let totalStd = 0;
+        let earned = 0;
+        COMPETENCY_CATALOG.forEach(c => {
+          const std = targetPos.standardCompetencies[c.id] || 4.0;
+          const actual = emp.competencies[c.id] || 0;
+          totalStd += std;
+          earned += Math.min(actual, std);
+        });
+        const matchPct = Math.round((earned / totalStd) * 100);
+
+        let bucket = 'READY_2_YEARS';
+        if (matchPct >= 85 && emp.tenureYears >= 5.0) {
+          bucket = 'READY_NOW';
+        } else if (matchPct >= 70) {
+          bucket = 'READY_1_YEAR';
+        }
+
+        return { ...emp, matchPct, bucket };
+      }).sort((a, b) => b.matchPct - a.matchPct);
+
+      const readyNowCandidates = scoredCandidates.filter(c => c.bucket === 'READY_NOW');
+      const ready1YrCandidates = scoredCandidates.filter(c => c.bucket === 'READY_1_YEAR');
+      const ready2YrCandidates = scoredCandidates.filter(c => c.bucket === 'READY_2_YEARS');
+
+      document.getElementById('badge-ready-now-count').innerText = `${readyNowCandidates.length} Kandidat`;
+      document.getElementById('badge-ready-1yr-count').innerText = `${ready1YrCandidates.length} Kandidat`;
+      document.getElementById('badge-ready-2yr-count').innerText = `${ready2YrCandidates.length} Kandidat`;
+
+      renderCandidateBucket('container-ready-now', readyNowCandidates, 'emerald');
+      renderCandidateBucket('container-ready-1yr', ready1YrCandidates, 'amber');
+      renderCandidateBucket('container-ready-2yr', ready2YrCandidates, 'slate');
+
+      const matcherTbody = document.getElementById('cross-dept-matcher-body');
+      matcherTbody.innerHTML = scoredCandidates.map(c => {
+        const isCrossDept = c.currentDepartment !== targetPos.department;
+        const bucketBadge = {
+          READY_NOW: '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300">Ready Now</span>',
+          READY_1_YEAR: '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300">Ready in 1 Yr</span>',
+          READY_2_YEARS: '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-300">Ready in 2 Yrs</span>'
+        }[c.bucket];
+
+        return `
+          <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition">
+            <td class="py-2.5 px-3">
+              <p class="font-bold text-xs text-slate-900 dark:text-white">${c.name}</p>
+              <p class="text-[10px] text-slate-500 dark:text-slate-400">${c.currentPosition}</p>
+            </td>
+            <td class="py-2.5 px-3">
+              <span class="inline-flex items-center gap-1 text-xs ${isCrossDept ? 'font-bold text-indigo-700 dark:text-indigo-400' : 'text-slate-700 dark:text-slate-300'}">
+                ${isCrossDept ? '<i class="ph-bold ph-arrows-left-right text-[11px]"></i> ' : ''}${c.currentDepartment}
+              </span>
+            </td>
+            <td class="py-2.5 px-3 text-center">
+              <span class="text-xs font-bold text-slate-700 dark:text-slate-300">${c.grade || '--'}</span>
+            </td>
+            <td class="py-2.5 px-3 text-xs text-slate-700 dark:text-slate-300">${c.tenure}</td>
+            <td class="py-2.5 px-3 text-center">
+              <div class="inline-flex items-center gap-2">
+                <span class="font-black text-xs ${c.matchPct >= 85 ? 'text-emerald-600 dark:text-emerald-400' : c.matchPct >= 70 ? 'text-amber-600 dark:text-amber-400' : 'text-slate-600 dark:text-slate-400'}">${c.matchPct}%</span>
+                <div class="w-16 bg-slate-200 dark:bg-slate-700 rounded-full h-1.5 overflow-hidden hidden sm:block">
+                  <div class="${c.matchPct >= 85 ? 'bg-emerald-500' : c.matchPct >= 70 ? 'bg-amber-500' : 'bg-slate-400'} h-1.5" style="width: ${c.matchPct}%"></div>
+                </div>
+              </div>
+            </td>
+            <td class="py-2.5 px-3 text-center">${bucketBadge}</td>
+            <td class="py-2.5 px-3 text-right">
+              <button onclick="inspectGapForCandidate('${c.id}')" class="text-xs font-bold text-sky-600 dark:text-sky-400 hover:underline">
+                Cek Profil
+              </button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function renderCandidateBucket(elementId, candidates, color) {
+      const container = document.getElementById(elementId);
+      if (candidates.length === 0) {
+        container.innerHTML = `<p class="text-xs text-slate-400 italic py-4 text-center">Belum ada kandidat di tier ini.</p>`;
+        return;
+      }
+      container.innerHTML = candidates.map(c => `
+        <div class="p-3 rounded-xl border border-${color}-100 dark:border-${color}-900/60 bg-${color}-50/40 dark:bg-${color}-950/20 space-y-2">
+          <div class="flex items-center justify-between">
+            <p class="font-bold text-xs text-slate-900 dark:text-white">${c.name}</p>
+            <span class="text-xs font-black text-${color}-700 dark:text-${color}-400">${c.matchPct}%</span>
+          </div>
+          <p class="text-[10px] text-slate-500 dark:text-slate-400">${c.grade} &bull; ${c.currentDepartment}</p>
+          <div class="pt-1 flex items-center justify-between">
+            <span class="text-[10px] text-slate-400">Tenure ${c.tenure}</span>
+            <button onclick="openEmployeeDetail('${c.id}')" class="text-[10px] font-bold text-sky-600 dark:text-sky-400 hover:underline">Detail 360° &rarr;</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function inspectGapForCandidate(empId) {
+      switchTab('tab-competency-profile');
+      const sel = document.getElementById('select-gap-emp');
+      sel.value = empId;
+      loadGapAndILPView();
+    }
+
+    /* Competency Profile & Radar Module */
+    function populateGapEmployeeDropdown() {
+      const select = document.getElementById('select-gap-emp');
+      const currentVal = select.value;
+      select.innerHTML = EMPLOYEES.map(e => `
+        <option value="${e.id}">${e.name} (${e.grade || e.currentDepartment})</option>
+      `).join('');
+      if (currentVal && EMPLOYEES.some(e => e.id === currentVal)) {
+        select.value = currentVal;
+      }
+    }
+
+    function loadGapAndILPView() {
+      const select = document.getElementById('select-gap-emp');
+      if (!select.value && EMPLOYEES.length > 0) {
+        select.value = EMPLOYEES[0].id;
+      }
+      const empId = select.value;
+      const emp = EMPLOYEES.find(e => e.id === empId) || EMPLOYEES[0];
+
+      const posId = document.getElementById('select-critical-job').value;
+      const targetPos = CRITICAL_POSITIONS.find(p => p.id === posId) || CRITICAL_POSITIONS[0];
+
+      if (!emp || !targetPos) return;
+
+      updateRadarChart(emp, targetPos);
+
+      const tbody = document.getElementById('gap-ilp-table-body');
+      tbody.innerHTML = COMPETENCY_CATALOG.map(c => {
+        const std = targetPos.standardCompetencies[c.id] || 4.0;
+        const actual = emp.competencies[c.id] || 0;
+        const gap = +(actual - std).toFixed(1);
+
+        let actionPlan = '<span class="text-emerald-600 dark:text-emerald-400 font-semibold flex items-center gap-1"><i class="ph-bold ph-check"></i> Memenuhi Standar (Mentoring)</span>';
+        if (gap < 0) {
+          const interventions = {
+            C1: 'Executive Strategic Thinking Masterclass & Corporate Taskforce',
+            C2: 'Leadership Coaching Program & Cross-functional Lead Assignment',
+            C3: 'Sertifikasi ISO 37001 Anti-Bribery & Audit Investigasi Terpadu',
+            C4: 'Simulasi Tabletop BCP & Emergency Response Lapangan',
+            C5: 'Pelatihan Digital Architecture & Otomasi Apps Script/AI',
+            C6: 'Workshop Negosiasi Regulasi & Stakeholder Management'
+          };
+          actionPlan = `<span class="text-rose-700 dark:text-rose-400 font-bold block">${interventions[c.id] || 'Pelatihan Akselerasi Kompetensi Terfokus'}</span>`;
+        }
+
+        return `
+          <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition">
+            <td class="py-2.5 px-3 font-semibold text-slate-800 dark:text-slate-200">${c.name}</td>
+            <td class="py-2.5 px-2 text-center font-bold text-sky-700 dark:text-sky-400">${std.toFixed(1)}</td>
+            <td class="py-2.5 px-2 text-center font-bold text-slate-900 dark:text-white">${actual.toFixed(1)}</td>
+            <td class="py-2.5 px-2 text-center font-extrabold ${gap >= 0 ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'}">
+              ${gap > 0 ? '+' : ''}${gap}
+            </td>
+            <td class="py-2.5 px-3">${actionPlan}</td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function updateRadarChart(employee, targetPosition) {
+      const labels = COMPETENCY_CATALOG.map(c => c.name);
+      const standardData = COMPETENCY_CATALOG.map(c => targetPosition.standardCompetencies[c.id] || 4.0);
+      const actualData = COMPETENCY_CATALOG.map(c => employee.competencies[c.id] || 0);
+
+      const isDark = document.documentElement.classList.contains('dark');
+      const gridColor = isDark ? 'rgba(148, 163, 184, 0.2)' : 'rgba(203, 213, 225, 0.6)';
+      const labelColor = isDark ? '#e2e8f0' : '#334155';
+
+      const canvas = document.getElementById('competencyRadarChart');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+
+      if (radarChartInstance) {
+        radarChartInstance.destroy();
+      }
+
+      radarChartInstance = new Chart(ctx, {
+        type: 'radar',
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: 'Standar Jabatan Target',
+              data: standardData,
+              borderColor: '#0284c7',
+              backgroundColor: isDark ? 'rgba(2, 132, 199, 0.3)' : 'rgba(2, 132, 199, 0.15)',
+              borderWidth: 2,
+              pointBackgroundColor: '#0284c7'
+            },
+            {
+              label: 'Aktual Karyawan',
+              data: actualData,
+              borderColor: '#e11d48',
+              backgroundColor: isDark ? 'rgba(225, 29, 72, 0.35)' : 'rgba(225, 29, 72, 0.2)',
+              borderWidth: 2,
+              pointBackgroundColor: '#e11d48'
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            r: {
+              min: 0,
+              max: 5,
+              ticks: { stepSize: 1, display: false },
+              grid: { color: gridColor },
+              angleLines: { color: gridColor },
+              pointLabels: {
+                color: labelColor,
+                font: { size: 9, family: 'Plus Jakarta Sans', weight: '600' }
+              }
+            }
+          },
+          plugins: {
+            legend: { display: false }
+          }
+        }
+      });
+    }
+
+    function saveILPPlan() {
+      showToast('Action Plan ILP berhasil disimpan ke database.', 'success');
+    }
+
+    /* Master Field Settings Module */
+    function openMasterSettingModal() {
+      const container = document.getElementById('master-competency-list');
+      container.innerHTML = COMPETENCY_CATALOG.map(c => `
+        <div class="flex items-center gap-2 p-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl">
+          <span class="w-8 text-[11px] font-bold text-slate-500 dark:text-slate-400">${c.id}</span>
+          <input type="text" id="master-comp-name-${c.id}" value="${c.name}" class="flex-1 p-2 border border-slate-300 dark:border-slate-600 rounded-lg text-xs font-semibold bg-white dark:bg-slate-800 text-slate-900 dark:text-white">
+        </div>
+      `).join('');
+      document.getElementById('modal-master-setting').classList.remove('hidden');
+    }
+
+    function closeMasterSettingModal() {
+      document.getElementById('modal-master-setting').classList.add('hidden');
+    }
+
+    async function saveMasterCompetencyNames() {
+      const updatedCatalog = COMPETENCY_CATALOG.map(c => {
+        const inp = document.getElementById(`master-comp-name-${c.id}`);
+        return {
+          id: c.id,
+          name: (inp && inp.value.trim() !== '') ? inp.value.trim() : c.name
+        };
+      });
+
+      const btn = document.getElementById('btn-save-master');
+      btn.disabled = true;
+      btn.innerText = 'Menyimpan...';
+
+      try {
+        const res = await apiCall('saveCompetencyCatalog', { catalogData: updatedCatalog });
+        btn.disabled = false;
+        btn.innerText = 'Terapkan Perubahan Label';
+        if (res && res.success) {
+          showToast(res.message, 'success');
+          closeMasterSettingModal();
+          loadInitialDataFromServer();
+        } else {
+          showToast(res ? res.message : 'Gagal memperbarui kompetensi.', 'error');
+        }
+      } catch (err) {
+        btn.disabled = false;
+        btn.innerText = 'Terapkan Perubahan Label';
+        showToast('Koneksi gagal: ' + err.message, 'error');
+      }
+    }
+
+    /* Update Dynamic Welcome Banner Greeting */
+    function updateWelcomeBanner(fullName) {
+      const hours = new Date().getHours();
+      let greeting = 'Selamat Pagi';
+      if (hours >= 11 && hours < 15) greeting = 'Selamat Siang';
+      else if (hours >= 15 && hours < 18) greeting = 'Selamat Sore';
+      else if (hours >= 18 || hours < 5) greeting = 'Selamat Malam';
+
+      const greetingEl = document.getElementById('banner-greeting-time');
+      if (greetingEl) greetingEl.innerText = greeting;
+
+      const nameEl = document.getElementById('banner-user-name');
+      if (nameEl && fullName) nameEl.innerText = fullName;
+
+      const dateEl = document.getElementById('banner-current-date');
+      if (dateEl) {
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        dateEl.innerText = new Date().toLocaleDateString('id-ID', options);
+      }
+    }
+
+    /* User Management Controller (Super Admin) */
+    function openUserManagementModal() {
+      document.getElementById('modal-user-management').classList.remove('hidden');
+      loadUserAccountsTable();
+    }
+
+    function closeUserManagementModal() {
+      document.getElementById('modal-user-management').classList.add('hidden');
+    }
+
+    async function loadUserAccountsTable() {
+      const tbody = document.getElementById('user-table-body');
+      tbody.innerHTML = '<tr><td colspan="4" class="py-4 text-center text-slate-400">Memuat data pengguna...</td></tr>';
+
+      try {
+        const res = await apiCall('fetchUserAccounts');
+        if (res && res.success) {
+          renderUserAccountsTable(res.users || []);
+        } else {
+          tbody.innerHTML = `<tr><td colspan="4" class="py-4 text-center text-rose-500">${escapeHtml(res ? res.message : 'Gagal mengambil akun.')}</td></tr>`;
+        }
+      } catch (err) {
+        tbody.innerHTML = `<tr><td colspan="4" class="py-4 text-center text-rose-500">${escapeHtml(err.message)}</td></tr>`;
+      }
+    }
+
+    function renderUserAccountsTable(users) {
+      const tbody = document.getElementById('user-table-body');
+      document.getElementById('user-count-badge').innerText = `${users.length} Akun`;
+
+      if (users.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="4" class="py-4 text-center text-slate-400">Belum ada akun terdaftar.</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = users.map(u => `
+        <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition">
+          <td class="py-2.5 px-3">
+            <p class="font-bold text-slate-900 dark:text-white">${escapeHtml(u.username)}</p>
+            <p class="text-[10px] text-slate-500">${escapeHtml(u.fullName)}</p>
+          </td>
+          <td class="py-2.5 px-3">
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold ${u.role === 'SUPER ADMIN' ? 'bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300' : 'bg-sky-100 text-sky-800 dark:bg-sky-950 dark:text-sky-300'}">
+              ${escapeHtml(u.role)}
+            </span>
+          </td>
+          <td class="py-2.5 px-3">
+            <span class="text-[10px] font-bold text-emerald-600 flex items-center gap-1">
+              <i class="ph-bold ph-check"></i> ${escapeHtml(u.status)}
+            </span>
+          </td>
+          <td class="py-2.5 px-3 text-right">
+            ${u.username !== 'blinengah' ? `
+              <button onclick="deleteUserAccountRow('${escapeHtml(u.id)}', '${escapeHtml(u.username)}')" class="p-1 text-slate-400 hover:text-rose-600 rounded" title="Hapus Akun">
+                <i class="ph-bold ph-trash text-sm"></i>
+              </button>
+            ` : '<span class="text-[10px] text-slate-400 italic">Utama</span>'}
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    async function handleCreateUserSubmit(e) {
+      e.preventDefault();
+      const username = document.getElementById('new-user-username').value.trim();
+      const fullName = document.getElementById('new-user-fullname').value.trim();
+      const password = document.getElementById('new-user-password').value;
+      const role = document.getElementById('new-user-role').value;
+
+      const btn = document.getElementById('btn-create-user');
+      btn.disabled = true;
+      btn.innerText = 'Menyimpan...';
+
+      const payload = { username, fullName, password, role };
+
+      try {
+        const res = await apiCall('createUserAccount', { userData: payload });
+        btn.disabled = false;
+        btn.innerText = '+ Tambahkan Akun';
+        if (res && res.success) {
+          showToast(res.message, 'success');
+          document.getElementById('new-user-username').value = '';
+          document.getElementById('new-user-fullname').value = '';
+          document.getElementById('new-user-password').value = '';
+          loadUserAccountsTable();
+        } else {
+          showToast(res ? res.message : 'Gagal membuat user.', 'error');
+        }
+      } catch (err) {
+        btn.disabled = false;
+        btn.innerText = '+ Tambahkan Akun';
+        showToast('Koneksi server gagal: ' + err.message, 'error');
+      }
+    }
+
+    async function deleteUserAccountRow(userId, username) {
+      if (confirm(`Yakin ingin menghapus akun ${username}?`)) {
+        try {
+          const res = await apiCall('deleteUserAccount', { userId });
+          if (res && res.success) {
+            showToast(res.message, 'success');
+            loadUserAccountsTable();
+          } else {
+            showToast(res ? res.message : 'Gagal menghapus user.', 'error');
+          }
+        } catch (err) {
+          showToast('Koneksi gagal: ' + err.message, 'error');
+        }
+      }
+    }
+  </script>
+</body>
+</html>
