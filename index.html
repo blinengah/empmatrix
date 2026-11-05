@@ -528,13 +528,24 @@
                 Pilih jabatan kritis strategis. Mesin otomatis memindai seluruh talenta lintas divisi berdasarkan kecocokan kompetensi, grade, dan tenure.
               </p>
             </div>
-            <div class="min-w-[280px] space-y-2">
-              <div class="flex items-center justify-between">
-                <label class="text-xs font-semibold text-slate-300">Pilih Critical Position:</label>
-                <button onclick="openPositionFormModal()" class="text-[11px] font-bold text-sky-400 hover:text-sky-300 underline">+ Buat Posisi</button>
+            <div class="min-w-[280px] space-y-3">
+              <div class="space-y-1.5">
+                <div class="flex items-center justify-between">
+                  <label class="text-xs font-semibold text-slate-300">Pilih Critical Position:</label>
+                  <button onclick="openPositionFormModal()" class="text-[11px] font-bold text-sky-400 hover:text-sky-300 underline">+ Buat Posisi</button>
+                </div>
+                <select id="select-critical-job" onchange="runSuccessionMatchEngine()" class="w-full p-2.5 rounded-xl bg-slate-800 text-white border border-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-sky-400">
+                </select>
               </div>
-              <select id="select-critical-job" onchange="runSuccessionMatchEngine()" class="w-full p-2.5 rounded-xl bg-slate-800 text-white border border-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-sky-400">
-              </select>
+
+              <div class="space-y-1.5">
+                <label class="block text-xs font-semibold text-slate-300">Succession Plan:</label>
+                <select id="select-succession-plan" onchange="runSuccessionMatchEngine()" class="w-full p-2.5 rounded-xl bg-slate-800 text-amber-300 border border-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-amber-400 font-medium">
+                  <option value="1_YEAR" selected>vacant in 1 year</option>
+                  <option value="2_YEAR">vacant in 2 year</option>
+                  <option value="3_YEAR">vacant in 3 years</option>
+                </select>
+              </div>
             </div>
           </div>
         </div>
@@ -2301,6 +2312,11 @@
       const selectedPosId = select.value;
       const targetPos = CRITICAL_POSITIONS.find(p => p.id === selectedPosId) || CRITICAL_POSITIONS[0];
       if (!targetPos) return;
+
+      // Ambil nilai Succession Plan (horizon kekosongan jabatan)
+      const planSelect = document.getElementById('select-succession-plan');
+      const vacantHorizon = planSelect ? planSelect.value : '1_YEAR';
+      const addedProjectionYears = vacantHorizon === '3_YEAR' ? 3 : (vacantHorizon === '2_YEAR' ? 2 : 1);
 
       const scoredCandidates = EMPLOYEES.map(emp => {
         let totalStd = 0;
