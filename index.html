@@ -322,7 +322,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
           <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm flex items-center justify-between">
             <div>
-              <p class="text-xs font-medium text-slate-500 dark:text-slate-400">Total Karyawan Terdata</p>
+              <p class="text-xs font-medium text-slate-500 dark:text-slate-400">Tottal Talenta Terdata</p>
               <h3 class="text-2xl font-black text-slate-900 dark:text-white mt-1" id="metric-total-emp">0</h3>
               <p class="text-[11px] text-emerald-600 dark:text-emerald-400 font-semibold mt-1 flex items-center gap-1">
                 <i class="ph-bold ph-check"></i> Database Terhubung
@@ -395,8 +395,8 @@
           </div>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-          <div class="lg:col-span-7 bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-4">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+          <div class="lg:col-span-7 bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm flex flex-col justify-between space-y-4">
             <div class="flex items-center justify-between">
               <div>
                 <h3 class="font-bold text-slate-900 dark:text-white text-sm">Status Kesiapan Suksesi Posisi Kritis</h3>
@@ -404,10 +404,10 @@
               </div>
               <button onclick="switchTab('tab-critical-pos')" class="text-xs font-bold text-sky-600 dark:text-sky-400 hover:underline">Detail &rarr;</button>
             </div>
-            <div class="space-y-3" id="overview-critical-list"></div>
+            <div class="space-y-2.5 max-h-[340px] overflow-y-auto custom-scrollbar pr-1.5" id="overview-critical-list"></div>
           </div>
 
-          <div class="lg:col-span-5 bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-4">
+          <div class="lg:col-span-5 bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm flex flex-col justify-between space-y-4">
             <div class="flex items-center justify-between">
               <div>
                 <h3 class="font-bold text-slate-900 dark:text-white text-sm">Talent Pool Highlights</h3>
@@ -415,7 +415,7 @@
               </div>
               <button onclick="switchTab('tab-talent-pool')" class="text-xs font-bold text-indigo-600 dark:text-indigo-400 hover:underline">Lihat Talent Pool &rarr;</button>
             </div>
-            <div class="space-y-3" id="overview-hipo-list"></div>
+            <div class="space-y-2.5 max-h-[340px] overflow-y-auto custom-scrollbar pr-1.5" id="overview-hipo-list"></div>
           </div>
         </div>
       </div>
@@ -458,8 +458,8 @@
             </div>
           </div>
 
-          <!-- Filter Terpadu: Departemen, Core Function, & Proyeksi Waktu -->
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-2 border-t border-slate-100 dark:border-slate-800 text-xs">
+          <!-- Filter Terpadu: Departemen & Klasifikasi Fungsi -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-2 border-t border-slate-100 dark:border-slate-800 text-xs">
             <div>
               <label class="block font-bold text-slate-500 dark:text-slate-400 mb-1">Departemen:</label>
               <select id="filter-dept" onchange="renderEmployeeTable()" class="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-sky-500">
@@ -482,37 +482,29 @@
                 </optgroup>
               </select>
             </div>
-            <div>
-              <label class="block font-bold text-slate-500 dark:text-slate-400 mb-1">Proyeksi Kesiapan Waktu:</label>
-              <select id="filter-projection" onchange="renderEmployeeTable()" class="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-sky-500 font-semibold text-sky-700 dark:text-sky-400">
-                <option value="CURRENT">Status Saat Ini (Tahun 2026)</option>
-                <option value="PLUS_1">Proyeksi 1 Tahun Mendatang (2027)</option>
-                <option value="PLUS_2">Proyeksi 2 Tahun Mendatang (2028)</option>
-                <option value="PLUS_3">Proyeksi 3 Tahun Mendatang (2029)</option>
-              </select>
-            </div>
           </div>
         </div>
 
-        <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm overflow-hidden">
-          <div class="overflow-x-auto">
-            <table class="w-full text-left text-sm">
-              <thead class="bg-slate-50 dark:bg-slate-800/60 border-b border-slate-200 dark:border-slate-800 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+        <!-- Redesigned Scrollable Directory Table with Sticky Header -->
+        <div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/90 dark:border-slate-800 shadow-sm overflow-hidden">
+          <div class="overflow-x-auto overflow-y-auto max-h-[600px] custom-scrollbar relative">
+            <table class="w-full text-left text-xs border-collapse">
+              <thead class="bg-slate-100/90 dark:bg-slate-800/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-700 text-[11px] font-black text-slate-600 dark:text-slate-300 uppercase tracking-wider sticky top-0 z-20 shadow-2xs">
                 <tr>
-                  <th class="py-3.5 px-4">Karyawan</th>
-                  <th class="py-3.5 px-4">Departemen, Fungsi & Posisi</th>
-                  <th class="py-3.5 px-4 text-center">Grade</th>
-                  <th class="py-3.5 px-4">Pendidikan & Usia</th>
-                  <th class="py-3.5 px-4">Tenure</th>
-                  <th class="py-3.5 px-4 text-center">PA / KPI</th>
-                  <th class="py-3.5 px-4 text-center">Asesmen</th>
-                  <th class="py-3.5 px-4">Training / Seminar</th>
-                  <th class="py-3.5 px-4">Sertifikasi</th>
-                  <th class="py-3.5 px-4">Achievement</th>
-                  <th class="py-3.5 px-4 text-right">Aksi</th>
+                  <th class="py-3.5 px-4 min-w-[190px]">Karyawan</th>
+                  <th class="py-3.5 px-4 min-w-[210px]">Posisi & Departemen</th>
+                  <th class="py-3.5 px-3 text-center min-w-[100px]">Grade</th>
+                  <th class="py-3.5 px-3 min-w-[140px]">Pendidikan & Usia</th>
+                  <th class="py-3.5 px-3 text-center min-w-[90px]">Tenure</th>
+                  <th class="py-3.5 px-3 text-center min-w-[90px]">PA / KPI</th>
+                  <th class="py-3.5 px-3 text-center min-w-[140px]">Asesmen</th>
+                  <th class="py-3.5 px-3 min-w-[180px]">Training / Seminar</th>
+                  <th class="py-3.5 px-3 min-w-[180px]">Sertifikasi</th>
+                  <th class="py-3.5 px-3 min-w-[170px]">Achievement</th>
+                  <th class="py-3.5 px-4 text-right min-w-[110px] sticky right-0 bg-slate-100/95 dark:bg-slate-800/95 z-20">Aksi</th>
                 </tr>
               </thead>
-              <tbody id="employee-table-body" class="divide-y divide-slate-100 dark:divide-slate-800/80"></tbody>
+              <tbody id="employee-table-body" class="divide-y divide-slate-100 dark:divide-slate-800/80 font-normal"></tbody>
             </table>
           </div>
         </div>
@@ -559,41 +551,50 @@
           <div id="filtered-positions-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5"></div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-          <div class="bg-white dark:bg-slate-900 rounded-2xl border-2 border-emerald-200/80 dark:border-emerald-900/60 p-5 shadow-sm space-y-4">
-            <div class="flex items-center justify-between pb-3 border-b border-emerald-100 dark:border-emerald-900/40">
-              <div class="flex items-center gap-2">
-                <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
-                <h4 class="font-bold text-sm text-slate-900 dark:text-white">Ready Now</h4>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 items-stretch">
+          <!-- Card Ready Now (Tinggi Simetris & Scrollable) -->
+          <div class="bg-white dark:bg-slate-900 rounded-2xl border-2 border-emerald-200/80 dark:border-emerald-900/60 p-5 shadow-sm flex flex-col justify-between space-y-3.5 min-h-[480px]">
+            <div class="space-y-2">
+              <div class="flex items-center justify-between pb-3 border-b border-emerald-100 dark:border-emerald-900/40">
+                <div class="flex items-center gap-2">
+                  <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+                  <h4 class="font-bold text-sm text-slate-900 dark:text-white">Ready Now</h4>
+                </div>
+                <span id="badge-ready-now-count" class="text-xs bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 font-bold px-2.5 py-0.5 rounded-full shrink-0">0 Kandidat</span>
               </div>
-              <span id="badge-ready-now-count" class="text-xs bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 font-bold px-2 py-0.5 rounded-full">0 Kandidat</span>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400">Kandidat memenuhi ≥85% kecocokan profil.</p>
             </div>
-            <p class="text-[11px] text-slate-500 dark:text-slate-400">Kandidat memenuhi ≥85% kecocokan profil.</p>
-            <div id="container-ready-now" class="space-y-3"></div>
+            <div id="container-ready-now" class="flex-1 max-h-[380px] overflow-y-auto custom-scrollbar pr-1.5 space-y-2.5"></div>
           </div>
 
-          <div class="bg-white dark:bg-slate-900 rounded-2xl border-2 border-amber-200/80 dark:border-amber-900/60 p-5 shadow-sm space-y-4">
-            <div class="flex items-center justify-between pb-3 border-b border-amber-100 dark:border-amber-900/40">
-              <div class="flex items-center gap-2">
-                <span class="w-3 h-3 rounded-full bg-amber-500"></span>
-                <h4 class="font-bold text-sm text-slate-900 dark:text-white">Ready in 1 Year</h4>
+          <!-- Card Ready in 1 Year (Tinggi Simetris & Scrollable) -->
+          <div class="bg-white dark:bg-slate-900 rounded-2xl border-2 border-amber-200/80 dark:border-amber-900/60 p-5 shadow-sm flex flex-col justify-between space-y-3.5 min-h-[480px]">
+            <div class="space-y-2">
+              <div class="flex items-center justify-between pb-3 border-b border-amber-100 dark:border-amber-900/40">
+                <div class="flex items-center gap-2">
+                  <span class="w-3 h-3 rounded-full bg-amber-500"></span>
+                  <h4 class="font-bold text-sm text-slate-900 dark:text-white">Ready in 1 Year</h4>
+                </div>
+                <span id="badge-ready-1yr-count" class="text-xs bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300 font-bold px-2.5 py-0.5 rounded-full shrink-0">0 Kandidat</span>
               </div>
-              <span id="badge-ready-1yr-count" class="text-xs bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300 font-bold px-2 py-0.5 rounded-full">0 Kandidat</span>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400">Kecocokan 70% - 84% dengan kebutuhan 1 thn pengembangan.</p>
             </div>
-            <p class="text-[11px] text-slate-500 dark:text-slate-400">Kecocokan 70% - 84% dengan kebutuhan 1 thn pengembangan.</p>
-            <div id="container-ready-1yr" class="space-y-3"></div>
+            <div id="container-ready-1yr" class="flex-1 max-h-[380px] overflow-y-auto custom-scrollbar pr-1.5 space-y-2.5"></div>
           </div>
 
-          <div class="bg-white dark:bg-slate-900 rounded-2xl border-2 border-slate-200 dark:border-slate-800 p-5 shadow-sm space-y-4">
-            <div class="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
-              <div class="flex items-center gap-2">
-                <span class="w-3 h-3 rounded-full bg-slate-400"></span>
-                <h4 class="font-bold text-sm text-slate-900 dark:text-white">Ready in 2 Years</h4>
+          <!-- Card Ready in 2 Years (Tinggi Simetris & Scrollable) -->
+          <div class="bg-white dark:bg-slate-900 rounded-2xl border-2 border-slate-200 dark:border-slate-800 p-5 shadow-sm flex flex-col justify-between space-y-3.5 min-h-[480px]">
+            <div class="space-y-2">
+              <div class="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
+                <div class="flex items-center gap-2">
+                  <span class="w-3 h-3 rounded-full bg-slate-400"></span>
+                  <h4 class="font-bold text-sm text-slate-900 dark:text-white">Ready in 2 Years</h4>
+                </div>
+                <span id="badge-ready-2yr-count" class="text-xs bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold px-2.5 py-0.5 rounded-full shrink-0">0 Kandidat</span>
               </div>
-              <span id="badge-ready-2yr-count" class="text-xs bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold px-2 py-0.5 rounded-full">0 Kandidat</span>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400">Pipeline suksesi jangka menengah (55% - 69%).</p>
             </div>
-            <p class="text-[11px] text-slate-500 dark:text-slate-400">Pipeline suksesi jangka menengah (55% - 69%).</p>
-            <div id="container-ready-2yr" class="space-y-3"></div>
+            <div id="container-ready-2yr" class="flex-1 max-h-[380px] overflow-y-auto custom-scrollbar pr-1.5 space-y-2.5"></div>
           </div>
         </div>
 
@@ -618,63 +619,113 @@
         </div>
       </div>
 
-      <!-- ================= TAB 5: COMPETENCY PROFILE ================= -->
+      <!-- ================= TAB 5: COMPETENCY PROFILE & SUCCESSION ANALYZER ================= -->
       <div id="tab-competency-profile" class="tab-content hidden space-y-6">
-        <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
+        <!-- Dual Filter Bar: Evaluasi Profil & Analisis Jabatan Tertentu -->
+        <div class="bg-white dark:bg-slate-900 p-5 rounded-3xl border border-slate-200/90 dark:border-slate-800 shadow-sm flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
           <div>
-            <h3 class="font-bold text-sm text-slate-900 dark:text-white">Evaluasi Competency Profile & Individual Learning Plan (ILP)</h3>
-            <p class="text-xs text-slate-500 dark:text-slate-400">Komparasi standar jabatan vs riil talenta untuk menyusun kurikulum pengembangan.</p>
+            <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-sky-50 dark:bg-sky-950/80 text-sky-700 dark:text-sky-300 text-[10px] font-black uppercase tracking-wider border border-sky-200 dark:border-sky-800 mb-1">
+              <i class="ph-bold ph-chart-polar"></i> Competency & Gap Diagnostics
+            </div>
+            <h3 class="font-black text-base text-slate-900 dark:text-white leading-tight">Evaluasi Profil Kompetensi & Individual Learning Plan (ILP)</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Simulasi kecocokan talenta terhadap jabatan strategis dan rancangan intervensi pengembangan.</p>
           </div>
-          <div class="flex items-center gap-2 w-full sm:w-auto">
-            <label class="text-xs font-semibold text-slate-600 dark:text-slate-300">Pilih Karyawan:</label>
-            <select id="select-gap-emp" onchange="loadGapAndILPView()" class="w-full sm:w-64 p-2 border border-slate-200 dark:border-slate-700 rounded-xl text-sm bg-white dark:bg-slate-800 text-slate-900 dark:text-white">
-            </select>
+
+          <!-- Dual Selectors: Karyawan & Target Jabatan -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full lg:w-auto text-xs">
+            <div class="min-w-[220px]">
+              <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1 flex items-center gap-1">
+                <i class="ph-bold ph-user text-sky-600"></i> Pilih Karyawan:
+              </label>
+              <select id="select-gap-emp" onchange="loadGapAndILPView()" class="w-full p-2.5 border border-slate-200 dark:border-slate-700 rounded-xl font-bold bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-sky-500 shadow-xs">
+              </select>
+            </div>
+            <div class="min-w-[240px]">
+              <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1 flex items-center gap-1">
+                <i class="ph-bold ph-crosshair text-amber-500"></i> Target Jabatan Analisis:
+              </label>
+              <select id="select-gap-position" onchange="loadGapAndILPView()" class="w-full p-2.5 border border-amber-300 dark:border-amber-700/80 rounded-xl font-bold bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-amber-500 shadow-xs">
+              </select>
+            </div>
           </div>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-          <div class="lg:col-span-5 bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm flex flex-col items-center">
-            <h4 class="font-bold text-sm text-slate-900 dark:text-white mb-1 w-full text-left">Radar Chart Profil Kompetensi</h4>
-            <div class="w-full max-w-sm h-72">
-              <canvas id="competencyRadarChart"></canvas>
+        <!-- Main Layout: Proportional 5-Column (Radar + Executive Analysis) vs 7-Column (Scrollable ILP) -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+          
+          <!-- KOLOM KIRI (5/12): Radar Chart & Executive Suitability Analyzer -->
+          <div class="lg:col-span-5 flex flex-col justify-between space-y-5">
+            <!-- 1. Radar Chart Card -->
+            <div class="bg-white dark:bg-slate-900 p-5 sm:p-6 rounded-3xl border border-slate-200/90 dark:border-slate-800 shadow-sm flex flex-col items-center">
+              <div class="w-full flex items-center justify-between mb-2">
+                <h4 class="font-extrabold text-xs uppercase tracking-wider text-slate-700 dark:text-slate-300">Radar Profil Kompetensi</h4>
+                <div class="flex items-center gap-3 text-[11px] font-bold">
+                  <span class="flex items-center gap-1 text-sky-600 dark:text-sky-400">
+                    <span class="w-2.5 h-2.5 rounded-full bg-sky-500"></span> Standar
+                  </span>
+                  <span class="flex items-center gap-1 text-rose-600 dark:text-rose-400">
+                    <span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span> Aktual
+                  </span>
+                </div>
+              </div>
+              <div class="w-full max-w-sm h-64 sm:h-72">
+                <canvas id="competencyRadarChart"></canvas>
+              </div>
             </div>
-            <div class="mt-4 flex items-center justify-center gap-6 text-xs font-semibold">
-              <div class="flex items-center gap-1.5">
-                <span class="w-3 h-3 rounded-full bg-sky-500"></span>
-                <span class="text-slate-700 dark:text-slate-300">Standar Jabatan</span>
-              </div>
-              <div class="flex items-center gap-1.5">
-                <span class="w-3 h-3 rounded-full bg-rose-500"></span>
-                <span class="text-slate-700 dark:text-slate-300">Aktual Karyawan</span>
-              </div>
+
+            <!-- 2. Executive Suitability & Projection Analysis Card (Kartu Hasil Analisa Kecocokan) -->
+            <div id="analysis-suitability-card" class="bg-white dark:bg-slate-900 p-5 rounded-3xl border-2 border-indigo-200/90 dark:border-indigo-900/60 shadow-sm space-y-3.5 flex-1 flex flex-col justify-between">
+              <!-- Rendered via loadGapAndILPView() -->
             </div>
           </div>
 
-          <div class="lg:col-span-7 bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-5">
-            <div class="flex items-center justify-between">
+          <!-- KOLOM KANAN (7/12): Rencana Pembelajaran Individu (ILP) dengan Sticky Table & Scrollable Body -->
+          <div class="lg:col-span-7 bg-white dark:bg-slate-900 p-5 sm:p-6 rounded-3xl border border-slate-200/90 dark:border-slate-800 shadow-sm flex flex-col justify-between space-y-4">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100 dark:border-slate-800">
               <div>
-                <h4 class="font-bold text-sm text-slate-900 dark:text-white">Rencana Pembelajaran Individu (ILP)</h4>
-                <p class="text-xs text-slate-500 dark:text-slate-400">Rekomendasi otomatis berbasis gap kompetensi negatif (&lt; 0)</p>
+                <h4 class="font-black text-sm text-slate-900 dark:text-white">Rencana Pembelajaran Individu (ILP)</h4>
+                <p class="text-[11px] text-slate-500 dark:text-slate-400">Intervensi kurikulum spesifik berbasis gap kompetensi negatif (&lt; 0)</p>
               </div>
-              <button onclick="saveILPPlan()" class="px-3.5 py-1.5 bg-sky-600 hover:bg-sky-700 text-white rounded-lg text-xs font-bold transition flex items-center gap-1.5">
-                <i class="ph-bold ph-floppy-disk"></i> Simpan ILP Plan
-              </button>
+              <div class="flex items-center gap-2">
+                <button onclick="saveILPPlan()" class="px-3.5 py-1.5 bg-sky-600 hover:bg-sky-700 text-white rounded-xl text-xs font-bold transition shadow-xs flex items-center gap-1.5 shrink-0">
+                  <i class="ph-bold ph-floppy-disk"></i> Simpan ILP Plan
+                </button>
+              </div>
             </div>
-            <div class="overflow-x-auto">
-              <table class="w-full text-left text-xs">
-                <thead class="bg-slate-50 dark:bg-slate-800/60 text-slate-500 dark:text-slate-400 uppercase font-semibold">
+
+            <!-- Mini Summary Bar ILP -->
+            <div class="grid grid-cols-3 gap-2 text-center text-xs" id="ilp-mini-metrics">
+              <div class="p-2 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200/70 dark:border-slate-700/60">
+                <p class="text-[10px] text-slate-500 dark:text-slate-400">Total Kompetensi</p>
+                <p class="text-sm font-black text-slate-900 dark:text-white" id="stat-total-comp">0</p>
+              </div>
+              <div class="p-2 rounded-xl bg-emerald-50/60 dark:bg-emerald-950/30 border border-emerald-200/70 dark:border-emerald-900/50">
+                <p class="text-[10px] text-emerald-700 dark:text-emerald-400 font-semibold">Memenuhi Standar</p>
+                <p class="text-sm font-black text-emerald-600 dark:text-emerald-400" id="stat-meet-comp">0</p>
+              </div>
+              <div class="p-2 rounded-xl bg-rose-50/60 dark:bg-rose-950/30 border border-rose-200/70 dark:border-rose-900/50">
+                <p class="text-[10px] text-rose-700 dark:text-rose-400 font-semibold">Gap Perlu Intervensi</p>
+                <p class="text-sm font-black text-rose-600 dark:text-rose-400" id="stat-gap-comp">0</p>
+              </div>
+            </div>
+
+            <!-- Scrollable Table Container with Sticky Header -->
+            <div class="flex-1 overflow-x-auto overflow-y-auto max-h-[460px] custom-scrollbar border border-slate-200/80 dark:border-slate-800 rounded-2xl relative">
+              <table class="w-full text-left text-xs border-collapse">
+                <thead class="bg-slate-100/90 dark:bg-slate-800/95 backdrop-blur-md text-slate-600 dark:text-slate-300 uppercase font-black text-[10px] tracking-wider sticky top-0 z-10 border-b border-slate-200 dark:border-slate-700 shadow-2xs">
                   <tr>
-                    <th class="py-2.5 px-3">Kompetensi</th>
-                    <th class="py-2.5 px-2 text-center">Standar</th>
-                    <th class="py-2.5 px-2 text-center">Aktual</th>
-                    <th class="py-2.5 px-2 text-center">Gap</th>
-                    <th class="py-2.5 px-3">Rekomendasi Intervensi ILP</th>
+                    <th class="py-2.5 px-3 min-w-[150px]">Kompetensi</th>
+                    <th class="py-2.5 px-2 text-center min-w-[65px]">Standar</th>
+                    <th class="py-2.5 px-2 text-center min-w-[65px]">Aktual</th>
+                    <th class="py-2.5 px-2 text-center min-w-[60px]">Gap</th>
+                    <th class="py-2.5 px-3 min-w-[220px]">Rekomendasi Intervensi ILP</th>
                   </tr>
                 </thead>
-                <tbody id="gap-ilp-table-body" class="divide-y divide-slate-100 dark:divide-slate-800"></tbody>
+                <tbody id="gap-ilp-table-body" class="divide-y divide-slate-100 dark:divide-slate-800/80 font-normal"></tbody>
               </table>
             </div>
           </div>
+
         </div>
       </div>
 
@@ -2070,16 +2121,8 @@
       const q = document.getElementById('search-emp').value.toLowerCase();
       const deptFilter = document.getElementById('filter-dept').value;
       const funcFilter = document.getElementById('filter-function') ? document.getElementById('filter-function').value : 'ALL';
-      const projFilter = document.getElementById('filter-projection') ? document.getElementById('filter-projection').value : 'CURRENT';
       const tbody = document.getElementById('employee-table-body');
-
-      // Kalkulasi penambahan tahun berdasarkan pilihan proyeksi
-      const additionalYears = {
-        CURRENT: 0,
-        PLUS_1: 1,
-        PLUS_2: 2,
-        PLUS_3: 3
-      }[projFilter] || 0;
+      const additionalYears = 0;
 
       const filtered = EMPLOYEES.filter(e => {
         const certString = (e.certifications || []).join(' ').toLowerCase();
@@ -2123,89 +2166,139 @@
         const projectedAge = (Number(emp.age) || 0) + additionalYears;
         const projectedTenure = ((Number(emp.tenureYears) || 0) + additionalYears).toFixed(1);
 
-        const trainBadges = (emp.trainings || []).map(t => `
-          <span class="inline-block px-2 py-0.5 bg-amber-50 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 border border-amber-200 dark:border-amber-800 rounded text-[10px] font-medium mr-1 mb-1 truncate max-w-[140px]" title="${escapeHtml(t)}">${escapeHtml(t)}</span>
-        `).join('');
+        // Helper Render Badge Horizontal Rapi (Maksimal 2 pill + counter jika berlebih)
+        const renderCompactChips = (items, colorBg, colorText, colorBorder, icon = '') => {
+          if (!items || items.length === 0) {
+            return `<span class="text-slate-400 dark:text-slate-600 text-[11px] italic">-</span>`;
+          }
+          return `
+            <div class="flex flex-col gap-1 max-h-[58px] overflow-y-auto custom-scrollbar pr-1">
+              ${items.map(item => `
+                <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-semibold border ${colorBg} ${colorText} ${colorBorder} truncate max-w-[165px]" title="${escapeHtml(item)}">
+                  ${icon ? `<i class="${icon} text-[10px] shrink-0"></i>` : ''}
+                  <span class="truncate">${escapeHtml(item)}</span>
+                </span>
+              `).join('')}
+            </div>
+          `;
+        };
 
-        const certBadges = (emp.certifications || []).map(c => `
-          <span class="inline-block px-2 py-0.5 bg-sky-50 dark:bg-sky-950/60 text-sky-800 dark:text-sky-300 border border-sky-200 dark:border-sky-800 rounded text-[10px] font-medium mr-1 mb-1 truncate max-w-[140px]" title="${escapeHtml(c)}">${escapeHtml(c)}</span>
-        `).join('');
+        const trainHtml = renderCompactChips(
+          emp.trainings, 
+          'bg-amber-50/90 dark:bg-amber-950/40', 
+          'text-amber-800 dark:text-amber-300', 
+          'border-amber-200/80 dark:border-amber-800/60',
+          'ph-bold ph-chalkboard-teacher'
+        );
 
-        const achBadges = (emp.achievements || []).map(a => `
-          <span class="inline-block px-2 py-0.5 bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 rounded text-[10px] font-medium mr-1 mb-1 truncate max-w-[140px]" title="${escapeHtml(a)}">★ ${escapeHtml(a)}</span>
-        `).join('');
+        const certHtml = renderCompactChips(
+          emp.certifications, 
+          'bg-sky-50/90 dark:bg-sky-950/40', 
+          'text-sky-800 dark:text-sky-300', 
+          'border-sky-200/80 dark:border-sky-800/60',
+          'ph-bold ph-certificate'
+        );
+
+        const achHtml = renderCompactChips(
+          emp.achievements, 
+          'bg-emerald-50/90 dark:bg-emerald-950/40', 
+          'text-emerald-800 dark:text-emerald-300', 
+          'border-emerald-200/80 dark:border-emerald-800/60',
+          'ph-fill ph-star'
+        );
 
         const isCore = ['Project Facility','Geoscience','DWO','Engineering','Operation'].includes(emp.functionCategory);
 
         return `
-          <tr class="hover:bg-slate-50/80 dark:hover:bg-slate-800/50 transition">
-            <td class="py-3 px-4">
-              <div onclick="openEmployeeDetail('${emp.id}')" class="flex items-center gap-3 cursor-pointer group" title="Klik untuk melihat profil detail karyawan">
-                <div class="w-8 h-8 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 group-hover:bg-sky-600 group-hover:text-white dark:group-hover:bg-sky-600 font-bold text-xs flex items-center justify-center transition shadow-xs">
+          <tr class="hover:bg-slate-50/90 dark:hover:bg-slate-800/60 transition-colors group/row">
+            <!-- 1. Karyawan -->
+            <td class="py-2.5 px-4 align-middle">
+              <div onclick="openEmployeeDetail('${emp.id}')" class="flex items-center gap-2.5 cursor-pointer group/name" title="Klik untuk membuka profil lengkap">
+                <div class="w-8 h-8 rounded-xl bg-slate-200/80 dark:bg-slate-800 text-slate-700 dark:text-slate-300 group-hover/name:bg-sky-600 group-hover/name:text-white font-black text-xs flex items-center justify-center shrink-0 transition shadow-2xs">
                   ${escapeHtml(emp.initials)}
                 </div>
-                <div>
-                  <p class="font-bold text-slate-900 dark:text-white text-xs group-hover:text-sky-600 dark:group-hover:text-sky-400 transition underline-offset-2 group-hover:underline flex items-center gap-1">
+                <div class="min-w-0">
+                  <p class="font-extrabold text-slate-900 dark:text-white text-xs group-hover/name:text-sky-600 dark:group-hover/name:text-sky-400 transition truncate flex items-center gap-1">
                     <span>${escapeHtml(emp.name)}</span>
-                    <i class="ph-bold ph-arrow-up-right text-[10px] opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                    <i class="ph-bold ph-arrow-up-right text-[10px] opacity-0 group-hover/name:opacity-100 transition-opacity"></i>
                   </p>
-                  <p class="text-[10px] text-slate-500 dark:text-slate-400">${escapeHtml(emp.nik)} • ${escapeHtml(emp.gender || 'Pria')}</p>
+                  <p class="text-[10px] text-slate-500 dark:text-slate-400 font-medium truncate">${escapeHtml(emp.nik)} • <span class="capitalize">${escapeHtml(emp.gender || 'Pria')}</span></p>
                 </div>
               </div>
             </td>
-            <td class="py-3 px-4">
-              <p class="font-semibold text-slate-800 dark:text-slate-200 text-xs">${escapeHtml(emp.currentPosition)}</p>
-              <p class="text-[10px] text-slate-500 dark:text-slate-400 flex items-center gap-1 mt-0.5">
-                <span>${escapeHtml(emp.currentDepartment)}</span>
-                <span class="px-1.5 py-0.2 rounded text-[9px] font-bold ${isCore ? 'bg-indigo-100 text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300' : 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400'}">
-                  ${escapeHtml(emp.functionCategory || 'Support')}
+
+            <!-- 2. Posisi & Departemen -->
+            <td class="py-2.5 px-4 align-middle">
+              <p class="font-bold text-slate-900 dark:text-white text-xs truncate max-w-[200px]" title="${escapeHtml(emp.currentPosition)}">${escapeHtml(emp.currentPosition)}</p>
+              <div class="flex items-center gap-1.5 mt-0.5">
+                <span class="text-[10px] text-slate-500 dark:text-slate-400 truncate max-w-[130px]" title="${escapeHtml(emp.currentDepartment)}">${escapeHtml(emp.currentDepartment)}</span>
+                <span class="px-1.5 py-0.2 rounded text-[9px] font-black tracking-tight shrink-0 ${isCore ? 'bg-indigo-100 text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300' : 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400'}">
+                  ${escapeHtml(isCore ? 'CORE' : 'SUPPORT')}
                 </span>
-              </p>
+              </div>
             </td>
-            <td class="py-3 px-4 text-center">
-              <span class="inline-block px-2 py-1 rounded-md text-xs font-bold bg-sky-50 dark:bg-sky-950 text-sky-800 dark:text-sky-300 border border-sky-100 dark:border-sky-800">
-                ${escapeHtml(emp.grade || 'Grade --')}
+
+            <!-- 3. Grade -->
+            <td class="py-2.5 px-3 text-center align-middle">
+              <span class="inline-block px-2.5 py-1 rounded-lg text-[11px] font-black bg-sky-50 dark:bg-sky-950/60 text-sky-700 dark:text-sky-300 border border-sky-200/80 dark:border-sky-800">
+                ${escapeHtml(emp.grade || '--')}
               </span>
             </td>
-            <td class="py-3 px-4">
-              <p class="text-xs text-slate-800 dark:text-slate-200">${escapeHtml(emp.education)}</p>
-              <p class="text-[10px] ${additionalYears > 0 ? 'text-amber-600 dark:text-amber-400 font-bold' : 'text-slate-500 dark:text-slate-400'}">
+
+            <!-- 4. Pendidikan & Usia -->
+            <td class="py-2.5 px-3 align-middle">
+              <p class="text-[11px] font-semibold text-slate-800 dark:text-slate-200 truncate max-w-[135px]" title="${escapeHtml(emp.education)}">${escapeHtml(emp.education)}</p>
+              <p class="text-[10px] font-medium ${additionalYears > 0 ? 'text-amber-600 dark:text-amber-400 font-bold' : 'text-slate-400'}">
                 ${projectedAge} Tahun ${additionalYears > 0 ? `(+${additionalYears}th)` : ''}
               </p>
             </td>
-            <td class="py-3 px-4 text-xs font-medium text-slate-700 dark:text-slate-300">
-              <span class="${additionalYears > 0 ? 'text-amber-600 dark:text-amber-400 font-bold' : ''}">
-                ${projectedTenure} Thn
+
+            <!-- 5. Tenure -->
+            <td class="py-2.5 px-3 text-center align-middle">
+              <span class="text-xs font-extrabold ${additionalYears > 0 ? 'text-amber-600 dark:text-amber-400' : 'text-slate-800 dark:text-slate-200'}">
+                ${projectedTenure} <span class="text-[10px] text-slate-400 font-normal">Thn</span>
               </span>
             </td>
-            <td class="py-3 px-4 text-center">
-              <span class="inline-block px-2 py-0.5 rounded text-[11px] font-black ${avgKpi >= 85 ? 'bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300' : avgKpi >= 75 ? 'bg-sky-100 dark:bg-sky-950 text-sky-800 dark:text-sky-300' : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300'}">
+
+            <!-- 6. PA / KPI -->
+            <td class="py-2.5 px-3 text-center align-middle">
+              <span class="inline-block px-2 py-0.5 rounded-md text-[10px] font-black tracking-tight ${avgKpi >= 85 ? 'bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800' : avgKpi >= 75 ? 'bg-sky-100 dark:bg-sky-950 text-sky-800 dark:text-sky-300 border border-sky-200 dark:border-sky-800' : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300'}">
                 ${paBadge}
               </span>
             </td>
-            <td class="py-3 px-4 text-center">
-              <span class="text-[11px] font-semibold text-slate-700 dark:text-slate-300 block truncate max-w-[120px]" title="${escapeHtml(emp.assessment.predicate)}">
+
+            <!-- 7. Asesmen -->
+            <td class="py-2.5 px-3 text-center align-middle">
+              <span class="text-[10px] font-bold text-slate-700 dark:text-slate-300 block truncate max-w-[130px] mx-auto bg-slate-50 dark:bg-slate-800/50 px-2 py-0.5 rounded-md border border-slate-200/50 dark:border-slate-700/50" title="${escapeHtml(emp.assessment.predicate)}">
                 ${escapeHtml(emp.assessment.predicate)}
               </span>
             </td>
-            <td class="py-3 px-4 max-w-[160px]">
-              <div class="flex flex-wrap">${trainBadges || '<span class="text-slate-400 text-[10px]">-</span>'}</div>
+
+            <!-- 8. Training / Seminar -->
+            <td class="py-2.5 px-3 align-middle">
+              ${trainHtml}
             </td>
-            <td class="py-3 px-4 max-w-[160px]">
-              <div class="flex flex-wrap">${certBadges || '<span class="text-slate-400 text-[10px]">-</span>'}</div>
+
+            <!-- 9. Sertifikasi -->
+            <td class="py-2.5 px-3 align-middle">
+              ${certHtml}
             </td>
-            <td class="py-3 px-4 max-w-[160px]">
-              <div class="flex flex-wrap">${achBadges || '<span class="text-slate-400 text-[10px]">-</span>'}</div>
+
+            <!-- 10. Achievement -->
+            <td class="py-2.5 px-3 align-middle">
+              ${achHtml}
             </td>
-            <td class="py-3 px-4 text-right whitespace-nowrap">
-              <div class="inline-flex items-center gap-1.5">
-                <button onclick="openEmployeeDetail('${emp.id}')" class="px-2.5 py-1 bg-slate-100 dark:bg-slate-800 hover:bg-sky-600 hover:text-white dark:hover:bg-sky-600 text-slate-700 dark:text-slate-200 rounded-lg text-xs font-bold transition">
-                  Detail
+
+            <!-- 11. Aksi (Sticky Right) -->
+            <td class="py-2.5 px-4 text-right align-middle sticky right-0 bg-white/95 dark:bg-slate-900/95 group-hover/row:bg-slate-50/95 dark:group-hover/row:bg-slate-800/95 transition-colors shadow-2xs">
+              <div class="inline-flex items-center gap-1">
+                <button onclick="openEmployeeDetail('${emp.id}')" class="p-1.5 text-slate-500 hover:text-sky-600 dark:hover:text-sky-400 hover:bg-sky-50 dark:hover:bg-slate-800 rounded-lg transition" title="Buka Detail">
+                  <i class="ph-bold ph-eye text-sm"></i>
                 </button>
-                <button onclick="editEmployee('${emp.id}')" class="p-1 text-slate-500 hover:text-sky-600 dark:hover:text-sky-400 rounded-lg transition" title="Edit Data">
+                <button onclick="editEmployee('${emp.id}')" class="p-1.5 text-slate-500 hover:text-amber-600 dark:hover:text-amber-400 hover:bg-amber-50 dark:hover:bg-slate-800 rounded-lg transition" title="Edit Data">
                   <i class="ph-bold ph-pencil-simple text-sm"></i>
                 </button>
-                <button onclick="deleteEmployee('${emp.id}')" class="p-1 text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 rounded-lg transition" title="Hapus Data">
+                <button onclick="deleteEmployee('${emp.id}')" class="p-1.5 text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-slate-800 rounded-lg transition" title="Hapus Data">
                   <i class="ph-bold ph-trash text-sm"></i>
                 </button>
               </div>
@@ -2831,20 +2924,26 @@
 
     function renderCandidateBucket(elementId, candidates, color) {
       const container = document.getElementById(elementId);
+      if (!container) return;
+
       if (candidates.length === 0) {
-        container.innerHTML = `<p class="text-xs text-slate-400 italic py-4 text-center">Belum ada kandidat di tier ini.</p>`;
+        container.innerHTML = `<div class="h-full flex items-center justify-center py-16"><p class="text-xs text-slate-400 dark:text-slate-500 italic text-center">Belum ada kandidat di tier ini.</p></div>`;
         return;
       }
+
       container.innerHTML = candidates.map(c => `
-        <div class="p-3 rounded-xl border border-${color}-100 dark:border-${color}-900/60 bg-${color}-50/40 dark:bg-${color}-950/20 space-y-2">
-          <div class="flex items-center justify-between">
-            <p class="font-bold text-xs text-slate-900 dark:text-white">${c.name}</p>
-            <span class="text-xs font-black text-${color}-700 dark:text-${color}-400">${c.matchPct}%</span>
+        <div onclick="openEmployeeDetail('${c.id}')" class="p-3.5 rounded-2xl border border-${color}-200/80 dark:border-${color}-900/60 bg-${color}-50/40 dark:bg-${color}-950/20 hover:border-sky-500 hover:shadow-xs transition cursor-pointer group space-y-2" title="Klik untuk melihat profil detail karyawan">
+          <div class="flex items-center justify-between gap-2">
+            <p class="font-bold text-xs text-slate-900 dark:text-white group-hover:text-sky-600 dark:group-hover:text-sky-400 transition truncate">${escapeHtml(c.name)}</p>
+            <span class="text-xs font-black text-${color}-700 dark:text-${color}-400 px-2 py-0.5 rounded-md bg-white dark:bg-slate-800 shadow-2xs border border-${color}-200/60 dark:border-${color}-800 shrink-0">${c.matchPct}%</span>
           </div>
-          <p class="text-[10px] text-slate-500 dark:text-slate-400">${c.grade} &bull; ${c.currentDepartment}</p>
-          <div class="pt-1 flex items-center justify-between">
-            <span class="text-[10px] text-slate-400">Tenure ${c.tenure}</span>
-            <button onclick="openEmployeeDetail('${c.id}')" class="text-[10px] font-bold text-sky-600 dark:text-sky-400 hover:underline">Detail 360° &rarr;</button>
+          <p class="text-[10px] text-slate-500 dark:text-slate-400 truncate">${escapeHtml(c.grade || '--')} &bull; ${escapeHtml(c.currentDepartment)}</p>
+          <div class="pt-1 border-t border-${color}-100/80 dark:border-${color}-900/40 flex items-center justify-between text-[10px]">
+            <span class="text-slate-400">Tenure: <strong class="text-slate-700 dark:text-slate-300">${c.tenure}</strong></span>
+            <span class="font-bold text-sky-600 dark:text-sky-400 group-hover:underline flex items-center gap-0.5">
+              <span>Detail</span>
+              <i class="ph-bold ph-arrow-right text-[9px]"></i>
+            </span>
           </div>
         </div>
       `).join('');
@@ -2859,39 +2958,67 @@
 
     /* Competency Profile & Radar Module */
     function populateGapEmployeeDropdown() {
-      const select = document.getElementById('select-gap-emp');
-      const currentVal = select.value;
-      select.innerHTML = EMPLOYEES.map(e => `
-        <option value="${e.id}">${e.name} (${e.grade || e.currentDepartment})</option>
-      `).join('');
-      if (currentVal && EMPLOYEES.some(e => e.id === currentVal)) {
-        select.value = currentVal;
+      // 1. Dropdown Karyawan
+      const empSelect = document.getElementById('select-gap-emp');
+      if (empSelect) {
+        const curEmpVal = empSelect.value;
+        empSelect.innerHTML = EMPLOYEES.map(e => `
+          <option value="${escapeHtml(e.id)}">${escapeHtml(e.name)} • ${escapeHtml(e.grade || e.currentPosition)}</option>
+        `).join('');
+        if (curEmpVal && EMPLOYEES.some(e => e.id === curEmpVal)) {
+          empSelect.value = curEmpVal;
+        }
+      }
+
+      // 2. Dropdown Jabatan Target Analisis
+      const posSelect = document.getElementById('select-gap-position');
+      if (posSelect) {
+        const curPosVal = posSelect.value;
+        posSelect.innerHTML = CRITICAL_POSITIONS.map(p => `
+          <option value="${escapeHtml(p.id)}">${escapeHtml(p.title)} (${escapeHtml(p.department)})</option>
+        `).join('');
+        if (curPosVal && CRITICAL_POSITIONS.some(p => p.id === curPosVal)) {
+          posSelect.value = curPosVal;
+        }
       }
     }
 
     function loadGapAndILPView() {
-      const select = document.getElementById('select-gap-emp');
-      if (!select.value && EMPLOYEES.length > 0) {
-        select.value = EMPLOYEES[0].id;
-      }
-      const empId = select.value;
-      const emp = EMPLOYEES.find(e => e.id === empId) || EMPLOYEES[0];
+      const empSelect = document.getElementById('select-gap-emp');
+      const posSelect = document.getElementById('select-gap-position');
 
-      const posId = document.getElementById('select-critical-job').value;
-      const targetPos = CRITICAL_POSITIONS.find(p => p.id === posId) || CRITICAL_POSITIONS[0];
+      if (!empSelect || !posSelect) return;
+
+      if (!empSelect.value && EMPLOYEES.length > 0) empSelect.value = EMPLOYEES[0].id;
+      if (!posSelect.value && CRITICAL_POSITIONS.length > 0) posSelect.value = CRITICAL_POSITIONS[0].id;
+
+      const emp = EMPLOYEES.find(e => e.id === empSelect.value) || EMPLOYEES[0];
+      const targetPos = CRITICAL_POSITIONS.find(p => p.id === posSelect.value) || CRITICAL_POSITIONS[0];
 
       if (!emp || !targetPos) return;
 
+      // 1. Render Radar Chart
       updateRadarChart(emp, targetPos);
 
-      const tbody = document.getElementById('gap-ilp-table-body');
-      tbody.innerHTML = COMPETENCY_CATALOG.map(c => {
+      // 2. Hitung Komparasi & Gap Kompetensi
+      let totalStd = 0;
+      let earned = 0;
+      let meetCount = 0;
+      let gapCount = 0;
+      const criticalGaps = [];
+
+      const competencyRows = COMPETENCY_CATALOG.map(c => {
         const std = targetPos.standardCompetencies[c.id] || 4.0;
         const actual = emp.competencies[c.id] || 0;
         const gap = +(actual - std).toFixed(1);
 
+        totalStd += std;
+        earned += Math.min(actual, std);
+
         let actionPlan = '<span class="text-emerald-600 dark:text-emerald-400 font-semibold flex items-center gap-1"><i class="ph-bold ph-check"></i> Memenuhi Standar (Mentoring)</span>';
         if (gap < 0) {
+          gapCount++;
+          criticalGaps.push({ name: c.name, gap });
           const interventions = {
             C1: 'Executive Strategic Thinking Masterclass & Corporate Taskforce',
             C2: 'Leadership Coaching Program & Cross-functional Lead Assignment',
@@ -2901,20 +3028,105 @@
             C6: 'Workshop Negosiasi Regulasi & Stakeholder Management'
           };
           actionPlan = `<span class="text-rose-700 dark:text-rose-400 font-bold block">${interventions[c.id] || 'Pelatihan Akselerasi Kompetensi Terfokus'}</span>`;
+        } else {
+          meetCount++;
         }
 
         return `
-          <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition">
-            <td class="py-2.5 px-3 font-semibold text-slate-800 dark:text-slate-200">${c.name}</td>
+          <tr class="hover:bg-slate-50/80 dark:hover:bg-slate-800/50 transition">
+            <td class="py-2.5 px-3 font-semibold text-slate-800 dark:text-slate-200">${escapeHtml(c.name)}</td>
             <td class="py-2.5 px-2 text-center font-bold text-sky-700 dark:text-sky-400">${std.toFixed(1)}</td>
             <td class="py-2.5 px-2 text-center font-bold text-slate-900 dark:text-white">${actual.toFixed(1)}</td>
-            <td class="py-2.5 px-2 text-center font-extrabold ${gap >= 0 ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'}">
+            <td class="py-2.5 px-2 text-center font-black ${gap >= 0 ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'}">
               ${gap > 0 ? '+' : ''}${gap}
             </td>
             <td class="py-2.5 px-3">${actionPlan}</td>
           </tr>
         `;
-      }).join('');
+      });
+
+      // Update Tabel & Mini-Metrics ILP
+      const tbody = document.getElementById('gap-ilp-table-body');
+      if (tbody) tbody.innerHTML = competencyRows.join('');
+
+      if (document.getElementById('stat-total-comp')) document.getElementById('stat-total-comp').innerText = COMPETENCY_CATALOG.length;
+      if (document.getElementById('stat-meet-comp')) document.getElementById('stat-meet-comp').innerText = meetCount;
+      if (document.getElementById('stat-gap-comp')) document.getElementById('stat-gap-comp').innerText = gapCount;
+
+      // 3. Hitung Tingkat Kecocokan & Status Kesiapan (Readiness Tier)
+      const matchPct = totalStd > 0 ? Math.round((earned / totalStd) * 100) : 0;
+      const empTenure = Number(emp.tenureYears) || 0;
+      const minTenure = Number(targetPos.minTenureYears) || 0;
+      const tenurePassed = empTenure >= minTenure;
+
+      let readinessLabel = 'Ready in 2 Years';
+      let readinessBadgeColor = 'bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-200 border-slate-300 dark:border-slate-700';
+      let projectionNote = 'Memerlukan akselerasi gap kompetensi jangka menengah & pendalaman masa jabatan.';
+
+      if (matchPct >= 85 && tenurePassed) {
+        readinessLabel = 'Ready Now (Sangat Cocok)';
+        readinessBadgeColor = 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 border-emerald-300 dark:border-emerald-800';
+        projectionNote = 'Kandidat siap dipromosikan segera atau mengisi suksesi utama dalam horizon waktu dekat.';
+      } else if (matchPct >= 70) {
+        readinessLabel = 'Ready in 1 Year (Pipeline Dekat)';
+        readinessBadgeColor = 'bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300 border-amber-300 dark:border-amber-800';
+        projectionNote = `Perlu pemenuhan ${gapCount} kompetensi prioritas dan pendampingan proyek strategis selama 12 bulan ke depan.`;
+      }
+
+      // 4. Render Kartu Hasil Analisis Eksekutif (Kolom Kiri Bawah)
+      const analysisCard = document.getElementById('analysis-suitability-card');
+      if (analysisCard) {
+        analysisCard.innerHTML = `
+          <div class="space-y-3">
+            <div class="flex items-center justify-between pb-2 border-b border-indigo-100 dark:border-indigo-900/40">
+              <span class="text-xs font-black text-indigo-950 dark:text-indigo-300 uppercase tracking-wider flex items-center gap-1.5">
+                <i class="ph-bold ph-chart-line-up text-indigo-600 dark:text-indigo-400"></i> Hasil Analisis Kecocokan Jabatan
+              </span>
+              <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black border ${readinessBadgeColor}">
+                ${readinessLabel}
+              </span>
+            </div>
+
+            <div class="grid grid-cols-2 gap-2.5 text-center">
+              <div class="p-2.5 rounded-2xl bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-200/80 dark:border-indigo-800/60">
+                <p class="text-[10px] font-semibold text-indigo-900 dark:text-indigo-300">Kecocokan Profil (Fit Score)</p>
+                <p class="text-xl font-black text-indigo-600 dark:text-indigo-400 mt-0.5">${matchPct}%</p>
+              </div>
+              <div class="p-2.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700">
+                <p class="text-[10px] font-semibold text-slate-600 dark:text-slate-400">Tenure vs Syarat Min.</p>
+                <p class="text-sm font-black ${tenurePassed ? 'text-emerald-600 dark:text-emerald-400' : 'text-amber-600 dark:text-amber-400'} mt-1">
+                  ${empTenure} Thn <span class="text-[10px] text-slate-400 font-normal">/ Min. ${minTenure} Thn</span>
+                </p>
+              </div>
+            </div>
+
+            <div class="space-y-2 text-xs">
+              <div class="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-700/60 space-y-1">
+                <p class="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wide">Kesesuaian Target:</p>
+                <p class="font-extrabold text-slate-900 dark:text-white text-xs">${escapeHtml(targetPos.title)}</p>
+                <p class="text-[10px] text-slate-500 dark:text-slate-400">${escapeHtml(targetPos.department)} &bull; ${escapeHtml(targetPos.currentStatus)}</p>
+              </div>
+
+              <div class="p-2.5 rounded-xl bg-amber-50/60 dark:bg-amber-950/30 border border-amber-200/80 dark:border-amber-900/50 space-y-1">
+                <p class="text-[10px] font-black text-amber-900 dark:text-amber-300 uppercase tracking-wide flex items-center gap-1">
+                  <i class="ph-bold ph-lightbulb"></i> Kebutuhan Intervensi & Proyeksi:
+                </p>
+                <p class="text-[11px] text-amber-950 dark:text-amber-200 font-medium leading-relaxed">${projectionNote}</p>
+                ${gapCount > 0 ? `
+                  <div class="pt-1 flex flex-wrap gap-1">
+                    ${criticalGaps.slice(0, 3).map(g => `
+                      <span class="px-1.5 py-0.2 rounded text-[9px] font-bold bg-rose-100 text-rose-800 dark:bg-rose-950 dark:text-rose-300 border border-rose-200 dark:border-rose-800">
+                        ${escapeHtml(g.name)} (${g.gap})
+                      </span>
+                    `).join('')}
+                    ${criticalGaps.length > 3 ? `<span class="text-[9px] text-slate-400 self-center">+${criticalGaps.length - 3} lainnya</span>` : ''}
+                  </div>
+                ` : ''}
+              </div>
+            </div>
+          </div>
+        `;
+      }
     }
 
     function updateRadarChart(employee, targetPosition) {
