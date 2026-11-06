@@ -430,13 +430,13 @@
             <h3 class="text-base font-bold text-slate-900 dark:text-white mt-1">Talent Pool Matrix (Performance vs. Potential)</h3>
             <p class="text-xs text-slate-500 dark:text-slate-400">Distribusi penempatan talenta berdasarkan Rerata KPI vs Skor Potensi Asesmen.</p>
           </div>
-          <button onclick="openEmployeeFormModal()" class="px-3.5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5 shadow-sm">
-            <i class="ph-bold ph-plus"></i> Tambah Karyawan ke Pool
+          <button onclick="openAddToPoolModal()" class="px-3.5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5 shadow-sm">
+            <i class="ph-bold ph-user-plus"></i> Tambah Karyawan ke Pool
           </button>
         </div>
 
-        <div class="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-4">
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-5" id="nine-box-container"></div>
+        <div class="bg-white dark:bg-slate-900 p-6 sm:p-7 rounded-3xl border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-4">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full" id="nine-box-container"></div>
         </div>
       </div>
 
@@ -829,6 +829,75 @@
 
       <div class="p-4 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 flex items-center justify-end">
         <button onclick="closeEmployeeModal()" class="px-5 py-2 bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 rounded-xl text-xs font-bold transition">Tutup</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL: PILIH PEKERJA DARI DIREKTORI KE POOL ==================== -->
+  <div id="modal-add-to-pool" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-lg w-full p-6 sm:p-7 shadow-2xl border border-slate-100 dark:border-slate-800 space-y-5">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
+        <div class="flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-xl bg-indigo-100 dark:bg-indigo-950/80 text-indigo-600 dark:text-indigo-400 flex items-center justify-center text-lg font-bold">
+            <i class="ph-bold ph-user-plus"></i>
+          </div>
+          <div>
+            <h3 class="font-extrabold text-base text-slate-900 dark:text-white leading-tight">Tambah Pekerja ke Talent Pool</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400">Pilih karyawan dari direktori untuk dipetakan ke matriks talenta</p>
+          </div>
+        </div>
+        <button onclick="closeAddToPoolModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-xl font-bold">&times;</button>
+      </div>
+
+      <form onsubmit="handleAddToPoolSubmit(event)" class="space-y-4 text-xs">
+        <div>
+          <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1.5">Pilih Karyawan Terdaftar di Direktori *</label>
+          <select id="select-pool-candidate" onchange="previewPoolCandidate()" required class="w-full p-2.5 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-medium focus:ring-2 focus:ring-indigo-500">
+          </select>
+        </div>
+
+        <!-- Live Candidate Preview Card & Target Placement Box -->
+        <div id="pool-candidate-preview" class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200/80 dark:border-slate-700/60 space-y-3">
+        </div>
+
+        <div class="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-end gap-2.5">
+          <button type="button" onclick="closeAddToPoolModal()" class="px-4 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-xl font-bold transition">Batal</button>
+          <button type="submit" id="btn-submit-add-pool" class="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-bold shadow-md shadow-indigo-600/20 transition flex items-center gap-1.5">
+            <i class="ph-bold ph-check"></i> Masukkan ke Talent Pool
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL: DAFTAR KARYAWAN PER KOTAK TALENT POOL ==================== -->
+  <div id="modal-box-employees" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-2xl w-full max-h-[85vh] flex flex-col shadow-2xl border border-slate-100 dark:border-slate-800 overflow-hidden">
+      <div class="px-6 py-4 bg-slate-900 dark:bg-slate-950 text-white flex items-center justify-between border-b border-slate-800">
+        <div class="flex items-center gap-3">
+          <div id="box-modal-icon" class="w-10 h-10 rounded-xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-xl font-bold">
+            <i class="ph-bold ph-users-four"></i>
+          </div>
+          <div>
+            <h3 class="font-extrabold text-base leading-tight" id="box-modal-title">Daftar Anggota Kuadran</h3>
+            <p class="text-xs text-slate-400" id="box-modal-subtitle">Klik nama karyawan untuk melihat profil detail</p>
+          </div>
+        </div>
+        <button onclick="closeBoxEmployeesModal()" class="text-slate-400 hover:text-white text-2xl font-bold">&times;</button>
+      </div>
+
+      <div class="p-6 overflow-y-auto custom-scrollbar flex-1 space-y-3">
+        <div class="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 px-1 pb-1 border-b border-slate-100 dark:border-slate-800">
+          <span>Total Anggota: <strong id="box-modal-count" class="text-slate-900 dark:text-white">0 Pekerja</strong></span>
+          <span class="text-[11px] text-sky-600 dark:text-sky-400 font-semibold flex items-center gap-1">
+            <i class="ph-bold ph-cursor-click"></i> Klik nama untuk buka detail
+          </span>
+        </div>
+        <div id="box-modal-list" class="space-y-2"></div>
+      </div>
+
+      <div class="p-4 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 flex justify-end">
+        <button onclick="closeBoxEmployeesModal()" class="px-5 py-2 bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 rounded-xl text-xs font-bold transition">Tutup</button>
       </div>
     </div>
   </div>
@@ -1671,65 +1740,306 @@
       const container = document.getElementById('nine-box-container');
       const boxes = [
         // 4 BOX AKTIF SAAT INI SESUAI TATA LETAK 2x2
-        { id: 'b-growth', active: true, title: 'High Potential / Med Perf', sub: 'Growth Talent', perf: 'med', pot: 'high', bg: 'bg-emerald-50/40 dark:bg-emerald-950/20', border: 'border-emerald-300 dark:border-emerald-800' },
-        { id: 'b-star',   active: true, title: 'High Potential / High Perf', sub: 'Star Talent / Future Leader', perf: 'high', pot: 'high', bg: 'bg-indigo-50/50 dark:bg-indigo-950/20', border: 'border-indigo-300 dark:border-indigo-800' },
-        { id: 'b-core',   active: true, title: 'Med Potential / Med Perf', sub: 'Core Player', perf: 'med', pot: 'med', bg: 'bg-slate-50/80 dark:bg-slate-800/40', border: 'border-slate-200 dark:border-slate-700' },
-        { id: 'b-highperf', active: true, title: 'Med Potential / High Perf', sub: 'High Performer', perf: 'high', pot: 'med', bg: 'bg-emerald-50/30 dark:bg-emerald-950/20', border: 'border-emerald-300 dark:border-emerald-800' },
+        { id: 'b-growth',   active: true, title: 'High Potential / Med Perf',  sub: 'Growth Talent',               perf: 'med',  pot: 'high', bg: 'bg-emerald-50/40 dark:bg-emerald-950/20', border: 'border-emerald-300 dark:border-emerald-800' },
+        { id: 'b-star',     active: true, title: 'High Potential / High Perf', sub: 'Star Talent / Future Leader', perf: 'high', pot: 'high', bg: 'bg-indigo-50/50 dark:bg-indigo-950/20',   border: 'border-indigo-300 dark:border-indigo-800' },
+        { id: 'b-core',     active: true, title: 'Med Potential / Med Perf',   sub: 'Core Player',                 perf: 'med',  pot: 'med',  bg: 'bg-slate-50/80 dark:bg-slate-800/40',     border: 'border-slate-200 dark:border-slate-700' },
+        { id: 'b-highperf', active: true, title: 'Med Potential / High Perf',  sub: 'High Performer',              perf: 'high', pot: 'med',  bg: 'bg-emerald-50/30 dark:bg-emerald-950/20', border: 'border-emerald-300 dark:border-emerald-800' },
 
-        // 5 BOX CADANGAN (DISEMBUNYIKAN SEMENTARA DENGAN active: false)
-        { id: 'b-enigma', active: false, title: 'High Potential / Low Perf', sub: 'Enigma / Rough Diamond', perf: 'low', pot: 'high', bg: 'bg-amber-50/60 dark:bg-amber-950/20', border: 'border-amber-200 dark:border-amber-900/60' },
-        { id: 'b-dilemma', active: false, title: 'Med Potential / Low Perf', sub: 'Dilemma / Inconsistent', perf: 'low', pot: 'med', bg: 'bg-rose-50/40 dark:bg-rose-950/20', border: 'border-rose-200 dark:border-rose-900/60' },
-        { id: 'b-risk',    active: false, title: 'Low Potential / Low Perf', sub: 'Underperformer / Risk', perf: 'low', pot: 'low', bg: 'bg-rose-50/70 dark:bg-rose-950/30', border: 'border-rose-200 dark:border-rose-900/60' },
-        { id: 'b-specialist', active: false, title: 'Low Potential / Med Perf', sub: 'Effective / Specialist', perf: 'med', pot: 'low', bg: 'bg-slate-50 dark:bg-slate-800/40', border: 'border-slate-200 dark:border-slate-800' },
-        { id: 'b-solid',   active: false, title: 'Low Potential / High Perf', sub: 'Solid Professional', perf: 'high', pot: 'low', bg: 'bg-sky-50/50 dark:bg-sky-950/20', border: 'border-sky-200 dark:border-sky-900/60' }
+        // 5 BOX CADANGAN (DISEMBUNYIKAN SEMENTARA)
+        { id: 'b-enigma',     active: false, title: 'High Potential / Low Perf', sub: 'Enigma / Rough Diamond',   perf: 'low',  pot: 'high', bg: 'bg-amber-50/60 dark:bg-amber-950/20', border: 'border-amber-200 dark:border-amber-900/60' },
+        { id: 'b-dilemma',    active: false, title: 'Med Potential / Low Perf',  sub: 'Dilemma / Inconsistent',   perf: 'low',  pot: 'med',  bg: 'bg-rose-50/40 dark:bg-rose-950/20',   border: 'border-rose-200 dark:border-rose-900/60' },
+        { id: 'b-risk',       active: false, title: 'Low Potential / Low Perf',  sub: 'Underperformer / Risk',     perf: 'low',  pot: 'low',  bg: 'bg-rose-50/70 dark:bg-rose-950/30',   border: 'border-rose-200 dark:border-rose-900/60' },
+        { id: 'b-specialist', active: false, title: 'Low Potential / Med Perf',  sub: 'Effective / Specialist',    perf: 'med',  pot: 'low',  bg: 'bg-slate-50 dark:bg-slate-800/40',     border: 'border-slate-200 dark:border-slate-800' },
+        { id: 'b-solid',      active: false, title: 'Low Potential / High Perf', sub: 'Solid Professional',       perf: 'high', pot: 'low',  bg: 'bg-sky-50/50 dark:bg-sky-950/20',     border: 'border-sky-200 dark:border-sky-900/60' }
       ];
 
       // Hanya render box yang berstatus active: true (4 Box utama)
       const activeBoxes = boxes.filter(b => b.active === true);
 
+      // Anggota Talent Pool: karyawan dengan inTalentPool true (atau data inisial A dan B)
+      const poolMembers = EMPLOYEES.filter(emp => emp.inTalentPool === true || emp.inTalentPool === undefined || emp.inTalentPool === 'true');
+
       container.innerHTML = activeBoxes.map(b => {
-        const occupants = EMPLOYEES.filter(emp => {
-          const avgKpi = ((emp.kpiHistory[2023] || 0) + (emp.kpiHistory[2024] || 0) + (emp.kpiHistory[2025] || 0)) / 3;
-          const pot = emp.assessment.potentialScore || 80;
+        const occupants = poolMembers.filter(emp => {
+          // 1. Jika pengguna telah memilih kuadran secara eksplisit via dropdown, gunakan pilihan tersebut
+          if (emp.poolBoxId) {
+            return emp.poolBoxId === b.id;
+          }
 
-          const matchPerf = (b.perf === 'high' && avgKpi >= 94) ||
-                            (b.perf === 'med' && avgKpi >= 91 && avgKpi < 94) ||
-                            (b.perf === 'low' && avgKpi < 91);
+          // 2. Fallback otomatis berdasarkan kalkulasi PA dan Potensi
+          const avgKpi = Number((((emp.kpiHistory[2023] || 0) + (emp.kpiHistory[2024] || 0) + (emp.kpiHistory[2025] || 0)) / 3).toFixed(1));
+          const pot = Number(emp.assessment.potentialScore || 80);
 
-          const matchPot = (b.pot === 'high' && pot >= 88) ||
-                           (b.pot === 'med' && pot >= 80 && pot < 88) ||
-                           (b.pot === 'low' && pot < 80);
+          const matchPerf = (b.perf === 'high' && avgKpi >= 85) ||
+                            (b.perf === 'med'  && avgKpi >= 75 && avgKpi < 85) ||
+                            (b.perf === 'low'  && avgKpi < 75);
+
+          const matchPot = (b.pot === 'high' && pot >= 85) ||
+                           (b.pot === 'med'  && pot >= 70 && pot < 85) ||
+                           (b.pot === 'low'  && pot < 70);
 
           return matchPerf && matchPot;
         });
 
         return `
-          <div class="p-5 rounded-3xl border-2 ${b.border} ${b.bg} space-y-4 min-h-[190px] flex flex-col justify-between shadow-xs transition hover:shadow-md">
+          <div onclick="openBoxEmployeesModal('${b.id}')" class="p-5 sm:p-6 rounded-3xl border-2 ${b.border} ${b.bg} space-y-4 min-h-[270px] flex flex-col justify-between shadow-xs transition hover:shadow-md cursor-pointer group" title="Klik area kartu ini untuk membuka pop-up daftar seluruh pekerja">
             <div>
               <div class="flex items-center justify-between">
-                <h5 class="text-sm font-black text-slate-900 dark:text-white tracking-tight">${escapeHtml(b.title)}</h5>
-                <span class="text-xs font-bold px-2.5 py-0.5 rounded-lg bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 shadow-xs border border-slate-200/60 dark:border-slate-700">${occupants.length} Org</span>
+                <h5 class="text-sm sm:text-base font-black text-slate-900 dark:text-white tracking-tight group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition flex items-center gap-1.5">
+                  <span>${escapeHtml(b.title)}</span>
+                  <i class="ph-bold ph-arrow-up-right text-xs opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                </h5>
+                <span class="text-xs font-black px-3 py-1 rounded-lg bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 shadow-xs border border-slate-200/80 dark:border-slate-700 shrink-0">${occupants.length} Org</span>
               </div>
               <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">${escapeHtml(b.sub)}</p>
             </div>
-            <div class="space-y-2">
+
+            <!-- Wadah Daftar Karyawan Scrollable (Tinggi Terkontrol & Scrollbar Halus) -->
+            <div onclick="event.stopPropagation();" class="max-h-[175px] overflow-y-auto custom-scrollbar pr-2 space-y-2.5">
               ${occupants.map(o => {
                 const avgKpiVal = (((o.kpiHistory[2023]||0) + (o.kpiHistory[2024]||0) + (o.kpiHistory[2025]||0)) / 3).toFixed(1);
                 return `
-                  <div onclick="openEmployeeDetail('${o.id}')" class="p-3 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700 shadow-xs hover:border-sky-500 hover:shadow-sm cursor-pointer transition flex items-center justify-between">
-                    <div>
-                      <p class="text-xs font-extrabold text-slate-900 dark:text-white">${escapeHtml(o.name)}</p>
-                      <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">${escapeHtml(o.grade || o.currentPosition)}</p>
+                  <div onclick="openEmployeeDetail('${o.id}');" class="p-3 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200/90 dark:border-slate-700 shadow-xs hover:border-sky-500 hover:shadow-sm cursor-pointer transition flex items-center justify-between gap-3" title="Klik untuk membuka profil detail lengkap">
+                    <div class="min-w-0 flex-1">
+                      <p class="text-xs sm:text-sm font-extrabold text-slate-900 dark:text-white hover:text-sky-600 dark:hover:text-sky-400 transition underline-offset-2 hover:underline truncate">${escapeHtml(o.name)}</p>
+                      <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5 truncate">${escapeHtml(o.grade || o.currentPosition)}</p>
                     </div>
-                    <span class="text-xs font-black text-sky-700 dark:text-sky-400 px-2 py-1 rounded-lg bg-sky-50 dark:bg-sky-950/60 border border-sky-100 dark:border-sky-800">${avgKpiVal}</span>
+                    <span class="text-xs font-black text-sky-700 dark:text-sky-400 px-2.5 py-1 rounded-lg bg-sky-50 dark:bg-sky-950/60 border border-sky-100 dark:border-sky-800 shrink-0">${avgKpiVal}</span>
                   </div>
                 `;
               }).join('')}
-              ${occupants.length === 0 ? '<p class="text-xs text-slate-400 dark:text-slate-500 italic py-6 text-center">Belum ada karyawan</p>' : ''}
+              ${occupants.length === 0 ? '<p class="text-xs text-slate-400 dark:text-slate-500 italic py-8 text-center">Klik kartu untuk melihat detail kuadran (0 Karyawan)</p>' : ''}
             </div>
           </div>
         `;
       }).join('');
+    }
+
+    /* Modal Handler: Membuka Daftar Pekerja Saat Card Talent Pool Diklik */
+    function openBoxEmployeesModal(boxId) {
+      const boxes = [
+        { id: 'b-growth', title: 'High Potential / Med Perf', sub: 'Growth Talent', perf: 'med', pot: 'high' },
+        { id: 'b-star',   title: 'High Potential / High Perf', sub: 'Star Talent / Future Leader', perf: 'high', pot: 'high' },
+        { id: 'b-core',   title: 'Med Potential / Med Perf', sub: 'Core Player', perf: 'med', pot: 'med' },
+        { id: 'b-highperf', title: 'Med Potential / High Perf', sub: 'High Performer', perf: 'high', pot: 'med' }
+      ];
+
+      const currentBox = boxes.find(b => b.id === boxId);
+      if (!currentBox) return;
+
+      const poolMembers = EMPLOYEES.filter(emp => emp.inTalentPool === true || emp.inTalentPool === undefined || emp.inTalentPool === 'true');
+      const boxOccupants = poolMembers.filter(emp => {
+        if (emp.poolBoxId) {
+          return emp.poolBoxId === currentBox.id;
+        }
+
+        const avgKpi = Number((((emp.kpiHistory[2023]||0) + (emp.kpiHistory[2024]||0) + (emp.kpiHistory[2025]||0)) / 3).toFixed(1));
+        const pot = Number(emp.assessment.potentialScore || 80);
+
+        const matchPerf = (currentBox.perf === 'high' && avgKpi >= 85) ||
+                          (currentBox.perf === 'med' && avgKpi >= 75 && avgKpi < 85) ||
+                          (currentBox.perf === 'low' && avgKpi < 75);
+
+        const matchPot = (currentBox.pot === 'high' && pot >= 85) ||
+                         (currentBox.pot === 'med' && pot >= 70 && pot < 85) ||
+                         (currentBox.pot === 'low' && pot < 70);
+
+        return matchPerf && matchPot;
+      });
+
+      document.getElementById('box-modal-title').innerText = `${currentBox.title}`;
+      document.getElementById('box-modal-subtitle').innerText = `${currentBox.sub} • Kuadran Talent Matrix`;
+      document.getElementById('box-modal-count').innerText = `${boxOccupants.length} Pekerja`;
+
+      const listContainer = document.getElementById('box-modal-list');
+      if (boxOccupants.length === 0) {
+        listContainer.innerHTML = `
+          <div class="text-center py-8 text-slate-400 space-y-2">
+            <i class="ph-bold ph-users text-3xl"></i>
+            <p class="text-xs font-bold text-slate-700 dark:text-slate-300">Belum Ada Karyawan Terpetakan</p>
+            <p class="text-[11px]">Gunakan tombol "+ Tambah Karyawan ke Pool" di halaman Talent Pool untuk memasukkan pekerja ke kuadran ini.</p>
+          </div>
+        `;
+      } else {
+        listContainer.innerHTML = boxOccupants.map(emp => {
+          const avgKpi = Number((((emp.kpiHistory[2023]||0) + (emp.kpiHistory[2024]||0) + (emp.kpiHistory[2025]||0)) / 3).toFixed(1));
+          const paBadge = formatPALabel ? formatPALabel(avgKpi) : avgKpi;
+          const pot = emp.assessment.potentialScore || 80;
+
+          return `
+            <div class="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/70 hover:border-sky-500 transition flex items-center justify-between gap-3">
+              <div class="flex items-center gap-3 min-w-0">
+                <div class="w-9 h-9 rounded-full bg-indigo-100 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300 font-bold text-xs flex items-center justify-center shrink-0">
+                  ${escapeHtml(emp.initials)}
+                </div>
+                <div class="min-w-0">
+                  <button onclick="closeBoxEmployeesModal(); openEmployeeDetail('${emp.id}');" class="text-left font-bold text-xs text-slate-900 dark:text-white hover:text-sky-600 dark:hover:text-sky-400 transition underline-offset-2 hover:underline truncate block">
+                    ${escapeHtml(emp.name)}
+                  </button>
+                  <p class="text-[11px] text-slate-500 dark:text-slate-400 truncate">${escapeHtml(emp.currentPosition)} &bull; ${escapeHtml(emp.currentDepartment)}</p>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-2 shrink-0">
+                <div class="text-right">
+                  <span class="inline-block px-2 py-0.5 rounded text-[10px] font-black bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300">
+                    PA: ${paBadge}
+                  </span>
+                  <p class="text-[10px] text-slate-400 mt-0.5">Potensi: <strong>${pot}</strong></p>
+                </div>
+                <button onclick="closeBoxEmployeesModal(); openEmployeeDetail('${emp.id}');" class="p-2 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sky-600 hover:bg-sky-50 dark:hover:bg-slate-700 transition" title="Buka Detail Karyawan">
+                  <i class="ph-bold ph-arrow-up-right text-xs"></i>
+                </button>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      document.getElementById('modal-box-employees').classList.remove('hidden');
+    }
+
+    function closeBoxEmployeesModal() {
+      document.getElementById('modal-box-employees').classList.add('hidden');
+    }
+
+    /* Controller Modal Tambah Pekerja dari Direktori ke Talent Pool */
+    function openAddToPoolModal() {
+      const select = document.getElementById('select-pool-candidate');
+      const submitBtn = document.getElementById('btn-submit-add-pool');
+      if (!select) return;
+
+      if (EMPLOYEES.length === 0) {
+        select.innerHTML = '<option value="">-- Belum ada data di direktori karyawan --</option>';
+        select.disabled = true;
+        if (submitBtn) submitBtn.disabled = true;
+        document.getElementById('pool-candidate-preview').innerHTML = `
+          <div class="text-center py-4 text-slate-400">
+            <p class="font-bold text-xs text-slate-700 dark:text-slate-300">Direktori Masih Kosong</p>
+            <p class="text-[11px]">Silakan tambahkan data karyawan terlebih dahulu melalui menu Direktori Karyawan.</p>
+          </div>
+        `;
+      } else {
+        select.disabled = false;
+        if (submitBtn) submitBtn.disabled = false;
+        // Tampilkan seluruh karyawan dari direktori
+        select.innerHTML = EMPLOYEES.map(e => `
+          <option value="${escapeHtml(e.id)}">${escapeHtml(e.name)} • ${escapeHtml(e.currentPosition)} (${escapeHtml(e.grade || e.currentDepartment)})${e.inTalentPool ? ' [Sudah di Pool]' : ''}</option>
+        `).join('');
+        previewPoolCandidate();
+      }
+
+      document.getElementById('modal-add-to-pool').classList.remove('hidden');
+    }
+
+    function closeAddToPoolModal() {
+      document.getElementById('modal-add-to-pool').classList.add('hidden');
+    }
+
+    function previewPoolCandidate() {
+      const select = document.getElementById('select-pool-candidate');
+      const previewBox = document.getElementById('pool-candidate-preview');
+      if (!select || !select.value) {
+        previewBox.innerHTML = '';
+        return;
+      }
+
+      const emp = EMPLOYEES.find(e => e.id === select.value);
+      if (!emp) return;
+
+      const avgKpi = Number((((emp.kpiHistory[2023]||0) + (emp.kpiHistory[2024]||0) + (emp.kpiHistory[2025]||0)) / 3).toFixed(1));
+      const pot = Number(emp.assessment.potentialScore || 80);
+
+      // Hitung rekomendasi bawaan berdasarkan PA dan Potensi
+      let defaultBox = 'b-growth';
+      if (pot >= 85 && avgKpi >= 85) {
+        defaultBox = 'b-star';
+      } else if (pot >= 85 && avgKpi >= 75) {
+        defaultBox = 'b-growth';
+      } else if (pot >= 70 && avgKpi >= 85) {
+        defaultBox = 'b-highperf';
+      } else if (pot >= 70 && avgKpi >= 75) {
+        defaultBox = 'b-core';
+      }
+
+      // Prioritaskan kotak yang sudah tersimpan sebelumnya jika ada
+      const selectedBoxId = emp.poolBoxId || defaultBox;
+
+      previewBox.innerHTML = `
+        <div class="flex items-center justify-between pb-2 border-b border-slate-200 dark:border-slate-700">
+          <div>
+            <p class="font-extrabold text-sm text-slate-900 dark:text-white">${escapeHtml(emp.name)}</p>
+            <p class="text-[11px] text-slate-500 dark:text-slate-400">${escapeHtml(emp.currentPosition)} &bull; ${escapeHtml(emp.currentDepartment)}</p>
+          </div>
+          <span class="px-2.5 py-1 rounded-lg bg-sky-50 dark:bg-sky-950 text-sky-700 dark:text-sky-300 font-bold text-xs border border-sky-200 dark:border-sky-800">${escapeHtml(emp.grade || 'Grade --')}</span>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3 text-center">
+          <div class="p-2.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+            <p class="text-[10px] text-slate-500 dark:text-slate-400">Rerata Kinerja (PA/KPI)</p>
+            <p class="text-base font-black text-slate-900 dark:text-white mt-0.5">${avgKpi}</p>
+          </div>
+          <div class="p-2.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+            <p class="text-[10px] text-slate-500 dark:text-slate-400">Skor Potensi Asesmen</p>
+            <p class="text-base font-black text-indigo-600 dark:text-indigo-400 mt-0.5">${pot}</p>
+          </div>
+        </div>
+
+        <!-- Dropdown Pilihan Penempatan Kuadran Matriks -->
+        <div class="p-3 rounded-2xl bg-indigo-50/70 dark:bg-indigo-950/40 border-2 border-indigo-200 dark:border-indigo-800 space-y-1.5">
+          <label class="block text-[11px] font-black text-indigo-950 dark:text-indigo-300 uppercase tracking-wider flex items-center justify-between">
+            <span>Pilih Penempatan Matriks (Talent Box):</span>
+            <span class="text-[9px] font-bold text-indigo-600 dark:text-indigo-400 bg-white dark:bg-slate-800 px-2 py-0.5 rounded-md border border-indigo-200 dark:border-indigo-700">Bisa Dipilih Bebas</span>
+          </label>
+          <select id="select-pool-target-box" class="w-full p-2.5 border border-indigo-300 dark:border-indigo-700 rounded-xl bg-white dark:bg-slate-900 text-slate-900 dark:text-white font-extrabold text-xs focus:ring-2 focus:ring-indigo-500 shadow-xs">
+            <option value="b-growth" ${selectedBoxId === 'b-growth' ? 'selected' : ''}>High Potential / Med Perf (Growth Talent)</option>
+            <option value="b-star" ${selectedBoxId === 'b-star' ? 'selected' : ''}>High Potential / High Perf (Star Talent / Future Leader)</option>
+            <option value="b-core" ${selectedBoxId === 'b-core' ? 'selected' : ''}>Med Potential / Med Perf (Core Player)</option>
+            <option value="b-highperf" ${selectedBoxId === 'b-highperf' ? 'selected' : ''}>Med Potential / High Perf (High Performer)</option>
+          </select>
+          <p class="text-[10px] text-slate-500 dark:text-slate-400 italic">Pilihan di atas otomatis terisi rekomendasi skor, Anda dapat memindahkannya ke kuadran lain jika diperlukan.</p>
+        </div>
+      `;
+    }
+
+    async function handleAddToPoolSubmit(e) {
+      e.preventDefault();
+      const select = document.getElementById('select-pool-candidate');
+      if (!select || !select.value) return;
+
+      const empId = select.value;
+      const emp = EMPLOYEES.find(e => e.id === empId);
+      if (!emp) return;
+
+      const targetBoxSelect = document.getElementById('select-pool-target-box');
+      const chosenBoxId = targetBoxSelect ? targetBoxSelect.value : 'b-growth';
+
+      const btn = document.getElementById('btn-submit-add-pool');
+      btn.disabled = true;
+      btn.innerText = 'Mendaftarkan...';
+
+      // Aktifkan flag Talent Pool dan tetapkan kuadran pilihan dropdown
+      emp.inTalentPool = true;
+      emp.poolBoxId = chosenBoxId;
+
+      try {
+        const res = await apiCall('saveEmployeeRecord', { employeeData: emp });
+        btn.disabled = false;
+        btn.innerText = 'Masukkan ke Talent Pool';
+
+        if (res && res.success) {
+          showToast(`Karyawan ${emp.name} berhasil didaftarkan ke Talent Pool!`, 'success');
+          closeAddToPoolModal();
+          renderNineBoxMatrix();
+          updateMetricCounts();
+        } else {
+          showToast(res ? res.message : 'Gagal memasukkan ke pool.', 'error');
+        }
+      } catch (err) {
+        btn.disabled = false;
+        btn.innerText = 'Masukkan ke Talent Pool';
+        showToast('Koneksi backend gagal: ' + err.message, 'error');
+      }
     }
 
     /* Helper Konversi Nilai Bobot ke Label Kategori Performance Appraisal */
@@ -1819,13 +2129,16 @@
         return `
           <tr class="hover:bg-slate-50/80 dark:hover:bg-slate-800/50 transition">
             <td class="py-3 px-4">
-              <div class="flex items-center gap-3">
-                <div class="w-8 h-8 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold text-xs flex items-center justify-center">
+              <div onclick="openEmployeeDetail('${emp.id}')" class="flex items-center gap-3 cursor-pointer group" title="Klik untuk melihat profil detail karyawan">
+                <div class="w-8 h-8 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 group-hover:bg-sky-600 group-hover:text-white dark:group-hover:bg-sky-600 font-bold text-xs flex items-center justify-center transition shadow-xs">
                   ${escapeHtml(emp.initials)}
                 </div>
                 <div>
-                  <p class="font-bold text-slate-900 dark:text-white text-xs">${escapeHtml(emp.name)}</p>
-                  <p class="text-[10px] text-slate-500 dark:text-slate-400">${escapeHtml(emp.nik)} &bull; ${escapeHtml(emp.gender || 'Pria')}</p>
+                  <p class="font-bold text-slate-900 dark:text-white text-xs group-hover:text-sky-600 dark:group-hover:text-sky-400 transition underline-offset-2 group-hover:underline flex items-center gap-1">
+                    <span>${escapeHtml(emp.name)}</span>
+                    <i class="ph-bold ph-arrow-up-right text-[10px] opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                  </p>
+                  <p class="text-[10px] text-slate-500 dark:text-slate-400">${escapeHtml(emp.nik)} • ${escapeHtml(emp.gender || 'Pria')}</p>
                 </div>
               </div>
             </td>
@@ -1904,7 +2217,7 @@
       document.getElementById('detail-name').innerText = emp.name;
       document.getElementById('detail-pos').innerText = `${emp.currentPosition} (${emp.nik})`;
       document.getElementById('detail-grade').innerText = emp.grade || 'N/A';
-      document.getElementById('detail-demog').innerText = `${emp.age} Thn &bull; ${emp.education}`;
+      document.getElementById('detail-demog').innerText = `${emp.age} Thn • ${emp.education}`;
       document.getElementById('detail-tenure').innerText = emp.tenure;
       document.getElementById('detail-dept').innerText = emp.currentDepartment;
       document.getElementById('detail-ninebox').innerText = (emp.assessment.potentialScore >= 88) ? 'Star Talent' : 'Core Performer';
