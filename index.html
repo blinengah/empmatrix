@@ -520,37 +520,43 @@
 
       <!-- ================= TAB 4: CRITICAL POSITION ================= -->
       <div id="tab-critical-pos" class="tab-content hidden space-y-6">
-        <div class="bg-gradient-to-r from-slate-900 to-sky-950 dark:from-slate-900 dark:to-slate-900 p-6 rounded-3xl text-white shadow-xl space-y-4 border border-slate-800">
-          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <!-- Banner Filter Horizon Suksesi -->
+        <div class="bg-gradient-to-r from-slate-900 via-sky-950 to-slate-900 p-6 rounded-3xl text-white shadow-xl space-y-4 border border-slate-800">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-5">
             <div>
               <span class="text-xs font-bold tracking-wider uppercase text-sky-400 bg-sky-900/60 px-3 py-1 rounded-full border border-sky-700/60">
                 Critical Position & Succession Matcher
               </span>
               <h3 class="text-xl font-black mt-2">Identifikasi Posisi Kritis & Succession Bench</h3>
-              <p class="text-xs text-slate-300 mt-1 max-w-2xl">
-                Pilih jabatan kritis strategis. Mesin otomatis memindai seluruh talenta lintas divisi berdasarkan kecocokan kompetensi, grade, dan tenure.
+              <p class="text-xs text-slate-300 mt-1 max-w-2xl leading-relaxed">
+                Tentukan horizon suksesi atau tingkat risiko kekosongan jabatan. Sistem otomatis memfilter posisi strategis dan menganalisis kesiapan suksesornya.
               </p>
             </div>
-            <div class="min-w-[280px] space-y-3">
-              <div class="space-y-1.5">
-                <div class="flex items-center justify-between">
-                  <label class="text-xs font-semibold text-slate-300">Pilih Critical Position:</label>
-                  <button onclick="openPositionFormModal()" class="text-[11px] font-bold text-sky-400 hover:text-sky-300 underline">+ Buat Posisi</button>
-                </div>
-                <select id="select-critical-job" onchange="runSuccessionMatchEngine()" class="w-full p-2.5 rounded-xl bg-slate-800 text-white border border-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-sky-400">
-                </select>
+            <div class="min-w-[280px] space-y-2 shrink-0">
+              <div class="flex items-center justify-between">
+                <label class="text-xs font-bold text-slate-300 uppercase tracking-wide">Filter Status Kebutuhan:</label>
+                <button onclick="openPositionFormModal()" class="text-[11px] font-bold text-sky-400 hover:text-sky-300 underline">+ Buat Posisi</button>
               </div>
-
-              <div class="space-y-1.5">
-                <label class="block text-xs font-semibold text-slate-300">Succession Plan:</label>
-                <select id="select-succession-plan" onchange="runSuccessionMatchEngine()" class="w-full p-2.5 rounded-xl bg-slate-800 text-amber-300 border border-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-amber-400 font-medium">
-                  <option value="1_YEAR" selected>vacant in 1 year</option>
-                  <option value="2_YEAR">vacant in 2 year</option>
-                  <option value="3_YEAR">vacant in 3 years</option>
-                </select>
-              </div>
+              <select id="filter-critical-status" onchange="handleCriticalFilterChange()" class="w-full p-2.5 rounded-xl bg-slate-800 text-amber-300 border-2 border-slate-700 text-xs font-bold focus:outline-none focus:ring-2 focus:ring-amber-400 shadow-md">
+                <option value="Critical Vacancy Risk" selected>Critical Vacancy Risk</option>
+                <option value="Vacant in 1 year">Vacant in 1 year</option>
+                <option value="Vacant in 2 year">Vacant in 2 year</option>
+                <option value="Vacant in 3 year">Vacant in 3 year</option>
+              </select>
+              <input type="hidden" id="select-critical-job" value="">
             </div>
           </div>
+        </div>
+
+        <!-- Kartu Posisi Kritis Hasil Filter -->
+        <div class="space-y-2.5">
+          <div class="flex items-center justify-between px-1">
+            <h4 class="text-xs font-extrabold uppercase tracking-wider text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
+              <i class="ph-bold ph-crosshair text-sky-600"></i> Posisi Strategis Terpilih:
+            </h4>
+            <span id="filtered-pos-count-badge" class="text-xs font-bold text-sky-600 dark:text-sky-400">0 Posisi Ditemukan</span>
+          </div>
+          <div id="filtered-positions-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5"></div>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -1103,11 +1109,12 @@
             <input type="number" id="inp-pos-tenure" value="7" min="1" max="25" class="w-full p-2.5 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white">
           </div>
           <div>
-            <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Status Kebutuhan</label>
-            <select id="inp-pos-status" class="w-full p-2.5 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white">
+            <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Status Kebutuhan *</label>
+            <select id="inp-pos-status" class="w-full p-2.5 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-semibold">
               <option value="Critical Vacancy Risk">Critical Vacancy Risk</option>
-              <option value="Retiring in 6 Months">Retiring in 6 Months</option>
-              <option value="Benchmark Talent Pool">Benchmark Talent Pool</option>
+              <option value="Vacant in 1 year">Vacant in 1 year</option>
+              <option value="Vacant in 2 year">Vacant in 2 year</option>
+              <option value="Vacant in 3 year">Vacant in 3 year</option>
             </select>
           </div>
         </div>
@@ -1730,9 +1737,13 @@
 
     function selectAndGoToCritical(posId) {
       switchTab('tab-critical-pos');
-      const sel = document.getElementById('select-critical-job');
-      sel.value = posId;
-      runSuccessionMatchEngine();
+      const targetPos = CRITICAL_POSITIONS.find(p => p.id === posId);
+      if (targetPos) {
+        const normalized = normalizePositionStatus_(targetPos.currentStatus);
+        const filterSelect = document.getElementById('filter-critical-status');
+        if (filterSelect) filterSelect.value = normalized;
+      }
+      renderFilteredPositionCards(posId);
     }
 
     /* Talent Pool Matrix Module (4-Box Active Focus, 5 Standby Hidden) */
@@ -2620,30 +2631,127 @@
       }
     }
 
-    function populateCriticalPositionsDropdown() {
-      const select = document.getElementById('select-critical-job');
-      const currentVal = select.value;
-      select.innerHTML = CRITICAL_POSITIONS.map(p => `
-        <option value="${p.id}">${p.title} (${p.department})</option>
-      `).join('');
-      if (currentVal && CRITICAL_POSITIONS.some(p => p.id === currentVal)) {
-        select.value = currentVal;
-      }
+    /* Normalisasi Status Posisi Kritis agar Selaras dengan 4 Kategori Utama */
+    function normalizePositionStatus_(statusStr) {
+      const s = String(statusStr || '').toLowerCase().trim();
+      if (s.includes('3 year') || s.includes('3_year') || s.includes('3 tahun')) return 'Vacant in 3 year';
+      if (s.includes('2 year') || s.includes('2_year') || s.includes('2 tahun')) return 'Vacant in 2 year';
+      if (s.includes('1 year') || s.includes('1_year') || s.includes('1 tahun') || s.includes('retiring') || s.includes('6 month')) return 'Vacant in 1 year';
+      return 'Critical Vacancy Risk';
     }
 
-    function runSuccessionMatchEngine() {
-      const select = document.getElementById('select-critical-job');
-      if (!select.value && CRITICAL_POSITIONS.length > 0) {
-        select.value = CRITICAL_POSITIONS[0].id;
-      }
-      const selectedPosId = select.value;
-      const targetPos = CRITICAL_POSITIONS.find(p => p.id === selectedPosId) || CRITICAL_POSITIONS[0];
-      if (!targetPos) return;
+    /* Handler Saat Filter Status di Banner Berubah */
+    function handleCriticalFilterChange() {
+      renderFilteredPositionCards();
+    }
 
-      // Ambil nilai Succession Plan (horizon kekosongan jabatan)
-      const planSelect = document.getElementById('select-succession-plan');
-      const vacantHorizon = planSelect ? planSelect.value : '1_YEAR';
-      const addedProjectionYears = vacantHorizon === '3_YEAR' ? 3 : (vacantHorizon === '2_YEAR' ? 2 : 1);
+    /* Render Kartu-Kartu Posisi Kritis Sesuai Pilihan Filter */
+    function renderFilteredPositionCards(selectedPosId = null) {
+      const filterSelect = document.getElementById('filter-critical-status');
+      const activeStatus = filterSelect ? filterSelect.value : 'Critical Vacancy Risk';
+      const container = document.getElementById('filtered-positions-container');
+      const badge = document.getElementById('filtered-pos-count-badge');
+      const hiddenInput = document.getElementById('select-critical-job');
+
+      if (!container) return;
+
+      // Saring posisi berdasarkan normalisasi status
+      const matchingPositions = CRITICAL_POSITIONS.filter(p => {
+        return normalizePositionStatus_(p.currentStatus) === activeStatus;
+      });
+
+      if (badge) {
+        badge.innerText = `${matchingPositions.length} Posisi Ditemukan`;
+      }
+
+      if (matchingPositions.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-full p-6 rounded-2xl bg-white dark:bg-slate-900 border border-dashed border-slate-300 dark:border-slate-800 text-center space-y-2">
+            <i class="ph-bold ph-crosshair text-3xl text-slate-400"></i>
+            <p class="text-xs font-bold text-slate-700 dark:text-slate-300">Tidak ada posisi kritis pada kategori "${escapeHtml(activeStatus)}"</p>
+            <p class="text-[11px] text-slate-400">Gunakan tombol "+ Buat Posisi" untuk menambahkan posisi dengan status ini.</p>
+          </div>
+        `;
+        if (hiddenInput) hiddenInput.value = '';
+        renderEmptySuccessionState();
+        return;
+      }
+
+      // Tentukan posisi mana yang sedang aktif
+      let activeId = selectedPosId;
+      if (!activeId || !matchingPositions.some(p => p.id === activeId)) {
+        activeId = matchingPositions[0].id;
+      }
+
+      if (hiddenInput) hiddenInput.value = activeId;
+
+      container.innerHTML = matchingPositions.map(pos => {
+        const isActive = pos.id === activeId;
+        const normalizedStatus = normalizePositionStatus_(pos.currentStatus);
+        const statusColors = {
+          'Critical Vacancy Risk': 'bg-rose-100 text-rose-800 dark:bg-rose-950 dark:text-rose-300 border-rose-200 dark:border-rose-800',
+          'Vacant in 1 year': 'bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300 border-amber-200 dark:border-amber-800',
+          'Vacant in 2 year': 'bg-sky-100 text-sky-800 dark:bg-sky-950 dark:text-sky-300 border-sky-200 dark:border-sky-800',
+          'Vacant in 3 year': 'bg-indigo-100 text-indigo-800 dark:bg-indigo-950 dark:text-indigo-300 border-indigo-200 dark:border-indigo-800'
+        }[normalizedStatus] || 'bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-200';
+
+        return `
+          <div onclick="selectActiveCriticalPosition('${escapeHtml(pos.id)}')" class="p-4 rounded-2xl border-2 transition cursor-pointer flex flex-col justify-between space-y-3 ${isActive ? 'bg-sky-50/70 dark:bg-sky-950/40 border-sky-500 shadow-md ring-2 ring-sky-500/20' : 'bg-white dark:bg-slate-900 border-slate-200/80 dark:border-slate-800 hover:border-sky-300 dark:hover:border-slate-700 shadow-xs'}">
+            <div class="space-y-1.5">
+              <div class="flex items-center justify-between gap-2">
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold border truncate ${statusColors}">
+                  ${escapeHtml(normalizedStatus)}
+                </span>
+                ${isActive ? '<span class="text-[10px] font-extrabold text-sky-600 dark:text-sky-400 flex items-center gap-1 shrink-0"><i class="ph-bold ph-check-circle"></i> Aktif Dipindai</span>' : ''}
+              </div>
+              <h5 class="text-xs sm:text-sm font-extrabold text-slate-900 dark:text-white leading-snug">${escapeHtml(pos.title)}</h5>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400">${escapeHtml(pos.department)}</p>
+            </div>
+
+            <div class="pt-2 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400">
+              <span>Min. Tenure: <strong class="text-slate-800 dark:text-slate-200">${pos.minTenureYears} Thn</strong></span>
+              <span class="font-bold text-sky-600 dark:text-sky-400 text-xs">Pindai Suksesor &rarr;</span>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      runSuccessionMatchEngine(activeId);
+    }
+
+    function selectActiveCriticalPosition(posId) {
+      renderFilteredPositionCards(posId);
+    }
+
+    function renderEmptySuccessionState() {
+      document.getElementById('badge-ready-now-count').innerText = '0 Kandidat';
+      document.getElementById('badge-ready-1yr-count').innerText = '0 Kandidat';
+      document.getElementById('badge-ready-2yr-count').innerText = '0 Kandidat';
+      document.getElementById('container-ready-now').innerHTML = '<p class="text-xs text-slate-400 italic py-4 text-center">Pilih posisi kritis terlebih dahulu.</p>';
+      document.getElementById('container-ready-1yr').innerHTML = '<p class="text-xs text-slate-400 italic py-4 text-center">Pilih posisi kritis terlebih dahulu.</p>';
+      document.getElementById('container-ready-2yr').innerHTML = '<p class="text-xs text-slate-400 italic py-4 text-center">Pilih posisi kritis terlebih dahulu.</p>';
+      document.getElementById('cross-dept-matcher-body').innerHTML = '<tr><td colspan="7" class="py-6 text-center text-slate-400 text-xs">Pilih posisi kritis untuk melihat hasil pemindaian.</td></tr>';
+    }
+
+    function populateCriticalPositionsDropdown() {
+      renderFilteredPositionCards();
+    }
+
+    function runSuccessionMatchEngine(overridePosId = null) {
+      let targetPosId = overridePosId;
+      if (!targetPosId) {
+        const hiddenInput = document.getElementById('select-critical-job');
+        targetPosId = hiddenInput ? hiddenInput.value : null;
+      }
+      if (!targetPosId && CRITICAL_POSITIONS.length > 0) {
+        targetPosId = CRITICAL_POSITIONS[0].id;
+      }
+
+      const targetPos = CRITICAL_POSITIONS.find(p => p.id === targetPosId);
+      if (!targetPos) {
+        renderEmptySuccessionState();
+        return;
+      }
 
       const scoredCandidates = EMPLOYEES.map(emp => {
         let totalStd = 0;
