@@ -1025,12 +1025,7 @@
         </div>
         <div>
           <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Departemen Penyelenggara *</label>
-          <select id="inp-pos-dept" class="w-full p-2.5 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white">
-            <option value="Corporate Security & GSS">Corporate Security & GSS</option>
-            <option value="Human Capital">Human Capital</option>
-            <option value="Operations & Engineering">Operations & Engineering</option>
-            <option value="Finance & Accounting">Finance & Accounting</option>
-            <option value="Legal & Governance">Legal & Governance</option>
+          <select id="inp-pos-dept" class="w-full p-2.5 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-medium">
           </select>
         </div>
         <div class="grid grid-cols-2 gap-3">
@@ -1230,8 +1225,9 @@
     /* App State Cache */
     let COMPETENCY_CATALOG = [];
     let CRITICAL_POSITIONS = [];
+    let DEPARTMENTS_CATALOG = [];
     let EMPLOYEES = [];
-    let SYSTEM_CONFIG = { isBootstrapActive: false, appVersion: 'V2.0.0' };
+    let SYSTEM_CONFIG = { isBootstrapActive: false, appVersion: 'V2.3.0' };
 
     let currentAuthUser = null;
     let radarChartInstance = null;
@@ -1269,6 +1265,7 @@
         if (response && response.success) {
           COMPETENCY_CATALOG = response.data.competencies || [];
           CRITICAL_POSITIONS = response.data.criticalPositions || [];
+          DEPARTMENTS_CATALOG = response.data.departments || [];
           EMPLOYEES = response.data.employees || [];
           SYSTEM_CONFIG = response.data.config || { isBootstrapActive: false };
 
@@ -1345,29 +1342,43 @@
       }
     }
 
-    /* Sinkronisasi Daftar Departemen Bawaan & Hasil Input Manual */
+    /* Sinkronisasi Master Departemen dari TB_DEPARTMENTS & Input Manual */
     function syncDepartmentOptions() {
       const defaultDepts = [
-        'Corporate Security & GSS',
-        'Human Capital',
+        'Human Capital & Business Support',
         'Operations & Engineering',
+        'Technical Integrity',
+        'Supply Chain Management',
+        'GM Business Units',
+        'Safety Health Environment',
+        'Field Operations',
         'Finance & Accounting',
         'Legal & Governance'
       ];
 
-      // Kumpulkan seluruh departemen unik dari data karyawan
+      // Gabungkan departemen dari sheet TB_DEPARTMENTS, default list, dan input data karyawan
       const allDepts = Array.from(new Set([
-        ...defaultDepts,
+        ...(DEPARTMENTS_CATALOG && DEPARTMENTS_CATALOG.length > 0 ? DEPARTMENTS_CATALOG : defaultDepts),
         ...EMPLOYEES.map(e => e.currentDepartment).filter(Boolean)
-      ])).sort();
+      ])).filter(d => d !== 'Corporate Security & GSS' && d !== 'Human Capital').sort();
 
-      // Perbarui datalist form karyawan
+      // 1. Perbarui Dropdown Departemen Penyelenggara pada Modal Critical Position
+      const posDeptSelect = document.getElementById('inp-pos-dept');
+      if (posDeptSelect) {
+        const currentPosVal = posDeptSelect.value;
+        posDeptSelect.innerHTML = allDepts.map(d => `<option value="${escapeHtml(d)}">${escapeHtml(d)}</option>`).join('');
+        if (currentPosVal && allDepts.includes(currentPosVal)) {
+          posDeptSelect.value = currentPosVal;
+        }
+      }
+
+      // 2. Perbarui datalist pada Form Tambah/Edit Karyawan
       const datalist = document.getElementById('dept-options');
       if (datalist) {
         datalist.innerHTML = allDepts.map(d => `<option value="${escapeHtml(d)}">`).join('');
       }
 
-      // Perbarui dropdown filter departemen pada tabel direktori
+      // 3. Perbarui dropdown filter pada Direktori Karyawan
       const filterSelect = document.getElementById('filter-dept');
       if (filterSelect) {
         const curVal = filterSelect.value;
