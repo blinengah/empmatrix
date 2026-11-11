@@ -1171,8 +1171,15 @@
         </div>
 
         <div class="space-y-2 pt-2 border-t border-slate-100 dark:border-slate-800">
-          <label class="block font-bold text-slate-700 dark:text-slate-300">Target Standar Kompetensi (1.0 - 5.0):</label>
-          <div class="grid grid-cols-2 gap-2" id="form-pos-std-inputs"></div>
+          <div class="flex items-center justify-between">
+            <label class="block font-bold text-slate-700 dark:text-slate-300">Target Standar Kompetensi (1.0 - 5.0):</label>
+            <div class="flex items-center gap-2 text-[11px]">
+              <button type="button" onclick="toggleAllPosComps(true)" class="text-sky-600 dark:text-sky-400 font-semibold hover:underline">Pilih Semua</button>
+              <span class="text-slate-300 dark:text-slate-600">•</span>
+              <button type="button" onclick="toggleAllPosComps(false)" class="text-slate-500 dark:text-slate-400 font-semibold hover:underline">Batal Semua</button>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-2 max-h-64 overflow-y-auto custom-scrollbar p-1" id="form-pos-std-inputs"></div>
         </div>
 
         <div class="pt-3 flex items-center justify-end gap-2">
@@ -2671,15 +2678,49 @@
     function buildPositionStandardInputs() {
       const container = document.getElementById('form-pos-std-inputs');
       container.innerHTML = COMPETENCY_CATALOG.map(c => `
-        <div class="flex items-center justify-between p-2 bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700 rounded-lg text-xs">
-          <span class="truncate max-w-[120px] dark:text-slate-300" title="${c.name}">${c.name}</span>
-          <input type="number" id="inp-pos-std-${c.id}" min="1.0" max="5.0" step="0.5" value="4.5" class="w-14 p-1 border border-slate-300 dark:border-slate-600 rounded text-center font-bold bg-white dark:bg-slate-800 text-slate-900 dark:text-white">
+        <div class="flex items-center justify-between p-2 bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700 rounded-xl text-xs transition" id="box-pos-std-${c.id}">
+          <label class="flex items-center gap-2 cursor-pointer min-w-0 flex-1 mr-2 select-none" title="${escapeHtml(c.name)}">
+            <input type="checkbox" id="chk-pos-std-${c.id}" checked onchange="togglePosCompCheck('${c.id}')" class="rounded text-sky-600 focus:ring-sky-500 w-4 h-4 shrink-0 accent-sky-600 cursor-pointer">
+            <span class="truncate text-slate-800 dark:text-slate-200 font-semibold text-[11px]" id="title-pos-std-${c.id}">${escapeHtml(c.name)}</span>
+          </label>
+          <input type="number" id="inp-pos-std-${c.id}" min="1.0" max="5.0" step="0.5" value="4.5" class="w-14 p-1 border border-slate-300 dark:border-slate-600 rounded-lg text-center font-bold bg-white dark:bg-slate-800 text-slate-900 dark:text-white shrink-0 transition">
         </div>
       `).join('');
     }
 
+    function togglePosCompCheck(cId) {
+      const chk = document.getElementById(`chk-pos-std-${cId}`);
+      const inp = document.getElementById(`inp-pos-std-${cId}`);
+      const box = document.getElementById(`box-pos-std-${cId}`);
+      const title = document.getElementById(`title-pos-std-${cId}`);
+      if (!chk || !inp) return;
+
+      if (chk.checked) {
+        inp.disabled = false;
+        inp.classList.remove('opacity-30', 'bg-slate-100', 'dark:bg-slate-900', 'cursor-not-allowed');
+        if (box) box.classList.remove('opacity-50');
+        if (title) title.classList.remove('line-through', 'text-slate-400');
+      } else {
+        inp.disabled = true;
+        inp.classList.add('opacity-30', 'bg-slate-100', 'dark:bg-slate-900', 'cursor-not-allowed');
+        if (box) box.classList.add('opacity-50');
+        if (title) title.classList.add('line-through', 'text-slate-400');
+      }
+    }
+
+    function toggleAllPosComps(state) {
+      COMPETENCY_CATALOG.forEach(c => {
+        const chk = document.getElementById(`chk-pos-std-${c.id}`);
+        if (chk) {
+          chk.checked = state;
+          togglePosCompCheck(c.id);
+        }
+      });
+    }
+
     function openPositionFormModal() {
       document.getElementById('inp-pos-title').value = '';
+      toggleAllPosComps(true);
       document.getElementById('modal-position-form').classList.remove('hidden');
     }
     function closePositionFormModal() {
@@ -2695,8 +2736,16 @@
 
       const standardCompetencies = {};
       COMPETENCY_CATALOG.forEach(c => {
-        standardCompetencies[c.id] = parseFloat(document.getElementById(`inp-pos-std-${c.id}`).value) || 4.0;
+        const chk = document.getElementById(`chk-pos-std-${c.id}`);
+        if (chk && chk.checked) {
+          standardCompetencies[c.id] = parseFloat(document.getElementById(`inp-pos-std-${c.id}`).value) || 4.0;
+        }
       });
+
+      if (Object.keys(standardCompetencies).length === 0) {
+        showToast('Pilih minimal satu kompetensi standar untuk posisi ini!', 'warning');
+        return;
+      }
 
       const posPayload = {
         title, department: dept, minTenureYears: tenure, currentStatus: status, standardCompetencies
@@ -2850,12 +2899,17 @@
         let totalStd = 0;
         let earned = 0;
         COMPETENCY_CATALOG.forEach(c => {
-          const std = targetPos.standardCompetencies[c.id] || 4.0;
-          const actual = emp.competencies[c.id] || 0;
-          totalStd += std;
-          earned += Math.min(actual, std);
+          // Hanya evaluasi kompetensi yang berstatus ON (terdaftar pada posisi target)
+          if (targetPos.standardCompetencies && targetPos.standardCompetencies[c.id] !== undefined) {
+            const std = Number(targetPos.standardCompetencies[c.id]) || 0;
+            if (std > 0) {
+              const actual = Number(emp.competencies[c.id]) || 0;
+              totalStd += std;
+              earned += Math.min(actual, std);
+            }
+          }
         });
-        const matchPct = Math.round((earned / totalStd) * 100);
+        const matchPct = totalStd > 0 ? Math.round((earned / totalStd) * 100) : 0;
 
         let bucket = 'READY_2_YEARS';
         if (matchPct >= 85 && emp.tenureYears >= 5.0) {
@@ -3007,8 +3061,15 @@
       let gapCount = 0;
       const criticalGaps = [];
 
-      const competencyRows = COMPETENCY_CATALOG.map(c => {
-        const std = targetPos.standardCompetencies[c.id] || 4.0;
+      // Saring kompetensi: hanya evaluasi yang dipersyaratkan oleh posisi target
+      const targetCatalog = COMPETENCY_CATALOG.filter(c => {
+        return targetPos.standardCompetencies && targetPos.standardCompetencies[c.id] !== undefined;
+      });
+
+      const activeList = targetCatalog.length > 0 ? targetCatalog : COMPETENCY_CATALOG;
+
+      const competencyRows = activeList.map(c => {
+        const std = targetPos.standardCompetencies ? (targetPos.standardCompetencies[c.id] || 4.0) : 4.0;
         const actual = emp.competencies[c.id] || 0;
         const gap = +(actual - std).toFixed(1);
 
@@ -3130,9 +3191,14 @@
     }
 
     function updateRadarChart(employee, targetPosition) {
-      const labels = COMPETENCY_CATALOG.map(c => c.name);
-      const standardData = COMPETENCY_CATALOG.map(c => targetPosition.standardCompetencies[c.id] || 4.0);
-      const actualData = COMPETENCY_CATALOG.map(c => employee.competencies[c.id] || 0);
+      const targetCatalog = COMPETENCY_CATALOG.filter(c => {
+        return targetPosition.standardCompetencies && targetPosition.standardCompetencies[c.id] !== undefined;
+      });
+      const activeCatalog = targetCatalog.length > 0 ? targetCatalog : COMPETENCY_CATALOG;
+
+      const labels = activeCatalog.map(c => c.name);
+      const standardData = activeCatalog.map(c => targetPosition.standardCompetencies[c.id] || 4.0);
+      const actualData = activeCatalog.map(c => employee.competencies[c.id] || 0);
 
       const isDark = document.documentElement.classList.contains('dark');
       const gridColor = isDark ? 'rgba(148, 163, 184, 0.2)' : 'rgba(203, 213, 225, 0.6)';
