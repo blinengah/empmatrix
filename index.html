@@ -487,21 +487,31 @@
 
         <!-- Redesigned Scrollable Directory Table with Sticky Header -->
         <div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/90 dark:border-slate-800 shadow-sm overflow-hidden">
+          <div class="px-4 py-2 bg-slate-50/90 dark:bg-slate-800/40 border-b border-slate-200/70 dark:border-slate-800 flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400">
+            <span class="font-medium flex items-center gap-1.5">
+              <i class="ph-bold ph-table text-sky-600 dark:text-sky-400"></i>
+              <span>Klik nama atau ikon mata untuk membuka profil 360&deg; karyawan</span>
+            </span>
+            <span class="hidden sm:inline-flex items-center gap-1 text-[10px] font-semibold text-slate-400 dark:text-slate-500">
+              <span>Geser ke kanan untuk Sertifikasi &amp; Achievement</span>
+              <i class="ph-bold ph-arrows-left-right"></i>
+            </span>
+          </div>
           <div class="overflow-x-auto overflow-y-auto max-h-[600px] custom-scrollbar relative">
             <table class="w-full text-left text-xs border-collapse">
-              <thead class="bg-slate-100/90 dark:bg-slate-800/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-700 text-[11px] font-black text-slate-600 dark:text-slate-300 uppercase tracking-wider sticky top-0 z-20 shadow-2xs">
+              <thead class="bg-slate-100 dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 text-[11px] font-black text-slate-600 dark:text-slate-300 uppercase tracking-wider sticky top-0 z-20">
                 <tr>
-                  <th class="py-3.5 px-4 min-w-[190px]">Karyawan</th>
-                  <th class="py-3.5 px-4 min-w-[210px]">Posisi & Departemen</th>
-                  <th class="py-3.5 px-3 text-center min-w-[100px]">Grade</th>
-                  <th class="py-3.5 px-3 min-w-[140px]">Pendidikan & Usia</th>
-                  <th class="py-3.5 px-3 text-center min-w-[90px]">Tenure</th>
-                  <th class="py-3.5 px-3 text-center min-w-[90px]">PA / KPI</th>
-                  <th class="py-3.5 px-3 text-center min-w-[140px]">Asesmen</th>
-                  <th class="py-3.5 px-3 min-w-[180px]">Training / Seminar</th>
-                  <th class="py-3.5 px-3 min-w-[180px]">Sertifikasi</th>
-                  <th class="py-3.5 px-3 min-w-[170px]">Achievement</th>
-                  <th class="py-3.5 px-4 text-right min-w-[110px] sticky right-0 bg-slate-100/95 dark:bg-slate-800/95 z-20">Aksi</th>
+                  <th class="py-3.5 px-4 min-w-[200px]">Karyawan</th>
+                  <th class="py-3.5 px-4 min-w-[225px]">Posisi &amp; Departemen</th>
+                  <th class="py-3.5 px-3 text-center min-w-[140px]">Grade</th>
+                  <th class="py-3.5 px-3 min-w-[160px]">Pendidikan &amp; Usia</th>
+                  <th class="py-3.5 px-3 text-center min-w-[95px] whitespace-nowrap">Tenure</th>
+                  <th class="py-3.5 px-3 text-center min-w-[100px] whitespace-nowrap">PA / KPI</th>
+                  <th class="py-3.5 px-3 text-center min-w-[165px]">Asesmen</th>
+                  <th class="py-3.5 px-3 min-w-[210px]">Training / Seminar</th>
+                  <th class="py-3.5 px-3 min-w-[210px]">Sertifikasi</th>
+                  <th class="py-3.5 px-3 min-w-[200px]">Achievement</th>
+                  <th class="py-3.5 px-4 text-center min-w-[116px] sticky right-0 bg-slate-100 dark:bg-slate-800 border-l border-slate-200 dark:border-slate-700 shadow-[-4px_0_12px_-4px_rgba(15,23,42,0.08)] z-30">Aksi</th>
                 </tr>
               </thead>
               <tbody id="employee-table-body" class="divide-y divide-slate-100 dark:divide-slate-800/80 font-normal"></tbody>
@@ -657,7 +667,7 @@
           <div class="lg:col-span-5 flex flex-col justify-between space-y-5">
             <!-- 1. Radar Chart Card -->
             <div class="bg-white dark:bg-slate-900 p-5 sm:p-6 rounded-3xl border border-slate-200/90 dark:border-slate-800 shadow-sm flex flex-col items-center">
-              <div class="w-full flex items-center justify-between mb-2">
+              <div class="w-full flex items-center justify-between mb-3">
                 <h4 class="font-extrabold text-xs uppercase tracking-wider text-slate-700 dark:text-slate-300">Radar Profil Kompetensi</h4>
                 <div class="flex items-center gap-3 text-[11px] font-bold">
                   <span class="flex items-center gap-1 text-sky-600 dark:text-sky-400">
@@ -668,7 +678,7 @@
                   </span>
                 </div>
               </div>
-              <div class="w-full max-w-sm h-64 sm:h-72">
+              <div class="w-full h-72 sm:h-80">
                 <canvas id="competencyRadarChart"></canvas>
               </div>
             </div>
@@ -680,45 +690,48 @@
           </div>
 
           <!-- KOLOM KANAN (7/12): Rencana Pembelajaran Individu (ILP) dengan Sticky Table & Scrollable Body -->
-          <div class="lg:col-span-7 bg-white dark:bg-slate-900 p-5 sm:p-6 rounded-3xl border border-slate-200/90 dark:border-slate-800 shadow-sm flex flex-col justify-between space-y-4">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100 dark:border-slate-800">
-              <div>
+          <div class="lg:col-span-7 bg-white dark:bg-slate-900 p-5 sm:p-6 rounded-3xl border border-slate-200/90 dark:border-slate-800 shadow-sm flex flex-col space-y-4">
+            <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3 pb-3.5 border-b border-slate-100 dark:border-slate-800">
+              <div class="space-y-0.5 min-w-0 flex-1">
                 <h4 class="font-black text-sm text-slate-900 dark:text-white">Rencana Pembelajaran Individu (ILP)</h4>
-                <p class="text-[11px] text-slate-500 dark:text-slate-400">Intervensi kurikulum spesifik berbasis gap kompetensi negatif (&lt; 0)</p>
+                <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed">Ketik langsung intervensi kurikulum per kompetensi (otomatis tersimpan ke Sheet)</p>
               </div>
-              <div class="flex items-center gap-2">
-                <button onclick="saveILPPlan()" class="px-3.5 py-1.5 bg-sky-600 hover:bg-sky-700 text-white rounded-xl text-xs font-bold transition shadow-xs flex items-center gap-1.5 shrink-0">
+              <div class="flex items-center gap-2 shrink-0 self-start sm:self-center">
+                <span id="ilp-sync-status" class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-[11px] font-semibold text-slate-500 dark:text-slate-400 flex items-center gap-1 whitespace-nowrap">
+                  <i class="ph-bold ph-cloud-check text-emerald-500"></i> Tersinkron
+                </span>
+                <button onclick="saveILPPlan(false)" id="btn-save-ilp" class="px-3.5 py-1.5 bg-sky-600 hover:bg-sky-700 text-white rounded-xl text-xs font-bold transition shadow-xs flex items-center gap-1.5 shrink-0 whitespace-nowrap">
                   <i class="ph-bold ph-floppy-disk"></i> Simpan ILP Plan
                 </button>
               </div>
             </div>
 
             <!-- Mini Summary Bar ILP -->
-            <div class="grid grid-cols-3 gap-2 text-center text-xs" id="ilp-mini-metrics">
-              <div class="p-2 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200/70 dark:border-slate-700/60">
+            <div class="grid grid-cols-3 gap-2.5 text-center text-xs" id="ilp-mini-metrics">
+              <div class="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200/70 dark:border-slate-700/60">
                 <p class="text-[10px] text-slate-500 dark:text-slate-400">Total Kompetensi</p>
-                <p class="text-sm font-black text-slate-900 dark:text-white" id="stat-total-comp">0</p>
+                <p class="text-sm font-black text-slate-900 dark:text-white mt-0.5" id="stat-total-comp">0</p>
               </div>
-              <div class="p-2 rounded-xl bg-emerald-50/60 dark:bg-emerald-950/30 border border-emerald-200/70 dark:border-emerald-900/50">
+              <div class="p-2.5 rounded-xl bg-emerald-50/60 dark:bg-emerald-950/30 border border-emerald-200/70 dark:border-emerald-900/50">
                 <p class="text-[10px] text-emerald-700 dark:text-emerald-400 font-semibold">Memenuhi Standar</p>
-                <p class="text-sm font-black text-emerald-600 dark:text-emerald-400" id="stat-meet-comp">0</p>
+                <p class="text-sm font-black text-emerald-600 dark:text-emerald-400 mt-0.5" id="stat-meet-comp">0</p>
               </div>
-              <div class="p-2 rounded-xl bg-rose-50/60 dark:bg-rose-950/30 border border-rose-200/70 dark:border-rose-900/50">
+              <div class="p-2.5 rounded-xl bg-rose-50/60 dark:bg-rose-950/30 border border-rose-200/70 dark:border-rose-900/50">
                 <p class="text-[10px] text-rose-700 dark:text-rose-400 font-semibold">Gap Perlu Intervensi</p>
-                <p class="text-sm font-black text-rose-600 dark:text-rose-400" id="stat-gap-comp">0</p>
+                <p class="text-sm font-black text-rose-600 dark:text-rose-400 mt-0.5" id="stat-gap-comp">0</p>
               </div>
             </div>
 
             <!-- Scrollable Table Container with Sticky Header -->
-            <div class="flex-1 overflow-x-auto overflow-y-auto max-h-[460px] custom-scrollbar border border-slate-200/80 dark:border-slate-800 rounded-2xl relative">
+            <div class="flex-1 overflow-x-auto overflow-y-auto max-h-[560px] custom-scrollbar border border-slate-200/80 dark:border-slate-800 rounded-2xl relative">
               <table class="w-full text-left text-xs border-collapse">
-                <thead class="bg-slate-100/90 dark:bg-slate-800/95 backdrop-blur-md text-slate-600 dark:text-slate-300 uppercase font-black text-[10px] tracking-wider sticky top-0 z-10 border-b border-slate-200 dark:border-slate-700 shadow-2xs">
+                <thead class="bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 uppercase font-black text-[10px] tracking-wider sticky top-0 z-10 border-b border-slate-200 dark:border-slate-700">
                   <tr>
-                    <th class="py-2.5 px-3 min-w-[150px]">Kompetensi</th>
-                    <th class="py-2.5 px-2 text-center min-w-[65px]">Standar</th>
-                    <th class="py-2.5 px-2 text-center min-w-[65px]">Aktual</th>
-                    <th class="py-2.5 px-2 text-center min-w-[60px]">Gap</th>
-                    <th class="py-2.5 px-3 min-w-[220px]">Rekomendasi Intervensi ILP</th>
+                    <th class="py-3 px-3 w-[32%] min-w-[155px]">Kompetensi</th>
+                    <th class="py-3 px-1.5 text-center w-[54px] whitespace-nowrap">Standar</th>
+                    <th class="py-3 px-1.5 text-center w-[54px] whitespace-nowrap">Aktual</th>
+                    <th class="py-3 px-1.5 text-center w-[50px] whitespace-nowrap">Gap</th>
+                    <th class="py-3 px-3 min-w-[260px]">Rekomendasi Intervensi ILP</th>
                   </tr>
                 </thead>
                 <tbody id="gap-ilp-table-body" class="divide-y divide-slate-100 dark:divide-slate-800/80 font-normal"></tbody>
@@ -869,11 +882,38 @@
           </div>
 
           <div class="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm space-y-3">
-            <h5 class="font-bold text-xs text-slate-700 dark:text-slate-300">Hasil Assessment Center & Potensi</h5>
-            <div class="p-3 bg-slate-50 dark:bg-slate-800/60 rounded-xl space-y-2 text-xs">
-              <p><span class="text-slate-500 dark:text-slate-400">Predikat:</span> <strong id="detail-assessment-predicate" class="text-slate-900 dark:text-white">--</strong></p>
+            <div class="flex items-center justify-between">
+              <h5 class="font-bold text-xs text-slate-700 dark:text-slate-300">Hasil Assessment Center & Potensi</h5>
+              <span id="detail-assess-sync-badge" class="text-[10px] font-semibold text-slate-400"></span>
+            </div>
+            <div class="p-3 bg-slate-50 dark:bg-slate-800/60 rounded-xl space-y-2.5 text-xs">
+              <div>
+                <label for="detail-assessment-predicate-select" class="block text-[11px] font-semibold text-slate-500 dark:text-slate-400 mb-1">Predikat Hasil Asesmen:</label>
+                <select id="detail-assessment-predicate-select" onchange="handleQuickAssessmentPredicateChange(this.value)" class="w-full px-2.5 py-1.5 border border-slate-200 dark:border-slate-700 rounded-lg font-bold text-xs bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-sky-500">
+                  <option value="Optimal / Recommended with Distinction">Optimal / Recommended with Distinction</option>
+                  <option value="Recommended for Strategic Role">Recommended for Strategic Role</option>
+                  <option value="Ready with Technical Mastery">Ready with Technical Mastery</option>
+                  <option value="High Potential Professional">High Potential Professional</option>
+                  <option value="Recommended with Development">Recommended with Development</option>
+                </select>
+              </div>
               <p><span class="text-slate-500 dark:text-slate-400">LQ:</span> <strong id="detail-assessment-lq" class="text-slate-900 dark:text-white">--</strong></p>
               <p class="text-[11px] text-slate-600 dark:text-slate-300 italic" id="detail-assessment-notes">--</p>
+
+              <!-- Attach & Preview Dokumen Assessment -->
+              <div class="pt-2 border-t border-slate-200/80 dark:border-slate-700/70 space-y-1.5">
+                <div class="flex items-center justify-between gap-2">
+                  <span class="text-[11px] font-bold text-slate-600 dark:text-slate-300 flex items-center gap-1">
+                    <i class="ph-bold ph-paperclip text-sky-600 dark:text-sky-400"></i> Dokumen Assessment:
+                  </span>
+                  <label class="cursor-pointer px-2.5 py-1 rounded-lg bg-sky-600 hover:bg-sky-700 text-white text-[10px] font-bold transition inline-flex items-center gap-1 shadow-2xs">
+                    <i class="ph-bold ph-upload-simple"></i>
+                    <span>Attach File</span>
+                    <input type="file" id="detail-assess-file-input" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" onchange="handleQuickAssessmentDocUpload(this)" class="hidden">
+                  </label>
+                </div>
+                <div id="detail-assessment-doc-container" class="text-[11px]"></div>
+              </div>
             </div>
           </div>
         </div>
@@ -1108,6 +1148,13 @@
               <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Catatan Evaluator</label>
               <textarea id="inp-assess-notes" rows="2" class="w-full p-2.5 border border-slate-200 dark:border-slate-700 rounded-xl text-xs bg-white dark:bg-slate-800 text-slate-900 dark:text-white">Memiliki kapabilitas governance, mitigasi risiko krisis, dan kepatuhan regulasi yang matang.</textarea>
             </div>
+            <div class="sm:col-span-3">
+              <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Attach Dokumen Hasil Assessment (PDF / DOCX / Gambar)</label>
+              <div class="flex flex-col sm:flex-row sm:items-center gap-2.5 p-2.5 border border-dashed border-slate-300 dark:border-slate-700 rounded-xl bg-slate-50/70 dark:bg-slate-800/40">
+                <input type="file" id="inp-assess-doc" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" class="text-xs text-slate-600 dark:text-slate-300 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-sky-600 file:text-white hover:file:bg-sky-700 cursor-pointer">
+                <span id="form-assess-doc-current" class="text-[11px] text-slate-500 dark:text-slate-400 truncate">Belum ada dokumen terlampir</span>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -1314,6 +1361,8 @@
           else if (action === 'fetchUserAccounts') runner.fetchUserAccounts();
           else if (action === 'createUserAccount') runner.createUserAccount(payload.userData);
           else if (action === 'deleteUserAccount') runner.deleteUserAccount(payload.userId);
+          else if (action === 'saveILPPlanRecord') runner.saveILPPlanRecord(payload.ilpData);
+          else if (action === 'updateEmployeeAssessmentQuick') runner.updateEmployeeAssessmentQuick(payload.assessmentPayload);
           else reject(new Error('Aksi tidak terdaftar di client runner'));
         });
       }
@@ -1361,6 +1410,7 @@
     let CRITICAL_POSITIONS = [];
     let DEPARTMENTS_CATALOG = [];
     let EMPLOYEES = [];
+    let ILP_PLANS = {};
     let SYSTEM_CONFIG = { isBootstrapActive: false, appVersion: 'V2.3.0' };
 
     let currentAuthUser = null;
@@ -1401,6 +1451,7 @@
           CRITICAL_POSITIONS = response.data.criticalPositions || [];
           DEPARTMENTS_CATALOG = response.data.departments || [];
           EMPLOYEES = response.data.employees || [];
+          ILP_PLANS = response.data.ilpPlans || {};
           SYSTEM_CONFIG = response.data.config || { isBootstrapActive: false };
 
           updateBootstrapBannerVisibility();
@@ -2173,15 +2224,15 @@
         const projectedAge = (Number(emp.age) || 0) + additionalYears;
         const projectedTenure = ((Number(emp.tenureYears) || 0) + additionalYears).toFixed(1);
 
-        // Helper Render Badge Horizontal Rapi (Maksimal 2 pill + counter jika berlebih)
+        // Helper Render Badge Horizontal Rapi (Maksimal 2 pill + scroll halus)
         const renderCompactChips = (items, colorBg, colorText, colorBorder, icon = '') => {
           if (!items || items.length === 0) {
             return `<span class="text-slate-400 dark:text-slate-600 text-[11px] italic">-</span>`;
           }
           return `
-            <div class="flex flex-col gap-1 max-h-[58px] overflow-y-auto custom-scrollbar pr-1">
+            <div class="flex flex-col gap-1.5 max-h-[68px] overflow-y-auto custom-scrollbar pr-1">
               ${items.map(item => `
-                <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-semibold border ${colorBg} ${colorText} ${colorBorder} truncate max-w-[165px]" title="${escapeHtml(item)}">
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md text-[10px] font-semibold border ${colorBg} ${colorText} ${colorBorder} truncate max-w-[195px]" title="${escapeHtml(item)}">
                   ${icon ? `<i class="${icon} text-[10px] shrink-0"></i>` : ''}
                   <span class="truncate">${escapeHtml(item)}</span>
                 </span>
@@ -2246,58 +2297,58 @@
             </td>
 
             <!-- 3. Grade -->
-            <td class="py-2.5 px-3 text-center align-middle">
-              <span class="inline-block px-2.5 py-1 rounded-lg text-[11px] font-black bg-sky-50 dark:bg-sky-950/60 text-sky-700 dark:text-sky-300 border border-sky-200/80 dark:border-sky-800">
+            <td class="py-3 px-3 text-center align-middle">
+              <span class="inline-block px-2.5 py-1 rounded-lg text-[11px] font-black bg-sky-50 dark:bg-sky-950/60 text-sky-700 dark:text-sky-300 border border-sky-200/80 dark:border-sky-800 leading-tight max-w-[150px]" title="${escapeHtml(emp.grade || '--')}">
                 ${escapeHtml(emp.grade || '--')}
               </span>
             </td>
 
             <!-- 4. Pendidikan & Usia -->
-            <td class="py-2.5 px-3 align-middle">
-              <p class="text-[11px] font-semibold text-slate-800 dark:text-slate-200 truncate max-w-[135px]" title="${escapeHtml(emp.education)}">${escapeHtml(emp.education)}</p>
+            <td class="py-3 px-3 align-middle">
+              <p class="text-[11px] font-semibold text-slate-800 dark:text-slate-200 truncate max-w-[155px]" title="${escapeHtml(emp.education)}">${escapeHtml(emp.education)}</p>
               <p class="text-[10px] font-medium ${additionalYears > 0 ? 'text-amber-600 dark:text-amber-400 font-bold' : 'text-slate-400'}">
                 ${projectedAge} Tahun ${additionalYears > 0 ? `(+${additionalYears}th)` : ''}
               </p>
             </td>
 
             <!-- 5. Tenure -->
-            <td class="py-2.5 px-3 text-center align-middle">
+            <td class="py-3 px-3 text-center align-middle whitespace-nowrap">
               <span class="text-xs font-extrabold ${additionalYears > 0 ? 'text-amber-600 dark:text-amber-400' : 'text-slate-800 dark:text-slate-200'}">
                 ${projectedTenure} <span class="text-[10px] text-slate-400 font-normal">Thn</span>
               </span>
             </td>
 
             <!-- 6. PA / KPI -->
-            <td class="py-2.5 px-3 text-center align-middle">
-              <span class="inline-block px-2 py-0.5 rounded-md text-[10px] font-black tracking-tight ${avgKpi >= 85 ? 'bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800' : avgKpi >= 75 ? 'bg-sky-100 dark:bg-sky-950 text-sky-800 dark:text-sky-300 border border-sky-200 dark:border-sky-800' : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300'}">
+            <td class="py-3 px-3 text-center align-middle whitespace-nowrap">
+              <span class="inline-block px-2.5 py-0.5 rounded-md text-[10px] font-black tracking-tight ${avgKpi >= 85 ? 'bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800' : avgKpi >= 75 ? 'bg-sky-100 dark:bg-sky-950 text-sky-800 dark:text-sky-300 border border-sky-200 dark:border-sky-800' : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300'}">
                 ${paBadge}
               </span>
             </td>
 
             <!-- 7. Asesmen -->
-            <td class="py-2.5 px-3 text-center align-middle">
-              <span class="text-[10px] font-bold text-slate-700 dark:text-slate-300 block truncate max-w-[130px] mx-auto bg-slate-50 dark:bg-slate-800/50 px-2 py-0.5 rounded-md border border-slate-200/50 dark:border-slate-700/50" title="${escapeHtml(emp.assessment.predicate)}">
+            <td class="py-3 px-3 text-center align-middle">
+              <span class="text-[10px] font-bold text-slate-700 dark:text-slate-300 block truncate max-w-[155px] mx-auto bg-slate-50 dark:bg-slate-800/50 px-2.5 py-1 rounded-md border border-slate-200/70 dark:border-slate-700/60" title="${escapeHtml(emp.assessment.predicate)}">
                 ${escapeHtml(emp.assessment.predicate)}
               </span>
             </td>
 
             <!-- 8. Training / Seminar -->
-            <td class="py-2.5 px-3 align-middle">
+            <td class="py-3 px-3 align-middle">
               ${trainHtml}
             </td>
 
             <!-- 9. Sertifikasi -->
-            <td class="py-2.5 px-3 align-middle">
+            <td class="py-3 px-3 align-middle">
               ${certHtml}
             </td>
 
             <!-- 10. Achievement -->
-            <td class="py-2.5 px-3 align-middle">
+            <td class="py-3 px-3 align-middle">
               ${achHtml}
             </td>
 
-            <!-- 11. Aksi (Sticky Right) -->
-            <td class="py-2.5 px-4 text-right align-middle sticky right-0 bg-white/95 dark:bg-slate-900/95 group-hover/row:bg-slate-50/95 dark:group-hover/row:bg-slate-800/95 transition-colors shadow-2xs">
+            <!-- 11. Aksi (Sticky Right Solid Surface) -->
+            <td class="py-3 px-4 text-center align-middle sticky right-0 bg-white dark:bg-slate-900 group-hover/row:bg-slate-50 dark:group-hover/row:bg-slate-800 border-l border-slate-100 dark:border-slate-800 shadow-[-4px_0_12px_-4px_rgba(15,23,42,0.06)] transition-colors z-10">
               <div class="inline-flex items-center gap-1">
                 <button onclick="openEmployeeDetail('${emp.id}')" class="p-1.5 text-slate-500 hover:text-sky-600 dark:hover:text-sky-400 hover:bg-sky-50 dark:hover:bg-slate-800 rounded-lg transition" title="Buka Detail">
                   <i class="ph-bold ph-eye text-sm"></i>
@@ -2367,9 +2418,23 @@
         `;
       }).join('');
 
-      document.getElementById('detail-assessment-predicate').innerText = emp.assessment.predicate;
+      currentDetailEmpId = emp.id;
+      const predSelect = document.getElementById('detail-assessment-predicate-select');
+      if (predSelect) {
+        const currentPred = emp.assessment.predicate || 'Optimal / Recommended with Distinction';
+        const hasOption = Array.from(predSelect.options).some(opt => opt.value === currentPred);
+        if (!hasOption && currentPred !== '-') {
+          const opt = document.createElement('option');
+          opt.value = currentPred;
+          opt.text = currentPred;
+          predSelect.appendChild(opt);
+        }
+        predSelect.value = currentPred !== '-' ? currentPred : 'Optimal / Recommended with Distinction';
+      }
+
       document.getElementById('detail-assessment-lq').innerText = emp.assessment.lq;
       document.getElementById('detail-assessment-notes').innerText = `"${emp.assessment.notes}"`;
+      renderDetailAssessmentDoc(emp);
 
       const compGrid = document.getElementById('detail-competencies-grid');
       compGrid.innerHTML = COMPETENCY_CATALOG.map(c => {
@@ -2385,7 +2450,114 @@
       document.getElementById('modal-emp-detail').classList.remove('hidden');
     }
 
+    let currentDetailEmpId = null;
+
+    function renderDetailAssessmentDoc(emp) {
+      const container = document.getElementById('detail-assessment-doc-container');
+      if (!container) return;
+      if (emp && emp.assessment && emp.assessment.docUrl) {
+        const docTitle = emp.assessment.docName || 'Dokumen_Assessment_Center';
+        container.innerHTML = `
+          <a href="${escapeHtml(emp.assessment.docUrl)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 font-bold hover:underline max-w-full">
+            <i class="ph-bold ph-file-pdf text-sm shrink-0"></i>
+            <span class="truncate">${escapeHtml(docTitle)}</span>
+            <i class="ph-bold ph-arrow-square-out text-xs shrink-0"></i>
+          </a>
+        `;
+      } else {
+        container.innerHTML = `<span class="text-slate-400 dark:text-slate-500 italic">Belum ada dokumen assessment terlampir.</span>`;
+      }
+    }
+
+    function readFileAsBase64Payload(file) {
+      return new Promise((resolve, reject) => {
+        if (!file) {
+          resolve(null);
+          return;
+        }
+        const reader = new FileReader();
+        reader.onload = () => {
+          resolve({
+            base64Data: reader.result,
+            fileName: file.name,
+            mimeType: file.type || 'application/octet-stream'
+          });
+        };
+        reader.onerror = () => reject(new Error('Gagal membaca file lampiran.'));
+        reader.readAsDataURL(file);
+      });
+    }
+
+    async function handleQuickAssessmentPredicateChange(newPredicate) {
+      if (!currentDetailEmpId) return;
+      const emp = EMPLOYEES.find(e => e.id === currentDetailEmpId);
+      if (!emp) return;
+
+      const syncBadge = document.getElementById('detail-assess-sync-badge');
+      if (syncBadge) syncBadge.innerText = 'Menyimpan...';
+
+      emp.assessment.predicate = newPredicate;
+
+      try {
+        const res = await apiCall('updateEmployeeAssessmentQuick', {
+          assessmentPayload: {
+            empId: currentDetailEmpId,
+            predicate: newPredicate
+          }
+        });
+        if (res && res.success) {
+          if (syncBadge) syncBadge.innerText = 'Tersimpan';
+          showToast('Predikat assessment berhasil diperbarui.', 'success');
+          renderEmployeeTable();
+        } else {
+          if (syncBadge) syncBadge.innerText = 'Gagal';
+          showToast(res ? res.message : 'Gagal memperbarui predikat.', 'error');
+        }
+      } catch (err) {
+        if (syncBadge) syncBadge.innerText = 'Error';
+        showToast('Gagal menyimpan predikat: ' + err.message, 'error');
+      }
+    }
+
+    async function handleQuickAssessmentDocUpload(inputEl) {
+      if (!currentDetailEmpId || !inputEl || !inputEl.files || !inputEl.files[0]) return;
+      const file = inputEl.files[0];
+      const emp = EMPLOYEES.find(e => e.id === currentDetailEmpId);
+      if (!emp) return;
+
+      const syncBadge = document.getElementById('detail-assess-sync-badge');
+      if (syncBadge) syncBadge.innerText = 'Mengunggah ke Drive...';
+      showToast(`Mengunggah "${file.name}" ke Google Drive...`, 'info');
+
+      try {
+        const filePayload = await readFileAsBase64Payload(file);
+        const res = await apiCall('updateEmployeeAssessmentQuick', {
+          assessmentPayload: {
+            empId: currentDetailEmpId,
+            assessmentFile: filePayload
+          }
+        });
+
+        inputEl.value = '';
+        if (res && res.success) {
+          emp.assessment.docUrl = res.docUrl;
+          emp.assessment.docName = res.docName;
+          renderDetailAssessmentDoc(emp);
+          if (syncBadge) syncBadge.innerText = 'Tersimpan di Drive';
+          showToast('Dokumen assessment berhasil disimpan ke Google Drive!', 'success');
+        } else {
+          if (syncBadge) syncBadge.innerText = 'Gagal';
+          showToast(res ? res.message : 'Gagal mengunggah dokumen.', 'error');
+        }
+      } catch (err) {
+        inputEl.value = '';
+        if (syncBadge) syncBadge.innerText = 'Error';
+        showToast('Gagal mengunggah file: ' + err.message, 'error');
+      }
+    }
+
     function closeEmployeeModal() {
+      currentDetailEmpId = null;
       document.getElementById('modal-emp-detail').classList.add('hidden');
     }
 
@@ -2455,6 +2627,11 @@
       const potInput = document.getElementById('inp-assess-potential');
       if (potInput) potInput.value = '85';
 
+      const docInput = document.getElementById('inp-assess-doc');
+      if (docInput) docInput.value = '';
+      const docCurrentLabel = document.getElementById('form-assess-doc-current');
+      if (docCurrentLabel) docCurrentLabel.innerText = 'Belum ada dokumen terlampir';
+
       addCareerRow('Officer Pelaksana', 'Operasional', '2021 - 2023');
       addCareerRow('Spesialis Pratama', 'Departemen Terkait', '2023 - Sekarang');
 
@@ -2513,6 +2690,17 @@
       const potInput = document.getElementById('inp-assess-potential');
       if (potInput) potInput.value = emp.assessment.potentialScore || 80;
 
+      const docInput = document.getElementById('inp-assess-doc');
+      if (docInput) docInput.value = '';
+      const docCurrentLabel = document.getElementById('form-assess-doc-current');
+      if (docCurrentLabel) {
+        if (emp.assessment && emp.assessment.docUrl) {
+          docCurrentLabel.innerHTML = `Terlampir: <a href="${escapeHtml(emp.assessment.docUrl)}" target="_blank" rel="noopener noreferrer" class="font-bold text-sky-600 dark:text-sky-400 underline">${escapeHtml(emp.assessment.docName || 'Lihat Dokumen')}</a>`;
+        } else {
+          docCurrentLabel.innerText = 'Belum ada dokumen terlampir';
+        }
+      }
+
       COMPETENCY_CATALOG.forEach(c => {
         const slider = document.getElementById(`comp-range-${c.id}`);
         const val = emp.competencies[c.id] || 3.5;
@@ -2558,7 +2746,7 @@
       }
     }
 
-    function handleEmployeeFormSubmit(e) {
+    async function handleEmployeeFormSubmit(e) {
       e.preventDefault();
       const empId = document.getElementById('form-emp-id').value;
       const name = document.getElementById('inp-name').value.trim();
@@ -2610,6 +2798,11 @@
       const rawAchievements = document.getElementById('inp-achievements') ? document.getElementById('inp-achievements').value.trim() : '';
       const achievements = rawAchievements ? rawAchievements.split(',').map(s => s.trim()).filter(Boolean) : [];
 
+      const existingEmp = empId ? EMPLOYEES.find(item => item.id === empId) : null;
+      const docFileInput = document.getElementById('inp-assess-doc');
+      const selectedFile = (docFileInput && docFileInput.files && docFileInput.files[0]) ? docFileInput.files[0] : null;
+      const assessmentFile = selectedFile ? await readFileAsBase64Payload(selectedFile) : null;
+
       const empPayload = {
         id: empId || null,
         nik, name, gender, grade, 
@@ -2625,15 +2818,18 @@
           predicate: assessPredicate,
           lq: assessLq,
           potentialScore: isNaN(parsedPotential) ? 80 : parsedPotential,
-          notes: assessNotes
+          notes: assessNotes,
+          docUrl: (existingEmp && existingEmp.assessment) ? (existingEmp.assessment.docUrl || '') : '',
+          docName: (existingEmp && existingEmp.assessment) ? (existingEmp.assessment.docName || '') : ''
         },
+        assessmentFile,
         competencies,
         pastPositions
       };
 
       const btn = document.getElementById('btn-save-emp');
       btn.disabled = true;
-      btn.innerText = 'Menyimpan ke Sheets...';
+      btn.innerText = assessmentFile ? 'Mengunggah Dokumen & Menyimpan...' : 'Menyimpan ke Sheets...';
 
       apiCall('saveEmployeeRecord', { employeeData: empPayload })
         .then(res => {
@@ -2898,6 +3094,8 @@
       const scoredCandidates = EMPLOYEES.map(emp => {
         let totalStd = 0;
         let earned = 0;
+        let totalComps = 0;
+        let passedComps = 0;
         COMPETENCY_CATALOG.forEach(c => {
           // Hanya evaluasi kompetensi yang berstatus ON (terdaftar pada posisi target)
           if (targetPos.standardCompetencies && targetPos.standardCompetencies[c.id] !== undefined) {
@@ -2906,10 +3104,16 @@
               const actual = Number(emp.competencies[c.id]) || 0;
               totalStd += std;
               earned += Math.min(actual, std);
+              totalComps++;
+              if (actual >= std) {
+                passedComps++;
+              }
             }
           }
         });
-        const matchPct = totalStd > 0 ? Math.round((earned / totalStd) * 100) : 0;
+        const scoreRatio = totalStd > 0 ? (earned / totalStd) : 0;
+        const passRatio = totalComps > 0 ? (passedComps / totalComps) : 0;
+        const matchPct = totalStd > 0 ? Math.round(((scoreRatio * 0.5) + (passRatio * 0.5)) * 100) : 0;
 
         let bucket = 'READY_2_YEARS';
         if (matchPct >= 85 && emp.tenureYears >= 5.0) {
@@ -3068,6 +3272,9 @@
 
       const activeList = targetCatalog.length > 0 ? targetCatalog : COMPETENCY_CATALOG;
 
+      const ilpKey = `${emp.id}__${targetPos.id}`;
+      const savedPlans = (ILP_PLANS[ilpKey] && ILP_PLANS[ilpKey].plans) ? ILP_PLANS[ilpKey].plans : {};
+
       const competencyRows = activeList.map(c => {
         const std = targetPos.standardCompetencies ? (targetPos.standardCompetencies[c.id] || 4.0) : 4.0;
         const actual = emp.competencies[c.id] || 0;
@@ -3076,46 +3283,70 @@
         totalStd += std;
         earned += Math.min(actual, std);
 
-        let actionPlan = '<span class="text-emerald-600 dark:text-emerald-400 font-semibold flex items-center gap-1"><i class="ph-bold ph-check"></i> Memenuhi Standar (Mentoring)</span>';
+        const interventions = {
+          C1: 'Executive Strategic Thinking Masterclass & Corporate Taskforce',
+          C2: 'Leadership Coaching Program & Cross-functional Lead Assignment',
+          C3: 'Sertifikasi ISO 37001 Anti-Bribery & Audit Investigasi Terpadu',
+          C4: 'Simulasi Tabletop BCP & Emergency Response Lapangan',
+          C5: 'Pelatihan Digital Architecture & Otomasi Apps Script/AI',
+          C6: 'Workshop Negosiasi Regulasi & Stakeholder Management'
+        };
+
+        let defaultText = 'Memenuhi Standar (Mentoring)';
         if (gap < 0) {
           gapCount++;
           criticalGaps.push({ name: c.name, gap });
-          const interventions = {
-            C1: 'Executive Strategic Thinking Masterclass & Corporate Taskforce',
-            C2: 'Leadership Coaching Program & Cross-functional Lead Assignment',
-            C3: 'Sertifikasi ISO 37001 Anti-Bribery & Audit Investigasi Terpadu',
-            C4: 'Simulasi Tabletop BCP & Emergency Response Lapangan',
-            C5: 'Pelatihan Digital Architecture & Otomasi Apps Script/AI',
-            C6: 'Workshop Negosiasi Regulasi & Stakeholder Management'
-          };
-          actionPlan = `<span class="text-rose-700 dark:text-rose-400 font-bold block">${interventions[c.id] || 'Pelatihan Akselerasi Kompetensi Terfokus'}</span>`;
+          defaultText = interventions[c.id] || 'Pelatihan Akselerasi Kompetensi Terfokus';
         } else {
           meetCount++;
         }
 
+        const currentText = savedPlans[c.id] !== undefined ? savedPlans[c.id] : defaultText;
+        const isCustom = savedPlans[c.id] !== undefined && savedPlans[c.id] !== defaultText;
+        const textColorClass = gap < 0
+          ? 'text-rose-700 dark:text-rose-300 border-rose-200/80 dark:border-rose-900/60 focus:border-rose-500 focus:ring-rose-500/20'
+          : 'text-emerald-700 dark:text-emerald-300 border-emerald-200/80 dark:border-emerald-900/60 focus:border-emerald-500 focus:ring-emerald-500/20';
+
         return `
           <tr class="hover:bg-slate-50/80 dark:hover:bg-slate-800/50 transition">
-            <td class="py-2.5 px-3 font-semibold text-slate-800 dark:text-slate-200">${escapeHtml(c.name)}</td>
-            <td class="py-2.5 px-2 text-center font-bold text-sky-700 dark:text-sky-400">${std.toFixed(1)}</td>
-            <td class="py-2.5 px-2 text-center font-bold text-slate-900 dark:text-white">${actual.toFixed(1)}</td>
-            <td class="py-2.5 px-2 text-center font-black ${gap >= 0 ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'}">
+            <td class="py-3 px-3 font-semibold text-slate-800 dark:text-slate-200 align-top break-words leading-snug">${escapeHtml(c.name)}</td>
+            <td class="py-3 px-1.5 text-center font-bold text-sky-700 dark:text-sky-400 align-top whitespace-nowrap">${std.toFixed(1)}</td>
+            <td class="py-3 px-1.5 text-center font-bold text-slate-900 dark:text-white align-top whitespace-nowrap">${actual.toFixed(1)}</td>
+            <td class="py-3 px-1.5 text-center font-black align-top whitespace-nowrap ${gap >= 0 ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'}">
               ${gap > 0 ? '+' : ''}${gap}
             </td>
-            <td class="py-2.5 px-3">${actionPlan}</td>
+            <td class="py-2.5 px-3 align-top">
+              <div class="space-y-1">
+                <textarea
+                  rows="3"
+                  data-comp-id="${escapeHtml(c.id)}"
+                  oninput="autoResizeILPTextarea(this); handleILPInputChange(this)"
+                  onblur="saveILPPlan(true)"
+                  placeholder="Ketik rencana intervensi ILP..."
+                  class="ilp-note-input w-full min-h-[74px] px-3 py-2 text-xs font-semibold rounded-xl border bg-white dark:bg-slate-800 focus:outline-none focus:ring-2 transition resize-y leading-relaxed ${textColorClass}"
+                >${escapeHtml(currentText)}</textarea>
+                ${isCustom ? '<span class="inline-flex items-center gap-1 text-[9px] font-bold text-sky-600 dark:text-sky-400"><i class="ph-bold ph-pencil-simple"></i> Diedit manual</span>' : ''}
+              </div>
+            </td>
           </tr>
         `;
       });
 
       // Update Tabel & Mini-Metrics ILP
       const tbody = document.getElementById('gap-ilp-table-body');
-      if (tbody) tbody.innerHTML = competencyRows.join('');
+      if (tbody) {
+        tbody.innerHTML = competencyRows.join('');
+        tbody.querySelectorAll('.ilp-note-input').forEach(el => autoResizeILPTextarea(el));
+      }
 
-      if (document.getElementById('stat-total-comp')) document.getElementById('stat-total-comp').innerText = COMPETENCY_CATALOG.length;
+      if (document.getElementById('stat-total-comp')) document.getElementById('stat-total-comp').innerText = activeList.length;
       if (document.getElementById('stat-meet-comp')) document.getElementById('stat-meet-comp').innerText = meetCount;
       if (document.getElementById('stat-gap-comp')) document.getElementById('stat-gap-comp').innerText = gapCount;
 
-      // 3. Hitung Tingkat Kecocokan & Status Kesiapan (Readiness Tier)
-      const matchPct = totalStd > 0 ? Math.round((earned / totalStd) * 100) : 0;
+      // 3. Hitung Tingkat Kecocokan Weighted Readiness (50% Skor Pencapaian + 50% Rasio Kelulusan Gap >= 0)
+      const scoreRatio = totalStd > 0 ? (earned / totalStd) : 0;
+      const passRatio = activeList.length > 0 ? (meetCount / activeList.length) : 0;
+      const matchPct = totalStd > 0 ? Math.round(((scoreRatio * 0.5) + (passRatio * 0.5)) * 100) : 0;
       const empTenure = Number(emp.tenureYears) || 0;
       const minTenure = Number(targetPos.minTenureYears) || 0;
       const tenurePassed = empTenure >= minTenure;
@@ -3152,6 +3383,7 @@
               <div class="p-2.5 rounded-2xl bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-200/80 dark:border-indigo-800/60">
                 <p class="text-[10px] font-semibold text-indigo-900 dark:text-indigo-300">Kecocokan Profil (Fit Score)</p>
                 <p class="text-xl font-black text-indigo-600 dark:text-indigo-400 mt-0.5">${matchPct}%</p>
+                <p class="text-[9px] font-semibold text-indigo-700/80 dark:text-indigo-300/80 mt-0.5">Lulus ${meetCount}/${activeList.length} Kompetensi</p>
               </div>
               <div class="p-2.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700">
                 <p class="text-[10px] font-semibold text-slate-600 dark:text-slate-400">Tenure vs Syarat Min.</p>
@@ -3190,13 +3422,37 @@
       }
     }
 
+    function autoResizeILPTextarea(el) {
+      if (!el) return;
+      el.style.height = 'auto';
+      el.style.height = Math.max(el.scrollHeight, 74) + 'px';
+    }
+
+    function wrapRadarPointLabel_(text, maxChars = 16) {
+      const words = String(text || '').split(/[\s/]+/).filter(Boolean);
+      if (words.length <= 1) return text;
+      const lines = [];
+      let currentLine = '';
+      words.forEach(word => {
+        const candidate = currentLine ? `${currentLine} ${word}` : word;
+        if (candidate.length <= maxChars) {
+          currentLine = candidate;
+        } else {
+          if (currentLine) lines.push(currentLine);
+          currentLine = word;
+        }
+      });
+      if (currentLine) lines.push(currentLine);
+      return lines.slice(0, 3);
+    }
+
     function updateRadarChart(employee, targetPosition) {
       const targetCatalog = COMPETENCY_CATALOG.filter(c => {
         return targetPosition.standardCompetencies && targetPosition.standardCompetencies[c.id] !== undefined;
       });
       const activeCatalog = targetCatalog.length > 0 ? targetCatalog : COMPETENCY_CATALOG;
 
-      const labels = activeCatalog.map(c => c.name);
+      const labels = activeCatalog.map(c => wrapRadarPointLabel_(c.name, 16));
       const standardData = activeCatalog.map(c => targetPosition.standardCompetencies[c.id] || 4.0);
       const actualData = activeCatalog.map(c => employee.competencies[c.id] || 0);
 
@@ -3238,6 +3494,9 @@
         options: {
           responsive: true,
           maintainAspectRatio: false,
+          layout: {
+            padding: { top: 10, bottom: 10, left: 12, right: 12 }
+          },
           scales: {
             r: {
               min: 0,
@@ -3247,7 +3506,8 @@
               angleLines: { color: gridColor },
               pointLabels: {
                 color: labelColor,
-                font: { size: 9, family: 'Plus Jakarta Sans', weight: '600' }
+                padding: 8,
+                font: { size: 8.5, family: 'Plus Jakarta Sans', weight: '600' }
               }
             }
           },
@@ -3258,8 +3518,96 @@
       });
     }
 
-    function saveILPPlan() {
-      showToast('Action Plan ILP berhasil disimpan ke database.', 'success');
+    let ilpAutoSaveTimer = null;
+    let lastSavedILPSignature = '';
+
+    function handleILPInputChange(el) {
+      const statusEl = document.getElementById('ilp-sync-status');
+      if (statusEl) {
+        statusEl.innerHTML = '<i class="ph-bold ph-pencil-line text-amber-500"></i> Mengetik (auto-save)...';
+      }
+      clearTimeout(ilpAutoSaveTimer);
+      ilpAutoSaveTimer = setTimeout(() => {
+        saveILPPlan(true);
+      }, 1200);
+    }
+
+    async function saveILPPlan(isAuto = false) {
+      clearTimeout(ilpAutoSaveTimer);
+      const empSelect = document.getElementById('select-gap-emp');
+      const posSelect = document.getElementById('select-gap-position');
+      if (!empSelect || !posSelect || !empSelect.value || !posSelect.value) return;
+
+      const empId = empSelect.value;
+      const posId = posSelect.value;
+      const inputs = document.querySelectorAll('.ilp-note-input');
+      const plans = {};
+
+      inputs.forEach(inp => {
+        const compId = inp.getAttribute('data-comp-id');
+        if (compId) {
+          plans[compId] = inp.value.trim();
+        }
+      });
+
+      const signature = `${empId}__${posId}::${JSON.stringify(plans)}`;
+      if (isAuto && signature === lastSavedILPSignature) {
+        return;
+      }
+
+      const statusEl = document.getElementById('ilp-sync-status');
+      const btn = document.getElementById('btn-save-ilp');
+
+      if (statusEl) {
+        statusEl.innerHTML = '<i class="ph-bold ph-spinner animate-spin text-sky-500"></i> Menyimpan ke Sheet...';
+      }
+      if (!isAuto && btn) {
+        btn.disabled = true;
+        btn.innerHTML = '<i class="ph-bold ph-spinner animate-spin"></i> Menyimpan...';
+      }
+
+      const ilpKey = `${empId}__${posId}`;
+      ILP_PLANS[ilpKey] = {
+        empId,
+        posId,
+        plans,
+        updatedBy: currentAuthUser ? currentAuthUser.username : 'USER'
+      };
+
+      try {
+        const res = await apiCall('saveILPPlanRecord', {
+          ilpData: ILP_PLANS[ilpKey]
+        });
+
+        if (!isAuto && btn) {
+          btn.disabled = false;
+          btn.innerHTML = '<i class="ph-bold ph-floppy-disk"></i> Simpan ILP Plan';
+        }
+
+        if (res && res.success) {
+          lastSavedILPSignature = signature;
+          if (statusEl) {
+            statusEl.innerHTML = '<i class="ph-bold ph-cloud-check text-emerald-500"></i> Tersimpan otomatis';
+          }
+          if (!isAuto) {
+            showToast(res.message, 'success');
+          }
+        } else {
+          if (statusEl) {
+            statusEl.innerHTML = '<i class="ph-bold ph-warning-circle text-rose-500"></i> Gagal sinkron';
+          }
+          showToast(res ? res.message : 'Gagal menyimpan ILP ke Sheet.', 'error');
+        }
+      } catch (err) {
+        if (!isAuto && btn) {
+          btn.disabled = false;
+          btn.innerHTML = '<i class="ph-bold ph-floppy-disk"></i> Simpan ILP Plan';
+        }
+        if (statusEl) {
+          statusEl.innerHTML = '<i class="ph-bold ph-warning-circle text-rose-500"></i> Error koneksi';
+        }
+        showToast('Gagal menyimpan ILP: ' + err.message, 'error');
+      }
     }
 
     /* Master Field Settings Module */
